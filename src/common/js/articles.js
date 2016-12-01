@@ -45,8 +45,8 @@ module.exports = {
 			'state-change-lifecycle': '组件state改变时，生命周期执行顺序',
 			'nested-component': '组件嵌套',
 			'component-namespace': '组件命名空间',
-            'spread-props': '组件spread props'
-			
+            'spread-props': '组件spread props',
+            'cancel-fetch-data': '组件在componentWillUnmount时取消请求'
         },
         "react-router": {
             'get-every-type-params':  "获取路由url上的每个参数",

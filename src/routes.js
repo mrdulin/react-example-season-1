@@ -44,14 +44,15 @@ import ComponentDidUpdateInputFocus from './pages/React/ComponentDidUpdateInputF
 import SelectOption from './pages/React/FormControl/SelectOption.react';
 import ScrollTop from './pages/React/ScrollTop.react';
 import ReplaceImgSrcWithinComponent from './pages/React/ReplaceImgSrcWithinComponent.react';
-import ReactCreateClass from './pages/React/React.createClass.jsx';
-import ReactChildren from './pages/React/React.children.jsx';
-import ReactCreateElement from './pages/React/React.createElement.jsx';
-import InitPropsAndState from './pages/React/InitPropsAndState.jsx';
-import InitLifecycle from './pages/React/InitLifecycle.jsx';
-import StateChangeLifecycle from './pages/React/StateChangeLifecycle.jsx';	
-import ComponentNamespace from './pages/React/ComponentNamespace.jsx';
-import SpreadProps from './pages/React/SpreadProps.jsx';
+import ReactCreateClass from './pages/React/React.createClass';
+import ReactChildren from './pages/React/React.children';
+import ReactCreateElement from './pages/React/React.createElement';
+import InitPropsAndState from './pages/React/InitPropsAndState';
+import InitLifecycle from './pages/React/InitLifecycle';
+import StateChangeLifecycle from './pages/React/StateChangeLifecycle';	
+import ComponentNamespace from './pages/React/ComponentNamespace';
+import SpreadProps from './pages/React/SpreadProps';
+import CancelFetchData from './pages/React/CancelFetchData';
 
 //react-router
 import GetEveryTypeParams from './pages/React-router/GetEveryTypeParams.react';
@@ -145,6 +146,7 @@ const routes = (
 			<Route path='state-change-lifecycle' component={StateChangeLifecycle}></Route>
 			<Route path='component-namespace' component={ComponentNamespace}></Route>
             <Route path='spread-props' component={SpreadProps}></Route>
+            <Route path='cancel-fetch-data' component={CancelFetchData}></Route>
         </Route>
         <Route path='react-dom' components={{sidebar: Sidebar, main: Main}}>
             <IndexRoute component={ArticleList}/>

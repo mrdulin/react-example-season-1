@@ -1,14 +1,14 @@
 export default util = ((window, document) => {
-    
+
     return {
         API: '',
         openweatherApiHost: 'http://api.openweathermap.org/data/2.5',
         openweatherApiKey: '2c36facc61cd4ec7543be24d6a7d0509',
-        
+
         getImgNaturalSize: (imageElement) => {
             const img = document.createElement('img');
-            const size = {width: '', height: ''};
-            if(typeof img.naturalWidth !== 'undefined') {
+            const size = { width: '', height: '' };
+            if (typeof img.naturalWidth !== 'undefined') {
                 size.width = imageElement.naturalWidth;
                 size.height = imageElement.naturalHeight;
             } else {
@@ -30,14 +30,14 @@ export default util = ((window, document) => {
         getTransitionEvent: () => {
             const el = document.createElement('test');
             const transitions = {
-                'transition':'transitionend',
-                'OTransition':'oTransitionEnd',
-                'MozTransition':'transitionend',
-                'WebkitTransition':'webkitTransitionEnd'
+                'transition': 'transitionend',
+                'OTransition': 'oTransitionEnd',
+                'MozTransition': 'transitionend',
+                'WebkitTransition': 'webkitTransitionEnd'
             }
 
-            for(let t in transitions) {
-                if(typeof el.style[t] !== 'undefined') {
+            for (let t in transitions) {
+                if (typeof el.style[t] !== 'undefined') {
                     return transitions[t];
                 }
             }
@@ -45,11 +45,31 @@ export default util = ((window, document) => {
 
         makeActionCreator: (type, ...propertykeys) => {
             return (...propertyValues) => {
-                let action = {type};
+                let action = { type };
                 propertykeys.forEach((el, index) => {
                     action[propertykeys[index]] = propertyValues[index];
                 });
                 return action;
+            };
+        },
+
+        makeCancelable(promise) {
+            let hasCanceled_ = false;
+
+            const wrappedPromise = new Promise((resolve, reject) => {
+                promise.then((val) =>
+                    hasCanceled_ ? reject({ isCanceled: true }) : resolve(val)
+                );
+                promise.catch((error) =>
+                    hasCanceled_ ? reject({ isCanceled: true }) : reject(error)
+                );
+            });
+
+            return {
+                promise: wrappedPromise,
+                cancel() {
+                    hasCanceled_ = true;
+                },
             };
         }
     }

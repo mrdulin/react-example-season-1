@@ -67,12 +67,11 @@ const config = {
 		root: __dirname,
 		extensions: ['', '.js', '.jsx', '.scss', '.sass', '.css', '.json'],
 		alias: {
-			'react-dom': getNodeModulePath('react-dom/dist/react-dom.js'),
 			'articles': path.resolve(src, 'common/js', 'articles.js')
 		}
 	},
 
-	devtool: __DEV__ ? 'source-map' : false,
+	devtool: __DEV__ ? 'cheap-source-map' : false,
 
 	plugins: [
 		new HtmlWebpackPlugin({
@@ -93,7 +92,8 @@ const config = {
 		}),
 		//暴露全局变量，暴露后的模块如果再使用import或者require该模块，会报错
 		new webpack.ProvidePlugin({
-			util: path.resolve(src, 'common/js', 'util.js')
+			util: path.resolve(src, 'common/js', 'util.js'),
+			React: 'react'
 		})
 	],
 
@@ -108,14 +108,14 @@ const config = {
 
 };
 
-config.addNoParse(new Map([
-	['react', 'react/dist/react.js'],
-	//react-redux依赖react，因此不能使用noParse
-	// ['react-redux', 'react-redux/dist/react-redux.js'],
-	['redux', 'redux/dist/redux.js'],
-	['redux-logger', 'redux-logger/dist/index.js'],
-	['redux-thunk', 'redux-thunk/dist/redux-thunk.js']
-]));
+// config.addNoParse(new Map([
+// 	['react', 'react/dist/react.js'],
+// 	//react-redux依赖react，因此不能使用noParse
+// 	// ['react-redux', 'react-redux/dist/react-redux.js'],
+// 	['redux', 'redux/dist/redux.js'],
+// 	['redux-logger', 'redux-logger/dist/index.js'],
+// 	['redux-thunk', 'redux-thunk/dist/redux-thunk.js']
+// ]));
 
 // console.log(config.module.noParse)
 
