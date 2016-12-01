@@ -53,6 +53,7 @@ import StateChangeLifecycle from './pages/React/StateChangeLifecycle';
 import ComponentNamespace from './pages/React/ComponentNamespace';
 import SpreadProps from './pages/React/SpreadProps';
 import CancelFetchData from './pages/React/CancelFetchData';
+import ReactPureComponent from './pages/React/React.PureComponent';
 
 //react-router
 import GetEveryTypeParams from './pages/React-router/GetEveryTypeParams.react';
@@ -150,6 +151,7 @@ const routes = (
 			<Route path='component-namespace' component={ComponentNamespace}></Route>
             <Route path='spread-props' component={SpreadProps}></Route>
             <Route path='cancel-fetch-data' component={CancelFetchData}></Route>
+            <Route path='react-pureComponent' component={ReactPureComponent}></Route>
         </Route>
         <Route path='react-dom' components={{sidebar: Sidebar, main: Main}}>
             <IndexRoute component={ArticleList}/>

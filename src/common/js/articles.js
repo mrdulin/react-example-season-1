@@ -46,7 +46,8 @@ module.exports = {
 			'nested-component': '组件嵌套',
 			'component-namespace': '组件命名空间',
             'spread-props': '组件spread props',
-            'cancel-fetch-data': '组件在componentWillUnmount时取消请求'
+            'cancel-fetch-data': '组件在componentWillUnmount时取消请求',
+            'react-pureComponent': 'React.PureComponent测试'
         },
         "react-router": {
             'get-every-type-params':  "获取路由url上的每个参数",
@@ -86,7 +87,9 @@ module.exports = {
         },
         "components": {
             "swiper": "轮播"
+        },
+        "Add-Ons": {
+            "pure-render-mixin": ""
         }
-
     }
 }
