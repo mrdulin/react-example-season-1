@@ -55,6 +55,7 @@ import SpreadProps from './pages/React/SpreadProps';
 import CancelFetchData from './pages/React/CancelFetchData';
 import ReactPureComponent from './pages/React/React.PureComponent';
 import SetStateMultipleTimes from './pages/React/SetStateMultipleTimes';
+import BestPractice from './pages/React/BestPractice';
 
 //react-router
 import GetEveryTypeParams from './pages/React-router/GetEveryTypeParams.react';
@@ -154,6 +155,7 @@ const routes = (
             <Route path='cancel-fetch-data' component={CancelFetchData}></Route>
             <Route path='react-pureComponent' component={ReactPureComponent}></Route>
             <Route path='setState-multiple-times' component={SetStateMultipleTimes}></Route>
+            <Route path='best-practice' component={BestPractice}></Route>
         </Route>
         <Route path='react-dom' components={{sidebar: Sidebar, main: Main}}>
             <IndexRoute component={ArticleList}/>
