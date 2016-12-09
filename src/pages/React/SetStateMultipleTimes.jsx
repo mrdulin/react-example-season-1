@@ -36,6 +36,7 @@ export default class extends React.Component{
             <button onClick={() => this.handleClick()} type='button'>多次调用setState</button>
             <button onClick={() => this.reset()}>重置</button>
             <button id='fuck-btn'>绑定原生事件的button</button>
+            <button id='bitch-btn' onClick={() => this.handleAsync()}>多个异步操作调用一次setState</button>
             <ul>
                 {
                     Object.keys(this.state).map((key,index) => {
@@ -44,6 +45,35 @@ export default class extends React.Component{
                 }
             </ul>
         </div>
+    }
+
+    asyncOperation(data) {
+        return new Promise((rs, rj) => {
+            setTimeout(() => {
+                if(data !== 'c') {
+                    rs(data);
+                } else {
+                    rj('something error');
+                }
+            }, 1000)
+        })
+    }
+
+    handleAsync() {
+        const newState = {};
+        this.asyncOperation('a').then(data => {
+            newState.key1 = data;
+            return this.asyncOperation('b');
+        }).then(data => {
+            newState.key2 = data;
+            return this.asyncOperation('c');
+        }).then(data => {
+            newState.key3 = data;
+            this.setState(newState);
+        }).catch(err => {
+            console.log(err);
+        });
+        
     }
     handleClick() {
         this.setState({key1: '1'});

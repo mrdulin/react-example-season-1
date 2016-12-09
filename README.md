@@ -20,12 +20,13 @@ dulin@dulindeiMac-2:~/workspace/react-examples (master*=) % gulp -v
 
 _如何运行:_
 
-1.  `npm install`，安装依赖
-2.  `npm start`，使用`webpack-dev-server`进行开发，不刷新页面，热替换
-3.  `npm run pre-release`启动`node`服务器，浏览器访问`localhost:3001`，测试预发布代码
-4.  `npm run release`，发布到`github` `master`分支的`docs`目录，访问链接`http://novaline.space/react-examples/index.html`, `github page`不支持`html5`路由方式(`browserHistory`)
+*  `typings install`, 安装类型定义包，实现vscode自动补全
+*  `npm install`，安装依赖
+*  `npm start`，使用`webpack-dev-server`进行开发，不刷新页面，热替换
+*  `npm run pre-release`启动`node`服务器，浏览器访问`localhost:3001`，测试预发布代码
+*  `npm run release`，发布到`github` `master`分支的`docs`目录，访问链接`http://novaline.space/react-examples/index.html`, `github page`不支持`html5`路由方式(`browserHistory`)
 使用`hashHistory`。
-5.  `npm version | major | minor | patch |`，修改本项目版本号。在`git`仓库中使用`npm version`会创建一个`git` `tag`。`git push origin --tags`，推送所有`tag`到远端。
+*  `npm version | major | minor | patch |`，修改本项目版本号。在`git`仓库中使用`npm version`会创建一个`git` `tag`。`git push origin --tags`，推送所有`tag`到远端。
 
 
 _说明:_
@@ -68,3 +69,9 @@ dulindeiMac:react-examples dulin$ npm i webpack-dev-middleware express --save-de
 ```
 
 原因：据说是因为node 6.x版本有些`package`不支持。所以使用`nvm`或者`n`切换node到`LTS`版本，注意，切换node版本后，`npm`的版本也会相应的切换
+
+_React生产环境优化思考:_
+
+*   通过`webpack`的`DefinePlugin`插件提供的环境变量，去除开发环境的redux中间件，例如日志
+*   使用[babel-plugin-transform-react-remove-prop-types](https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types)去除`propTypes`
+*   使用`webpack`的`UglifyJsPlugin`删除开发调试过程中遗忘的`debugger`，`dead code`等

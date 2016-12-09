@@ -5,16 +5,28 @@
         "stage-0"
     ],
     "plugins": [
-        ["transform-decorators-legacy"],
+        [
+            "transform-decorators-legacy"
+        ],
         "add-module-exports",
-        ["transform-runtime", {
-            "polyfill": false,
-            "regenerator": true
-        }]
+        [
+            "transform-runtime",
+            {
+                "polyfill": false,
+                "regenerator": true
+            }
+        ]
     ],
-     "env": {
+    "env": {
         "development": {
-            "presets": ["react-hmre"]
+            "presets": [
+                "react-hmre"
+            ]
+        },
+        "production": {
+            "plugins": [
+                "transform-react-remove-prop-types"
+            ]
         }
     }
 }
