@@ -64,7 +64,7 @@
     "build": "rm -rf ./dist ./docs && webpack --progress -d -w",
     "start": "nodemon --watch webpack.config.js --watch package.json --delay 1000ms --exec ./node_modules/.bin/webpack-dev-server --progress --inline --hot",
     "release": "cross-env NODE_ENV=production webpack --progress && git add . && git commit -m 'build' && git pull origin master && git push origin master",
-    "pre-release": "npm run watch && rm -rf ./dist ./docs && cross-env NODE_ENV=production HOST=local webpack --progress --profile && cross-env NODE_ENV=production nodemon server.js"
+    "pre-release": "cross-env NODE_ENV=production HOST=local webpack --progress && cross-env NODE_ENV=production nodemon server.js"
   },
   "keywords": [
     "react",
