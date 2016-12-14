@@ -35,7 +35,7 @@ module.exports = {
             "textarea": "React表单控件——textarea",
             "select": "React表单控件——select",
             "componentDidUpdate-input-focus": "input的onBlur, onFocus事件与删除按钮的onMouseDown，onClick事件的触发的先后顺序。",
-            'ScrollTop': 'ScrollTop测试',
+            'scrollTop': 'ScrollTop测试',
             'replace-img-src-within-component': '替换组件内部包含的img标签的src',
 			'react-create-class': '使用React.createClass方法创建一个组件',
 			'react-children': 'React.thildren用法',

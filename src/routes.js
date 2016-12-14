@@ -142,7 +142,7 @@ const routes = (
             <Route path='component-communication' component={ComponentCommunication}/>
             <Route path='componentDidUpdate-input-focus' component={ComponentDidUpdateInputFocus}/>
             <Route path='select' component={SelectOption}/>
-            <Route path='ScrollTop' component={ScrollTop}></Route>
+            <Route path='scrollTop' component={ScrollTop}></Route>
             <Route path='replace-img-src-within-component' component={ReplaceImgSrcWithinComponent}></Route>
 			<Route path='react-create-class' component={ReactCreateClass}></Route>
 			<Route path='react-children' component={ReactChildren}></Route>

@@ -9,9 +9,22 @@ class Sidebar extends Component{
         this.toggleSideBar = ::this.toggleSideBar;
         this.state = {
             filterText: this.props.filterText,
-            hideSideBar: this.props.hideSideBar
-        }
+            hideSideBar: this.props.hideSideBar,
+            libShowMap: {}
+        };
+
+        const libNames = this.libNames;
+        const libShowMap = {};
+        libNames.forEach((libName, idx) => {
+            libShowMap[libName] = true;
+        });
+        Object.assign(this.state, {libShowMap});
     }
+
+    get libNames() {
+        return Object.keys(articles.items);
+    }
+
     render() {
         const sideBarItems = this.renderItems();
         const {hideSideBar, filterText} = this.state;
@@ -34,19 +47,22 @@ class Sidebar extends Component{
 
     renderItems() {
         const {items} = articles;
-        const libNames = Object.keys(items);
+        const libNames = this.libNames;
         return libNames.map((libName, index) => {
             const articleKeys = Object.keys(items[libName]);
-            const articles = articleKeys.map((articleKey, idx) => {
+            const articles = articleKeys.sort().map((articleKey, idx) => {
                 if(articleKey.indexOf(this.state.filterText) !== -1) {
                     return <li key={articleKey}>
                         - <Link to={`/${libName}/${articleKey}`}>{articleKey}</Link>
                     </li>
                 }
-            })
+            });
             return <div key={libName} className='searchable_section'>
                 <a className="toc_title" href='javascript:void(0)' onClick={e => this.handleTitleClick(e, libName)}>{libName}</a>
-                <ul className='toc_section'>{articles}</ul>
+                <div>
+                    <ul className='toc_section' id={`${libName}-list`}>{articles}</ul>
+                    {this.state.libShowMap[libName] ? null : <span>...</span>}
+                </div>
             </div>
         })
     }
@@ -58,8 +74,32 @@ class Sidebar extends Component{
     }
 
     handleTitleClick(e, libName) {
+        const currentLibName = this.props.location.pathname.replace('/', '');
+        this.toggleList(libName, `${libName}-list`);
+        if(currentLibName === libName) {
+            return void 0;
+        }
         this.props.router.push(`/${libName}`);
-    }   
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+    }
+
+    /**
+     * @desc ul用DOM原生方法处理显示与隐藏，省略号用了react的state来控制显示与隐藏
+     * @param libName
+     * @param idSelector
+     */
+    toggleList(libName, idSelector) {
+        const listNode = document.getElementById(idSelector);
+        const show = listNode.style.display === 'block' || listNode.style.display === '';
+        listNode.style.display = show ? 'none' : 'block';
+        this.setState((prevState, props) => {
+            const {libShowMap} = prevState;
+            libShowMap[libName] = !libShowMap[libName];
+            return {libShowMap};
+        });
+    }
 }
 
 export default withRouter(Sidebar);
