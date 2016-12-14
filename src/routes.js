@@ -94,6 +94,7 @@ import FileIO from './pages/Mini-projects/FileIO/FileIO.react';
 import TodoList from './pages/Mini-projects/TodoList/TodoList.react';
 import i18n from './pages/Mini-projects/i18n/i18n.react';
 import MiniApp from './pages/Mini-projects/mini-app/app.jsx';
+import {Hack, HackDetail, HackList, HackUser} from './pages/Mini-projects/hack/';
 
 //components
 import Swiper from './pages/Components/Swiper';
@@ -197,6 +198,11 @@ const routes = (
             <Route path='todoList' component={TodoList}></Route>
             <Route path='i18n' component={i18n}/>
             <Route path='mini-app' component={MiniApp}></Route>
+            <Route path="hack" component={Hack}>
+                <IndexRoute component={HackList}/>
+                <Route path="detail/:repo" component={HackDetail}/>
+                <Route path="user/:username" component={HackUser}></Route>
+            </Route>
         </Route>
         <Route path='components' components={{sidebar: Sidebar, main: Main}}>
             <IndexRoute component={ArticleList}/>

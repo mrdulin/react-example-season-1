@@ -71,6 +71,7 @@
 /**
  * 解决方案2: 使用cancelable promise
  */
+
 export default class extends React.Component{
     state = {
         data: ''

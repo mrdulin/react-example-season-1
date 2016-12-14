@@ -85,7 +85,8 @@ module.exports = {
             "file-io": "file.io —— Ephemeral file sharing Convenient, anonymous and secure",
             "todoList": "TodoList",
             "i18n": "React 国际化",
-            "mini-app": '迷你应用'
+            "mini-app": '迷你应用',
+            "hack": 'github hack'
         },
         "components": {
             "swiper": "轮播"
