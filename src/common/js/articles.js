@@ -77,6 +77,9 @@ module.exports = {
             "inject-state-to-es5-component-mixins": "HOC connect 可以注入store到mixins的方法中",
             "test-api-middleware": "测试自定义api中间件"
         },
+        'redux-saga': {
+            'beginning': '官方例子'
+        },
         "react-dom": {
             "call-react-dom-render-in-parent-component": "在父组件的componentDidMount生命周期内使用ReactDOM.render渲染子组件"
         },

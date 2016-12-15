@@ -87,6 +87,8 @@ import TestApiMiddleware from './pages/React-redux/TestApiMiddleware.react';
 //react-dom
 import CallReactDOMRenderInParentComponent from './pages/React-dom/CallReactDOMRenderInParentComponent.react';
 
+//redux-saga
+import ReduxSagaBeginnning from './pages/Redux-saga/Beginning';
 
 //mini-projects
 import AdorableAvatars from './pages/Mini-projects/AdorableAvatars/AdorableAvatars.react';
@@ -190,6 +192,10 @@ const routes = (
             <Route path='connect-multiple-nested-components' component={ConnectMultipleNestedComponents}/>
             <Route path='inject-state-to-es5-component-mixins' component={InjectStateToEs5ComponentMixins}/>
             <Route path='test-api-middleware' component={TestApiMiddleware}/>
+        </Route>
+        <Route path='redux-saga' components={{sidebar: Sidebar, main: Main}}>
+            <IndexRoute component={ArticleList}/>
+            <Route path='beginning' component={ReduxSagaBeginnning}></Route>
         </Route>
         <Route path='mini-projects' components={{sidebar: Sidebar, main: Main}}>
             <IndexRoute component={ArticleList}/>

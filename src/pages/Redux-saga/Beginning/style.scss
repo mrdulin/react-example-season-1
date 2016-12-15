@@ -1,0 +1,99 @@
+:local{
+    * {
+        box-sizing: content-box;
+    }
+    .container{
+        width: 320px;
+        height: 568px;
+        border: 1px solid #222;
+        overflow: hidden;
+    }
+
+    .content{
+        overflow: auto;
+        height: 514px;
+    }
+
+    .layoutButton{
+        width: 44px;
+        height: 100%;
+    }
+
+    .header{
+        background-color: #ededed;
+        margin-bottom: 10px;
+        height: 44px;
+        line-height: 44px;
+        padding-left: 10px;
+        padding-right: 10px;
+        display: flex;
+    }
+
+    form{
+        flex: 1;
+    }
+
+    .searchInput{
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+        border-radius: 3px;
+        border: none;
+        outline: none;
+    }
+
+    .bookList{
+        & > li{
+            height: 123px;
+            background-color: #fff;
+            display: flex;
+            overflow: hidden;
+        }
+
+        &.layout-grid{
+            display: flex;
+            & > li{
+                flex: 1;
+                width: 50%;
+            }
+        }
+
+        &.layout-list{
+            & > li{
+            }
+        }
+        
+
+        .bookSubTitle{
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            overflow: hidden;
+        }
+
+        .bookItemLeftPart{
+            width: 100px;
+            height: 100%;
+
+            & > img{
+                max-width: 100%;
+                width: 100%;
+            }
+        }
+
+        .bookItemRightPart{
+            flex: 1;
+            margin-left: 10px;
+        }
+       
+
+        & > li:not(:last-child) {
+            border-bottom: 1px solid #ddd;
+        }
+    }
+
+    .loadMore{
+        text-align: center;
+        line-height: 44px;
+    }
+}

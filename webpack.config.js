@@ -51,7 +51,10 @@ const config = {
 		}, {
 			test: /\.(scss|sass)$/,
 			exclude: /node_modules/,
-			loader: ExtractTextPlugin.extract('style', 'css?sourceMap!sass?sourceMap')
+			loader: ExtractTextPlugin.extract(
+				'style', 
+				'css?sourceMap?modules&localIdentName=[name]__[local]-[hash:base64:5]!sass?sourceMap'
+			)
 		}, {
 			test: /\.(png|jpg|gif|svg)$/,
 			exclude: /(node_modules|bower_components)/,
@@ -94,7 +97,8 @@ const config = {
 		//暴露全局变量，暴露后的模块如果再使用import或者require该模块，会报错
 		new webpack.ProvidePlugin({
 			util: path.resolve(src, 'common/js', 'util.js'),
-			React: 'react'
+			React: 'react',
+			classNames: 'classNames'
 		})
 	],
 

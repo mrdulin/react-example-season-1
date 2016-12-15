@@ -2,10 +2,17 @@
     "root": true,
     "parser": "esprima",
     "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
     },
     "env": {
-        "browser": true
+        "browser": true,
+        "es6": true
     },
+    
     "plugins": [
 
     ],
