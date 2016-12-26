@@ -76,7 +76,7 @@ const config = {
 		modulesDirectories: ["node_modules", 'src']
 	},
 
-	devtool: 'cheap-source-map',
+	devtool: __DEV__ ? 'cheap-source-map' : false,
 
 	plugins: [
 		new HtmlWebpackPlugin({
