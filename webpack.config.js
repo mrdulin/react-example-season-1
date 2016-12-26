@@ -38,7 +38,8 @@ const config = {
 	output: {
 		path: dist,
 		filename: __DEV__ ? '[name].js' : '[name].[chunkhash:8].js',
-		publicPath
+		publicPath,
+		pathinfo: __DEV__
 	},
 
 	module: {
