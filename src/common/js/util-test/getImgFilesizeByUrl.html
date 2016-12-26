@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>getImgFilesizeByUrl</title>
+</head>
+<body>
+    <script src="../util.js"></script>
+    <script>
+        window.onload = init;
+        function init() {
+            const url = 'http://7xp9vw.com1.z0.glb.clouddn.com/image/5.jpg';
+
+            util.getImgFilesizeByUrl(url).then(function(bytes) {
+                alert('图片大小为: ' + bytes + ' bytes')
+            }).catch(function(e) {
+                throw new Error(e);
+            });
+
+        }
+    </script>
+</body>
+</html>

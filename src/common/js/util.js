@@ -1,4 +1,4 @@
-export default util = ((window, document) => {
+export default ((window, document) => {
 
     return {
         API: '',
@@ -71,6 +71,22 @@ export default util = ((window, document) => {
                     hasCanceled_ = true;
                 },
             };
+        },
+
+        getImgFilesizeByUrl(url) {
+            return new Promise((resolve, reject) => {
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", url, true);
+                xhr.responseType = "arraybuffer";
+                xhr.onreadystatechange = function() {
+                    if(this.status === 200) {
+                        resolve(this.response.byteLength);
+                    } else {
+                        reject('获取图片文件大小失败')
+                    }
+                };
+                xhr.send(null);
+            })
         }
     }
 })(window, document);

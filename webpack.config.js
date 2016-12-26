@@ -4,6 +4,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const pkg = require('./package.json');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const __PROD__ = process.env.NODE_ENV === 'production';
 const __DEV__ = __PROD__ === false;
@@ -28,16 +29,15 @@ const getNodeModulePath = (nodeModulePath, symbol = '.') => {
 const publicPath = __PROD__ ? `http://novaline.space/${pkg.name}/` : '/';
 
 const config = {
-	PORT: 3001,
+	PORT: 3000,
 
 	entry: {
-		app: src + '/index.js'
+		app: path.join(src, 'index.js')
 	},
 
 	output: {
 		path: dist,
-		filename: __DEV__ ? '[name].js' : '[name].[hash].js',
-		chunkFilename: '[id].chunk.js',
+		filename: __DEV__ ? '[name].js' : '[name].[chunkhash:8].js',
 		publicPath
 	},
 
@@ -72,15 +72,17 @@ const config = {
 		alias: {
 			'articles': path.resolve(src, 'common/js', 'articles.js'),
 			'images': path.resolve(src, 'images')
-		}
+		},
+		modulesDirectories: ["node_modules", 'src']
 	},
 
-	devtool: __DEV__ ? 'cheap-source-map' : false,
+	devtool: 'cheap-source-map',
 
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: src + '/index.html',
-			filename: 'index.html'
+			filename: 'index.html',
+			dll: require('./dll/dll.json').react_libs.js
 		}),
 		new webpack.DefinePlugin({
 			__DEV__: __DEV__,
@@ -91,14 +93,31 @@ const config = {
 			__VERSION__: JSON.stringify(pkg.version),
 			__TITLE__: JSON.stringify(pkg.description)
 		}),
-		new ExtractTextPlugin('[name].[contenthash].css', {
+		new ExtractTextPlugin('[name].[contenthash:8].css', {
 			allChunks: true
 		}),
-		//暴露全局变量，暴露后的模块如果再使用import或者require该模块，会报错
+		new webpack.DllReferencePlugin({
+			context: __dirname,
+			manifest: require('./dll/react_libs.manifest.json')
+		}),
+		new CopyWebpackPlugin([
+			{ from: 'dll', to: 'dll' }
+		], {
+			ignore: ['*.json']
+		}),
 		new webpack.ProvidePlugin({
 			util: path.resolve(src, 'common/js', 'util.js'),
 			React: 'react',
+			ReactRoute: 'react-router',
+			ReactDOM: 'react-dom',
+			ReactRedux: 'react-redux',
 			classNames: 'classNames'
+		}),
+		// new webpack.optimize.CommonsChunkPlugin("commons", "commons.js", Infinity),
+		new CleanWebpackPlugin(['dist', 'docs'], {
+			root: __dirname,
+			verbose: true,
+			dry: false
 		})
 	],
 
@@ -128,7 +147,7 @@ if (__DEV__) {
 	// webpack-dev-server 的cli 的--hot会添加HotModuleReplacementPlugin，所以不要重复添加。
 	// config.plugins.push(new webpack.HotModuleReplacementPlugin());
 	config.devServer = {
-		contentBase: dist,
+		contentBase: './',
 		historyApiFallback: true,
 		colors: true,
 		port: config.PORT,
@@ -138,11 +157,6 @@ if (__DEV__) {
 
 if (__PROD__) {
 	config.plugins.push(
-		new CleanWebpackPlugin(['dist', 'docs'], {
-			root: __dirname,
-			verbose: true,
-			dry: false
-		}),
 		new webpack.optimize.UglifyJsPlugin({
 			compress: {
 				warnings: false,
@@ -154,7 +168,6 @@ if (__PROD__) {
 			},
 			mangle: true
 		}),
-		new webpack.optimize.CommonsChunkPlugin("commons", "commons.js"),
 		new webpack.optimize.DedupePlugin(),
 		new webpack.optimize.OccurrenceOrderPlugin()
 	);

@@ -32,6 +32,7 @@
     "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {
+    "assets-webpack-plugin": "^3.5.0",
     "babel-core": "^6.8.0",
     "babel-loader": "^6.2.4",
     "babel-plugin-add-module-exports": "^0.2.1",
@@ -44,6 +45,7 @@
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-0": "^6.5.0",
     "clean-webpack-plugin": "^0.1.9",
+    "copy-webpack-plugin": "^4.0.1",
     "cross-env": "^2.0.1",
     "css-loader": "^0.23.1",
     "eslint": "^3.11.1",
@@ -64,8 +66,9 @@
     "webpack-dev-server": "^1.14.1"
   },
   "scripts": {
-    "build": "rm -rf ./dist ./docs && webpack --progress -d -w",
-    "start": "nodemon --watch webpack.config.js --watch package.json --delay 1000ms --exec ./node_modules/.bin/webpack-dev-server --progress --inline --hot",
+    "build:dll": "webpack --config webpack.config.dll.js --progress",
+    "watch": "webpack-dev-server --progress -d -w",
+    "start": "webpack-dev-server --progress --inline --hot",
     "release": "cross-env NODE_ENV=production webpack --progress && git add . && git commit -m 'build' && git pull origin master && git push origin master",
     "pre-release": "cross-env NODE_ENV=production HOST=local webpack --progress && cross-env NODE_ENV=production nodemon server.js"
   },
