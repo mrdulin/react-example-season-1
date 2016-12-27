@@ -152,7 +152,8 @@ if (__DEV__) {
 		historyApiFallback: true,
 		colors: true,
 		port: config.PORT,
-		progress: true
+		progress: true,
+		host: '0.0.0.0'
 	};
 }
 

@@ -13,6 +13,7 @@
         overflow-x: hidden;
         background-color: #fff;
         transition: width cubic-bezier(0.075, 0.82, 0.165, 1) .2s;
+        -webkit-overflow-scrolling: touch;
 
         &.hide{
             width: 60px;

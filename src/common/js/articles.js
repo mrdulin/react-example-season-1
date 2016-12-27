@@ -49,7 +49,8 @@ module.exports = {
             'cancel-fetch-data': '组件在componentWillUnmount时取消请求',
             'react-pureComponent': 'React.PureComponent测试',
             'setState-multiple-times': '多次调用setState，render次数',
-            'best-practice': 'react最佳实践'
+            'best-practice': 'react最佳实践',
+            'mobile-fixed-layout': '移动端fixed布局'
         },
         "react-router": {
             'get-every-type-params':  "获取路由url上的每个参数",
