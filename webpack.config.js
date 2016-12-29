@@ -77,13 +77,13 @@ const config = {
 		modulesDirectories: ["node_modules", 'src']
 	},
 
-	devtool: __DEV__ ? 'cheap-source-map' : false,
+	devtool: 'source-map',
 
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: src + '/index.html',
-			filename: 'index.html',
-			dll: require('./dll/dll.json').react_libs.js
+			filename: 'index.html'
+			// dll: require('./dll/dll.json').react_libs.js
 		}),
 		new webpack.DefinePlugin({
 			__DEV__: __DEV__,
@@ -97,10 +97,10 @@ const config = {
 		new ExtractTextPlugin('[name].[contenthash:8].css', {
 			allChunks: true
 		}),
-		new webpack.DllReferencePlugin({
-			context: __dirname,
-			manifest: require('./dll/react_libs.manifest.json')
-		}),
+		// new webpack.DllReferencePlugin({
+		// 	context: __dirname,
+		// 	manifest: require('./dll/react_libs.manifest.json')
+		// }),
 		new CopyWebpackPlugin([
 			{ from: 'dll', to: 'dll' }
 		], {

@@ -4,7 +4,7 @@ class StyleByParentComponent extends Component{
     static defaultProps = {
         cycle: {borderRadius: '50%', width: '100px', height: '100px', backgroundColor: 'red'},
         square: {width: '100px', height: '100px', backgroundColor: 'lightblue'}
-    }
+    };
     
     constructor() {
         super();
