@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, {Component, PureComponent} from 'react';
 import {withRouter, Link} from 'react-router';
 import articles from 'articles';
 
-class Sidebar extends Component{
+class Sidebar extends PureComponent{
     constructor(props) {
         super(props);
         this.handleTextFilterChange = ::this.handleTextFilterChange;
@@ -26,6 +26,7 @@ class Sidebar extends Component{
     }
 
     render() {
+        console.count('sidebar render');
         const sideBarItems = this.renderItems();
         const {hideSideBar, filterText} = this.state;
         return <div className={`sidebar ${hideSideBar ? 'hide' : ''}`}>

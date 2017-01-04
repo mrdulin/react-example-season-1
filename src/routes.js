@@ -58,6 +58,7 @@ import SetStateMultipleTimes from './pages/React/SetStateMultipleTimes';
 import BestPractice from './pages/React/BestPractice';
 import MobileFixedLayout from './pages/React/MobileFixedLayout'
 import DynamicJSXTags from './pages/React/Dynamic-JSX-tags.react';
+import ImmutableHelper from './pages/React/ImmutableHelper';
 
 //react-router
 import GetEveryTypeParams from './pages/React-router/GetEveryTypeParams.react';
@@ -163,6 +164,7 @@ const routes = (
             <Route path='best-practice' component={BestPractice}></Route>
             <Route path='mobile-fixed-layout' component={MobileFixedLayout}></Route>
             <Route path='dynamic-JSX-tags' component={DynamicJSXTags}></Route>
+            <Route path='immutable-helper' component={ImmutableHelper}></Route>
         </Route>
         <Route path='react-dom' components={{sidebar: Sidebar, main: Main}}>
             <IndexRoute component={ArticleList}/>

@@ -1,6 +1,10 @@
 import './sass/index.scss';
 import './pages/Mini-projects';
 
+import Perf from 'react-addons-perf'
+
+window.Perf = Perf;
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Router, browserHistory, RouterContext, hashHistory} from 'react-router';
