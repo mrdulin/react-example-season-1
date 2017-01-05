@@ -54,7 +54,7 @@ const config = {
 			exclude: /node_modules/,
 			loader: ExtractTextPlugin.extract(
 				'style', 
-				'css?sourceMap?modules&localIdentName=[name]__[local]-[hash:base64:5]!sass?sourceMap'
+				'css?sourceMap?modules&localIdentName=[name]__[local]-[hash:base64:5]!sass'
 			)
 		}, {
 			test: /\.(png|jpg|gif|svg)$/,
@@ -67,12 +67,18 @@ const config = {
 		}]
 	},
 
+	sassLoader: {
+		includePaths: ['src/pages'],
+		sourceMap: true
+	},
+
 	resolve: {
 		root: __dirname,
 		extensions: ['', '.js', '.jsx', '.scss', '.sass', '.css', '.json'],
 		alias: {
 			'articles': path.resolve(src, 'common/js', 'articles.js'),
-			'images': path.resolve(src, 'images')
+			'images': path.resolve(src, 'images'),
+			pages: path.resolve(src, 'pages')
 		},
 		modulesDirectories: ["node_modules", 'src']
 	},
@@ -112,7 +118,8 @@ const config = {
 			ReactRoute: 'react-router',
 			ReactDOM: 'react-dom',
 			ReactRedux: 'react-redux',
-			classNames: 'classNames'
+			classNames: 'classNames',
+			IScroll: 'iscroll'
 		}),
 		// new webpack.optimize.CommonsChunkPlugin("commons", "commons.js", Infinity),
 		new CleanWebpackPlugin(['dist', 'docs'], {

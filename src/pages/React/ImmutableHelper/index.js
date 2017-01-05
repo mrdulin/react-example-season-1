@@ -2,6 +2,7 @@ import update from 'immutability-helper';
 import 'whatwg-fetch';
 
 const {PureComponent} = React;
+const {findDOMNode} = ReactDOM;
 const API = 'http://it-ebooks-api.info/v1/search';
 
  const _compare = (prop) => (a, b) => {
@@ -13,30 +14,73 @@ const API = 'http://it-ebooks-api.info/v1/search';
 }
 
 const _compareByKey = (prop, sortKey) => (a, b) => {
-    return sortKey === 'desc' ? a[prop] > b[prop] : a[prop] < b[prop];
+    return sortKey === 'desc' ? ~~(a[prop] > b[prop]) : ~~(a[prop] < b[prop]);
 }
 
-const BookList = ({children}) => (
-    <ul>{children}</ul>
-)   
+const BookList = ({books}) => {
+    if(!books || books.length === 0) return null;
+    return <ul className='book-list'>
+        {books.map((book, index) => <BookItem key={index} book={book}></BookItem>)}
+    </ul>
+}
 
 const BookItem = ({book}) => (
-    <li>{book.Title}</li>
+    <li className='book-item'>
+        <div className='l'>
+            <img className='book-thumbnail' src={book.Image} alt="book thumbnail"/>
+        </div>
+        <div className='r'>
+            <h1 className='book-title'>{book.Title}</h1>
+        </div>
+    </li>
 )
 
 const LoadMore = ({page, pageSize, total, load}) => {
 
     const hasMore = page * pageSize < total;
 
-    return <button style={{display: hasMore ? 'block': 'none'}} type='button' onClick={load}>加载更多</button>
+    if(!hasMore) return null;
+
+    return <p type='button' className='LoadMore' onClick={load}>加载更多</p>
 }
+
+const QueryTime = ({time}) => {
+    if(!time) return null;
+    return <p className='query-time'>本次查询耗时{time}秒</p>
+}
+
+const Empty = ({show}) => {
+    if(!show) return null;
+    return <p className='empty'>查询不到结果~</p>
+}
+
+const Header = ({children}) => <header className='header'>{children}</header>;
+
+const SubHeader = ({children}) => <div className='sub-header'>{children}</div>;
     
-const SearchBar = ({submit}) => (
-    <form onSubmit={submit}>
+const SearchBar = ({submit}) => {
+    let _input = null;
+    const handleSubmit = (e) => {
+        _input.blur();
+        submit && submit(e);
+    };
+    return <form className='search-form' onSubmit={handleSubmit}>
         {/*<input type="search" name="search" onChange={e => this._handleSearchChange(e)} placeholder='输入书名进行搜索'/>*/}
-        <input type="search" name="search" placeholder='输入书名进行搜索' autoComplete='off'/>
+        <input className='search-input' ref={ref => _input = ref} type="search" name="search" placeholder='输入书名进行搜索' autoComplete='off'/>
+        <button type="submit">搜索</button>
     </form>
-)
+}
+
+const Spin = ({show}) => {
+    if(!show) return null;
+    return <div className='spin'>
+        <p className='spin-text'>搜索中...</p>
+    </div>
+}
+
+const Scroller = ({children}) => {
+    return <div className='scroller'>{children}</div>
+}
 
 const Filter = ({change, filter}) => {
     const titleMap = {
@@ -57,32 +101,83 @@ const Filter = ({change, filter}) => {
 
     const titleTxt = titleMap[filter.title];
     console.log(titleTxt);
-    return <div>
+    return <div className='filter'>
         <button type="button" onClick={handleTitleFilter}>{titleTxt}</button>
     </div>
 }   
+
+const Wrapper = ({children}) => <div className='wrapper'>{children}</div>
 
 export default class extends PureComponent{
     constructor() {
         super();
         this.state = {
             books: [],
+            time: 0,
             query: '',
             page: 1,
             total: 0,
             filter: {
                 title: 'none'
-            }
+            },
+            searching: false
         }
+
     }
+
+    componentDidMount() {
+        this._wrapperElement = document.querySelector('.wrapper');
+        this._subHeaderElement = document.querySelector('.sub-header');
+        this._searchInput = document.querySelector('.search-input');
+        this._updateWrapperTop();
+        this._initScroller();       
+    }
+
+    componentWillUnmount() {
+        this._scroller.destroy();
+        this._scroller = null;
+        document.removeEventListener('touchmove', this._preventTouchmoveDefault);
+    }
+
+    _initScroller() {
+        document.addEventListener('touchmove', this._preventTouchmoveDefault, false);
+        this._scroller = new IScroll(this._wrapperElement);
+        this._scroller.on('beforeScrollStart', ::this._blurSearchInput)
+    }
+
+    _preventTouchmoveDefault(e) {
+        e.preventDefault();
+    }
+
+    _blurSearchInput() {
+        console.log(this._searchInput);
+        this._searchInput.blur();
+    }
+
+    _updateWrapperTop() {
+        const subheaderHeight = this._caculateSubHeaderHeight();
+        const headerHeight = 45;
+        const height = subheaderHeight + headerHeight;
+        console.log(height);
+        this._wrapperElement.style.top = `${height}px`;
+    }
+    
+    _caculateSubHeaderHeight() {
+        const heightOriginal = window.getComputedStyle(this._subHeaderElement).getPropertyValue('height');
+        const height = ~~heightOriginal.replace('px', '');
+        return height;
+    }
+    
 
     _fetchData(query, page) {
         const url = `${API}/${query}/page/${page}`;
         return fetch(url).then(res => res.json()).then(data => {
-            const {Books: books, Total: total} = data;
+            const {Books: books = [], Total: total, Time: time = 0} = data;
             const totalInt = parseInt(total, 10);
-            return {books, total: totalInt};
-        }).catch(console.error);
+            return {books, total: totalInt, time};
+        }).catch(e => {
+            console.error(e)
+        });
     }
 
     _loadMore() {
@@ -103,7 +198,7 @@ export default class extends PureComponent{
                     }
                 })
             }
-            this.setState(newState);
+            this.setState(newState, this._refreshScroller);
         })
     }
 
@@ -116,7 +211,8 @@ export default class extends PureComponent{
         const newState = update(this.state, {
             query: {$set: query},
             page: {$set: 1},
-            total: {$set: 0}
+            total: {$set: 0},
+            searching: {$set: true}
         });
         this.setState(newState);
     }
@@ -131,11 +227,13 @@ export default class extends PureComponent{
         //虽然在react事件中调用多次setState，react会把这些new state合并后再setState，但是异步callback中的setState除外.
         this._updateState(form.search.value); //render 1次
         this._fetchData(query, page).then(data => { //异步请求 render 1次
-            const {books, total} = data;
+            const {books, total, time} = data;
             let newState = update(this.state, 
                 {
                     books: {$set: books},
-                    total: {$set: total}
+                    total: {$set: total},
+                    time: {$set: time},
+                    searching: {$set: false}
                 }
             );
             if(title !== 'none') {
@@ -143,8 +241,15 @@ export default class extends PureComponent{
                     books: {$apply: books => books.sort(_compareByKey('Title', title))}
                 })
             }
-            this.setState(newState);
+            this.setState(newState, this._refreshScroller);
         })
+    }
+
+    _refreshScroller() {
+        setTimeout(() => {
+            this._updateWrapperTop();
+            this._scroller.refresh();
+        }, 10)
     }
 
     _handleFilterChange(titleKey) { 
@@ -159,19 +264,28 @@ export default class extends PureComponent{
 
     render() {
         console.count('render count');
-        const {books, query, page, total, filter} = this.state;
-
+        const {books = [], query, page, total, filter, time, searching} = this.state;
         console.log(this.state);
 
-        return <div id='immutable-helper'>
-            <SearchBar submit={e => this._handleSearchFormSubmit(e)}></SearchBar>
-            <Filter change={(titleKey) => this._handleFilterChange(titleKey)} filter={filter}></Filter>
-            <BookList>
-            {
-                books.map((book, index) => <BookItem key={index} book={book}></BookItem>)
-            }
-            </BookList>
-            <LoadMore page={page} pageSize={10} total={total} load={() => this._loadMore()}></LoadMore>
-        </div>
+        return <div>
+            <p>immutable-helper + iscroll + react</p>
+            <div id='immutable-helper'>
+                <Header>
+                    <SearchBar submit={e => this._handleSearchFormSubmit(e)}></SearchBar>
+                </Header>
+                <SubHeader>
+                    <Filter change={(titleKey) => this._handleFilterChange(titleKey)} filter={filter}></Filter>
+                    <QueryTime time={time}></QueryTime>
+                </SubHeader>
+                <Wrapper>
+                    <Scroller>
+                        <BookList books={books}></BookList>
+                        <Empty show={query && !searching && books.length === 0}></Empty>
+                        <LoadMore page={page} pageSize={10} total={total} load={() => this._loadMore()}></LoadMore>
+                    </Scroller>
+                </Wrapper>
+                <Spin show={searching}></Spin>
+            </div>
+        </div> 
     }
 }

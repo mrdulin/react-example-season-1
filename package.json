@@ -18,6 +18,7 @@
     "classnames": "^2.2.5",
     "immutability-helper": "^2.1.0",
     "intl": "^1.2.5",
+    "iscroll": "^5.2.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-intl": "^2.1.5",
