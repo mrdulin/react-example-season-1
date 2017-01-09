@@ -1,7 +1,7 @@
 import update from 'immutability-helper';
 import 'whatwg-fetch';
 
-const {PureComponent} = React;
+const {PureComponent, Component} = React;
 const {findDOMNode} = ReactDOM;
 const API = 'http://it-ebooks-api.info/v1/search';
 
@@ -17,20 +17,24 @@ const _compareByKey = (prop, sortKey) => (a, b) => {
     return sortKey === 'desc' ? ~~(a[prop] > b[prop]) : ~~(a[prop] < b[prop]);
 }
 
-const BookList = ({books}) => {
+const BookList = ({books, toggleIntro}) => {
     if(!books || books.length === 0) return null;
     return <ul className='book-list'>
-        {books.map((book, index) => <BookItem key={index} book={book}></BookItem>)}
+        {books.map((book, index) => <BookItem key={index} book={book} toggleIntro={() => toggleIntro(index)}></BookItem>)}
     </ul>
 }
 
-const BookItem = ({book}) => (
+const BookItem = ({book, toggleIntro}) => (
     <li className='book-item'>
         <div className='l'>
             <img className='book-thumbnail' src={book.Image} alt="book thumbnail"/>
         </div>
         <div className='r'>
             <h1 className='book-title'>{book.Title}</h1>
+            <a href="javascript: void 0" onClick={toggleIntro}>{book.showIntro ? '隐藏简介' : '显示简介'}</a>
+            <div style={{display: book.showIntro ? 'block' : 'none'}}>
+                <p className='subTitle'>{book.SubTitle}</p>
+            </div>
         </div>
     </li>
 )
@@ -108,7 +112,7 @@ const Filter = ({change, filter}) => {
 
 const Wrapper = ({children}) => <div className='wrapper'>{children}</div>
 
-export default class extends PureComponent{
+export default class extends Component{
     constructor() {
         super();
         this.state = {
@@ -139,6 +143,12 @@ export default class extends PureComponent{
         document.removeEventListener('touchmove', this._preventTouchmoveDefault);
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        // this.state.filter === nextState.filter //false
+
+        return true;
+    }
+
     _initScroller() {
         document.addEventListener('touchmove', this._preventTouchmoveDefault, false);
         this._scroller = new IScroll(this._wrapperElement);
@@ -150,7 +160,7 @@ export default class extends PureComponent{
     }
 
     _blurSearchInput() {
-        console.log(this._searchInput);
+        // console.log(this._searchInput);
         this._searchInput.blur();
     }
 
@@ -179,25 +189,38 @@ export default class extends PureComponent{
             console.error(e)
         });
     }
-
+    /**
+     * @desc 加载更多
+     */
     _loadMore() {
         const {page, query, filter: {title}} = this.state;
         const nextPage = page + 1;
         this._fetchData(query, nextPage).then(data => {
             const {books} = data;
-            let newState = update(this.state, {
-                books: {$push: books},
-                page: {$set: nextPage}
-            });
-            if(title !== 'none') {
-                newState = update(newState, {
-                    books: {
-                        $apply: items => {
-                            return items.sort(_compareByKey('Title', title));
-                        }
-                    }
-                })
+
+            //使用新建引用的方式
+            const oldBooks = this.state.books;
+            const newBooks = Array.prototype.concat.apply(oldBooks, books);
+            let newState =  {
+                books: newBooks,
+                page: nextPage
             }
+
+
+            //使用immutable-helper的方式
+            // let newState = update(this.state, {
+            //     books: {$push: books},
+            //     page: {$set: nextPage}
+            // });
+            // if(title !== 'none') {
+            //     newState = update(newState, {
+            //         books: {
+            //             $apply: items => {
+            //                 return items.sort(_compareByKey('Title', title));
+            //             }
+            //         }
+            //     })
+            // }
             this.setState(newState, this._refreshScroller);
         })
     }
@@ -262,10 +285,56 @@ export default class extends PureComponent{
         this.setState(newState);
     }
 
+    _toggleIntro(index) {
+        //1. use immutable-helper，but it seems there is no need to use it.
+        const newState = update(this.state, {
+            books: {$apply: books => {
+                let target = books[index];
+                const newTarget = update(target, {
+                    showIntro: {$apply: showIntro => {
+                        if(typeof showIntro === 'undefined') {   
+                            return true;
+                        } else {
+                            return !showIntro;
+                        }
+                    }}
+                })
+                return [...books.slice(0, index), newTarget, ...books.slice(index + 1)];
+            }}
+        })
+
+        //2. immutable-helper way version 2
+        //  const newState = update(this.state, {
+        //     books: {$apply: books => {
+        //         let target = books[index];
+        //         const showIntro = target.showIntro;
+        //         target.showIntro = typeof showIntro === 'undefined' ? true : !showIntro;
+                 
+        //         return [...books.slice(0, index), target, ...books.slice(index + 1)];
+        //     }}
+        // })
+        
+        // 3. use es7 object spread property 
+        // const {books} = this.state;
+        // const target = books[index]; 
+        // const showIntro = target.showIntro;
+        // const newState = {
+        //     ...this.state,
+        //     books: [
+        //         ...books.slice(0, index),
+        //         Object.assign({}, target, {showIntro: typeof showIntro === 'undefined' ? true : !showIntro}),
+        //         ...books.slice(index + 1)
+        //     ]
+        // }
+        console.log('this.state', this.state);  //方式2修改了源数据this.state.books中某个book对象的字段
+        console.log('newState', newState);
+        this.setState(newState);
+    }
+
     render() {
         console.count('render count');
         const {books = [], query, page, total, filter, time, searching} = this.state;
-        console.log(this.state);
+        // console.log(this.state);
 
         return <div>
             <p>immutable-helper + iscroll + react</p>
@@ -279,7 +348,7 @@ export default class extends PureComponent{
                 </SubHeader>
                 <Wrapper>
                     <Scroller>
-                        <BookList books={books}></BookList>
+                        <BookList books={books} toggleIntro={index => this._toggleIntro(index)}></BookList>
                         <Empty show={query && !searching && books.length === 0}></Empty>
                         <LoadMore page={page} pageSize={10} total={total} load={() => this._loadMore()}></LoadMore>
                     </Scroller>

@@ -1,3 +1,10 @@
+@mixin ellipsis-multi($n: 1) {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: $n;
+    -webkit-box-orient: vertical;
+}
+
 #immutable-helper{
     position: relative;
     width: 320px;
@@ -127,16 +134,16 @@
 
     .book-item {
         position: relative;
-        height: 80px;
+        height: 120px;
         display: flex;
         overflow: hidden;
         border-bottom: 1px solid #ddd;
         background: #fff;
 
         .l{
-            width: 60px;
+            width: 80px;
             margin-right: 10px;
-            display: flex;
+            position: relative;
         }
         .r{
             flex: 1;
@@ -147,15 +154,27 @@
         display: block;
         width: 100%;
         max-width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
     }
 
     .book-title{
+         @include ellipsis-multi(1);
         font-size: 16px;
         font-weight: normal;    
     }
 
     .empty{
         text-align: center;
+    }
+
+    .subTitle{
+        @include ellipsis-multi(2);
+        color: #666;
     }
 }
 
