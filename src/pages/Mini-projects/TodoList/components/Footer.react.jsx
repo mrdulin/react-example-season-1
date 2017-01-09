@@ -27,8 +27,9 @@ class Footer extends Component{
     }
 
     handleFilterClick(filterKey, e) {
-        const {onFilterChange} = this.props;
+        const {onFilterChange, filter} = this.props;
         e.preventDefault();
+        if(filterKey === filter) return;
         onFilterChange && onFilterChange(filterKey);
     }
 }

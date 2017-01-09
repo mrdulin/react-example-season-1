@@ -2,7 +2,8 @@ import {combineReducers} from 'redux';
 
 const initState = {
     visibilityFilter: 'SHOW_ALL',
-    todos: []
+    todos: [],
+    test: false
 }
 
 const createReducer = (initialState, handlersMap) => (state = initialState, action) => {
@@ -17,8 +18,16 @@ const TodoList = createReducer(initState, {
     todolist_addTodo: addTodo,
     todolist_toggleTodo: toggleTodo,
     todolist_setFilter: setFilter,
-    todolist_completeAllTodos: completeAllTodos
+    todolist_completeAllTodos: completeAllTodos,
+    todolist_toggleTest: toggleTest
 })
+
+function toggleTest(state) {
+    return {
+        ...state, 
+        test: !state.test
+    }
+}
 
 function completeAllTodos(state, {checked}) {
     return {
