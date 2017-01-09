@@ -32,6 +32,7 @@
     "redux-saga": "^0.13.0",
     "redux-thunk": "^2.1.0",
     "redux-undo": "^0.6.1",
+    "reselect": "^2.5.4",
     "superagent": "^3.2.1",
     "whatwg-fetch": "^1.0.0"
   },

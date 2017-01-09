@@ -19,10 +19,10 @@ class Todos extends Component {
     render() {
         const {todos} = this.props;
         const todoItems = todos.map((todo, index) => {
-            return <Todo {...todo} key={index} onClick={e => this.handleToggleTodo(e, index)}></Todo>
+            return <Todo {...todo} key={index} onClick={e => this.handleToggleTodo(index)}></Todo>
         });
         return (
-            <section id='main' style={{display: todos.length > 0 ? 'display' : 'none'}}>
+            <section id='main' style={{display: todos.length > 0 ? 'block' : 'none'}}>
                 <input type="checkbox" id="toggle-all" onClick={this.handleMarkAll}/>
                 <label htmlFor="toggle-all">Mark all as complete</label>
                 <ul id='todo-list'>{todoItems}</ul>
@@ -35,9 +35,10 @@ class Todos extends Component {
         toggleTodo && toggleTodo(index);
     }
 
-    handleMarkAll() {
+    handleMarkAll(e) {
         const {markAll} = this.props;
-        markAll && markAll();
+        const checked = e.target.checked;
+        markAll && markAll(checked);
     }
 }
 

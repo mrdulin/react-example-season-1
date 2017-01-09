@@ -6,11 +6,12 @@ class AddTodo extends Component{
     }
 
     render() {
+        console.count('AddTodo');
         return (
             <header id='header'>
                 <h1>todos</h1>
                 <form id='todo-form' onSubmit={(e) => {this.addTodoSubmit(e)}}>
-                    <input id='new-todo' ref='add_todo_input' type="text" placeholder="What needs to be done?" autoFocus/>
+                    <input id='new-todo' ref='add_todo_input' type="text" placeholder="What needs to be done?" autoFocus autoComplete='off'/>
                 </form>
             </header>
         );

@@ -1,63 +1,62 @@
+import {combineReducers} from 'redux';
+
 const initState = {
-    filter: 'SHOW_ALL',
-    todos: [],
-    todosFiltered: []
+    visibilityFilter: 'SHOW_ALL',
+    todos: []
 }
 
-export const TodoList = (state = initState, action) => {
-    switch (action.type) {
-        case 'ADD_TODO':
-            const todos = state.todos;
-            const newTodo = {completed: false, text: action.text};
-            todos.push(newTodo);
-            let todosFiltered = [];
-            const todosClone = todos.slice(0);
-
-            switch (filter) {
-                case 'SHOW_ALL':
-                    todosFiltered = todosClone;
-                    break;
-                case 'SHOW_COMPLETE':
-                    todosFiltered = todosClone.filter(todo => todo.completed);
-                    break;
-            }
-
-            return Object.assign({}, state, {todos})
-        default:
-            return state;
+const createReducer = (initialState, handlersMap) => (state = initialState, action) => {
+    if(handlersMap.hasOwnProperty(action.type)) {
+        return handlersMap[action.type](state, action);
+    } else {
+        return state;
     }
 }
 
-// export const todos = (state = [], action) => {
-//     switch (action.type) {
-//         case ADD_TODO:
-//             return [
-//                 ...state,
-//                 {text: action.text, completed: false}
-//             ]
-//         case TOGGLE_TODO:
-//             return state.map((todo, index) => {
-//                 if(index === action.index) {
-//                     return Object.assign({}, todo, {
-//                         completed: !todo.completed
-//                     });
-//                 }
-//                 return todo;
-//             });
-//         case COMPLETE_TODO:
-//             return state.map((todo, index) => {
-//                 return index === action.index ? Object.assign({}, todo, {completed: true}) : todo;
-//             });
-//         default:
-//             return state;
-//     }
-// };
+const TodoList = createReducer(initState, {
+    todolist_addTodo: addTodo,
+    todolist_toggleTodo: toggleTodo,
+    todolist_setFilter: setFilter,
+    todolist_completeAllTodos: completeAllTodos
+})
 
-// export const visibilityFilter = (state = SHOW_ALL, action) => {
-//     switch (action.type) {
-//         case SET_VISIBILITY_FILTER:
-//             return action.filter;
-//         default:
-//             return state;
-//     }
-// };
+function completeAllTodos(state, {checked}) {
+    return {
+        ...state,
+        todos: state.todos.map(todo => Object.assign({}, todo, {completed: checked}))
+    }
+}
+
+function toggleTodo(state, {index}) {
+    const target = state.todos[index];
+    return {
+        ...state,
+        todos: [
+            ...state.todos.slice(0, index),
+            Object.assign({}, target, {text: target.text, completed: !target.completed}),
+            ...state.todos.slice(index + 1)
+        ]
+    }
+}
+
+function addTodo(state, action) {
+    return Object.assign({}, state, {
+        todos: [
+            ...state.todos,
+            {
+                text: action.text,
+                completed: false
+            }
+        ]
+    })
+}
+
+function setFilter(state, action) {
+    return {
+        ...state,
+        visibilityFilter: action.filter
+    }
+}
+
+
+export {TodoList};

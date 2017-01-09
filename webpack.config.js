@@ -6,6 +6,10 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const pkg = require('./package.json');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
+console.log('========================================================');
+console.log('WEBPACK NODE_ENV :: ', JSON.stringify(process.env.NODE_ENV));
+console.log('========================================================');
+
 const __PROD__ = process.env.NODE_ENV === 'production';
 const __DEV__ = __PROD__ === false;
 
@@ -78,7 +82,8 @@ const config = {
 		alias: {
 			'articles': path.resolve(src, 'common/js', 'articles.js'),
 			'images': path.resolve(src, 'images'),
-			pages: path.resolve(src, 'pages')
+			pages: path.resolve(src, 'pages'),
+			actions: path.resolve(src, 'actions')
 		},
 		modulesDirectories: ["node_modules", 'src']
 	},
