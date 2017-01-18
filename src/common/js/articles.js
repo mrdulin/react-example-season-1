@@ -52,7 +52,8 @@ module.exports = {
             'best-practice': 'react最佳实践',
             'mobile-fixed-layout': '移动端fixed布局',
             'dynamic-JSX-tags': '动态jsx标签',
-            'immutable-helper': '使用不可变数据'
+            'immutable-helper': '使用不可变数据',
+            'set-state-in-componentWillMount': 'componentWillMount中异步请求callback中setState'
         },
         "react-router": {
             'get-every-type-params':  "获取路由url上的每个参数",

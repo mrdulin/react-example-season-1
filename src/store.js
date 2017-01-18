@@ -25,6 +25,10 @@ if(__DEV__) {
     //如果action常量是Symbol类型，那么会报错： Uncaught (in promise) TypeError: Cannot convert a Symbol value to a string
     //解决方法: 如下，将Symbol类型转换成字符串
     const logger = createLogger({
+        duration: true, //action的耗时，action @ 10:27:55.461 todolist_addTodo (in 2.31 ms)
+        timestamp: true, //action的时间戳, action @ 10:27:55.461 todolist_addTodo (in 2.31 ms)
+        logErrors: true, //是否允许action catch到错误，打印或者抛出错误
+        diff: true,
         actionTransformer: (action) => ({
             ...action,
             type: String(action.type),

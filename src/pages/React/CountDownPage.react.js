@@ -1,6 +1,25 @@
 import React, {Component} from 'react';
 import CountDown from '../../common/components/CountDown';
 
+function lazy() {
+    var imgs = document.getElementsByTagName('img');
+    console.log(imgs.length);
+}
+
+class Child extends Component{
+    componentDidMount() {
+        lazy();
+    }
+    render() {
+        return <div>
+            child component
+            <img src="" alt=""/>
+            <img src="" alt=""/>
+            <img src="" alt=""/>
+        </div>
+    }
+}
+
 class CountDownPage extends Component{
     state = {
         isBegin: false
@@ -22,6 +41,7 @@ class CountDownPage extends Component{
                 <h2>倒计时</h2>
                 <CountDown {...options}></CountDown>
                 {this.state.isBegin ? <p>活动开始啦～～～</p> : null}
+                <Child></Child>
             </div>
         );
     }
