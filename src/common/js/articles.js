@@ -60,7 +60,8 @@ module.exports = {
             "router-will-leave": "路由跳转前确认",
             "transition-to-all-ways": "路由跳转的N种方法",
             "create-path": "测试react-router的createPath方法",
-            "listen-event": "监听路由跳转"
+            "listen-event": "监听路由跳转",
+            "react-router-tab": "react-router实现tab标签页效果"
         },
         "redux": {
             'redux-beginning': 'redux初探',

@@ -68,7 +68,7 @@ import TransitionToAllWays from './pages/React-router/TransitionToAllWays.react'
 import NamesComponent from './pages/React-router/NamesComponent.react';
 import CreatePath from './pages/React-router/CreatePath.react';
 import ListenEvent from './pages/React-router/ListenEvent.react';
-
+import Tab from './pages/React-router/Tab/index';
 
 //redux
 import ReduxBeginning from './pages/Redux/ReduxBeginning.react';
@@ -179,6 +179,11 @@ const routes = (
             <Route path='transition-to-all-ways' component={TransitionToAllWays}></Route>
             <Route path='create-path' component={CreatePath}/>
             <Route path='listen-event' component={ListenEvent}/>
+            <Route path='tab' component={Tab}>
+                <Route path='page1' component={require('./pages/React-router/Tab/pages/PageOne')}></Route>
+                <Route path='page2' component={require('./pages/React-router/Tab/pages/PageTwo')}></Route>
+                <Route path='page3' component={require('./pages/React-router/Tab/pages/PageThree')}></Route>
+            </Route>
         </Route>
         <Route path='redux' components={{sidebar: Sidebar, main: Main}}>
             <IndexRoute component={ArticleList}/>

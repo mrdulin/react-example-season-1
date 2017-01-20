@@ -120,7 +120,7 @@ const config = {
 		new webpack.ProvidePlugin({
 			util: path.resolve(src, 'common/js', 'util.js'),
 			React: 'react',
-			ReactRoute: 'react-router',
+			ReactRouter: 'react-router',
 			ReactDOM: 'react-dom',
 			ReactRedux: 'react-redux',
 			classNames: 'classNames',

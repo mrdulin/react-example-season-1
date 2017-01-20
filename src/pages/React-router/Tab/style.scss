@@ -1,0 +1,31 @@
+.navs{
+    float: left;
+    background-color: #fff;
+    width: 100px;
+
+}
+
+.page-container{
+   
+}
+
+.tab-container{
+    height: 50px;
+    background-color: #000;
+    display: flex;
+
+    > a{
+        flex-basis: 100px;
+        background-color: goldenrod;
+        color: #fff;
+        padding: 8px 10px;
+        margin-right: 10px;
+    }
+}
+
+.container{
+    margin-left: 120px;
+    background-color: #fff;
+    width: 500px;
+    height: 500px;
+}
