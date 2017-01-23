@@ -17,9 +17,16 @@ import store from './store';
 const createElement = (Component, props) => {
     // console.log(Component, props);
     return <Component {...props} />
-}
+};
 
 util.setTitle(__TITLE__);
+
+var pathHistory = [];
+
+browserHistory.listen(function(ev) {
+    console.log('listen', ev);
+
+});
 
 ReactDOM.render(
     <Provider store={store}>

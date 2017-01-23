@@ -49,7 +49,7 @@ import ReactChildren from './pages/React/React.children';
 import ReactCreateElement from './pages/React/React.createElement';
 import InitPropsAndState from './pages/React/InitPropsAndState';
 import InitLifecycle from './pages/React/InitLifecycle';
-import StateChangeLifecycle from './pages/React/StateChangeLifecycle';	
+import StateChangeLifecycle from './pages/React/StateChangeLifecycle';
 import ComponentNamespace from './pages/React/ComponentNamespace';
 import SpreadProps from './pages/React/SpreadProps';
 import CancelFetchData from './pages/React/CancelFetchData';
@@ -124,12 +124,12 @@ const routes = (
             <Route path='this-props-children' component={ThisPropsChildren}></Route>
             <Route path='inherit-component' component={InheritComponent}></Route>
             <Route path='set-children-react-element-style' component={SetChildrenReactElementStyle}></Route>
-            <Route path='insert-an-element-on-mouseover' component={InsertAnElementOnMouseOver} /> 
+            <Route path='insert-an-element-on-mouseover' component={InsertAnElementOnMouseOver}/>
             <Route path='jsx-array-dom' component={JSXArrayDom}></Route>
             <Route path='react-audioplayer' component={AudioPlayer}></Route>
             <Route path='horizontal-scroll' component={HorizontalScroll}></Route>
             <Route path='ajax-in-constructor' component={AjaxInConstructor}></Route>
-            <Route path='call-child-component-method' component={CallChildComponentMethod} />
+            <Route path='call-child-component-method' component={CallChildComponentMethod}/>
             <Route path='pass-async-data-to-child-component' component={PassAsyncDataToChildComponent}></Route>
             <Route path='high-order-component' component={HOC}></Route>
             <Route path='react-filter-bar' component={FilterBarExample}></Route>
@@ -140,7 +140,8 @@ const routes = (
             <Route path='loop-scroll' component={LoopScroll}></Route>
             <Route path='grab-child-component-state' component={GrabChildComponentState}></Route>
             <Route path='create-iframe' component={CreateIframe}></Route>
-            <Route path='set-modal-window-position-on-input-focus' component={SetModalWindowPositionOnInputFocus}></Route>
+            <Route path='set-modal-window-position-on-input-focus'
+                   component={SetModalWindowPositionOnInputFocus}></Route>
             <Route path='input-type-text' component={InputTypeText}/>
             <Route path='input-type-checkbox' component={InputTypeCheckbox}></Route>
             <Route path='mobile-input-focus-vistual-keybroad' component={MobileInputFocusVistualKeyboard}/>
@@ -151,13 +152,13 @@ const routes = (
             <Route path='select' component={SelectOption}/>
             <Route path='scrollTop' component={ScrollTop}></Route>
             <Route path='replace-img-src-within-component' component={ReplaceImgSrcWithinComponent}></Route>
-			<Route path='react-create-class' component={ReactCreateClass}></Route>
-			<Route path='react-children' component={ReactChildren}></Route>
-			<Route path='react-createElement' component={ReactCreateElement}></Route>
-			<Route path='init-props-and-state' component={InitPropsAndState}></Route>
-			<Route path='init-lifecycle' component={InitLifecycle}></Route>
-			<Route path='state-change-lifecycle' component={StateChangeLifecycle}></Route>
-			<Route path='component-namespace' component={ComponentNamespace}></Route>
+            <Route path='react-create-class' component={ReactCreateClass}></Route>
+            <Route path='react-children' component={ReactChildren}></Route>
+            <Route path='react-createElement' component={ReactCreateElement}></Route>
+            <Route path='init-props-and-state' component={InitPropsAndState}></Route>
+            <Route path='init-lifecycle' component={InitLifecycle}></Route>
+            <Route path='state-change-lifecycle' component={StateChangeLifecycle}></Route>
+            <Route path='component-namespace' component={ComponentNamespace}></Route>
             <Route path='spread-props' component={SpreadProps}></Route>
             <Route path='cancel-fetch-data' component={CancelFetchData}></Route>
             <Route path='react-pureComponent' component={ReactPureComponent}></Route>
@@ -184,22 +185,34 @@ const routes = (
                 <Route path='page2' component={require('./pages/React-router/Tab/pages/PageTwo')}></Route>
                 <Route path='page3' component={require('./pages/React-router/Tab/pages/PageThree')}></Route>
             </Route>
+            <Route path="crumb" component={require('./pages/React-router/Crumb')}>
+                <Route name='RouteName1' path='level1' component={require('./pages/React-router/Crumb/pages/PageOne')}>
+                    <Route name="RouteName2" path="level2" component={require('./pages/React-router/Crumb/pages/PageTwo')}>
+                        <Route name="RouteName3" path='level3' component={require('./pages/React-router/Crumb/pages/PageThree')}></Route>
+                    </Route>
+                </Route>
+            </Route>
         </Route>
         <Route path='redux' components={{sidebar: Sidebar, main: Main}}>
             <IndexRoute component={ArticleList}/>
             <Route path='redux-beginning' component={ReduxBeginning}/>
-            <Route path='create-store-in-component-compare-with-connect-state' component={CreateStoreInComponentCompareWithConnectState}/>
-            <Route path='check-data-in-state-and-new-createStore-state-is-same-when-dispatch-action' component={CheckDataInStateAndNewCreateStoreStateIsSameWhenDispatchAction}/>
+            <Route path='create-store-in-component-compare-with-connect-state'
+                   component={CreateStoreInComponentCompareWithConnectState}/>
+            <Route path='check-data-in-state-and-new-createStore-state-is-same-when-dispatch-action'
+                   component={CheckDataInStateAndNewCreateStoreStateIsSameWhenDispatchAction}/>
         </Route>
         <Route path='react-redux' components={{sidebar: Sidebar, main: Main}}>
             <IndexRoute component={ArticleList}/>
-            <Route path="init-store-data-in-componentWillMount-when-go-back" component={InitReduxStateTreeDataInComponentWillMount}></Route>
+            <Route path="init-store-data-in-componentWillMount-when-go-back"
+                   component={InitReduxStateTreeDataInComponentWillMount}></Route>
             <Route path='define-redux-state-data-structure' component={DefineReduxStateDataStructure}></Route>
             <Route path='map-state-to-props' component={MapStateToProps}></Route>
-            <Route path='inject-action-creators-to-component-props' component={InjectActionCreatorsToComponentProps}></Route>
+            <Route path='inject-action-creators-to-component-props'
+                   component={InjectActionCreatorsToComponentProps}></Route>
             <Route path='map-dispatch-to-props' component={MapDispatchToProps}></Route>
             <Route path='change-state-reference-type-data' component={ChangeStateTreeRefData}></Route>
-            <Route path='async-action-in-componentWillReceiveProps' component={AsyncActionInComponentWillReceiveProps}></Route>
+            <Route path='async-action-in-componentWillReceiveProps'
+                   component={AsyncActionInComponentWillReceiveProps}></Route>
             <Route path='auto-complete-page' component={AutoCompletePage}/>
             <Route path='es6-component-inherit-es5-component' component={Es6ComponentInheritEs5Component}></Route>
             <Route path='connect-multiple-nested-components' component={ConnectMultipleNestedComponents}/>
