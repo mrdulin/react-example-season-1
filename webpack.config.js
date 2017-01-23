@@ -5,6 +5,7 @@ const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const pkg = require('./package.json');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const DashboardPlugin = require('webpack-dashboard/plugin');
 
 console.log('========================================================');
 console.log('WEBPACK NODE_ENV :: ', JSON.stringify(process.env.NODE_ENV));
@@ -131,7 +132,9 @@ const config = {
 			root: __dirname,
 			verbose: true,
 			dry: false
-		})
+		}),
+
+		new DashboardPlugin()
 	],
 
 	addNoParse: (noParseMap) => {

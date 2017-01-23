@@ -69,12 +69,13 @@
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.0",
+    "webpack-dashboard": "^0.2.1",
     "webpack-dev-server": "^1.14.1"
   },
   "scripts": {
     "build:dll": "webpack --config webpack.config.dll.js --progress",
     "watch": "webpack-dev-server --progress -d -w",
-    "start": "webpack-dev-server --progress --inline --hot --hide-modules",
+    "start": "webpack-dashboard webpack-dev-server --progress --inline --hot --hide-modules",
     "release": "cross-env NODE_ENV=production webpack --progress && git add . && git commit -m 'build' && git pull origin master && git push origin master",
     "pre-release": "cross-env NODE_ENV=production HOST=local webpack --progress && cross-env NODE_ENV=production nodemon server.js"
   },
