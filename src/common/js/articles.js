@@ -54,7 +54,9 @@ module.exports = {
             'dynamic-JSX-tags': '动态jsx标签',
             'immutable-helper': '使用不可变数据',
             'set-state-in-componentWillMount': 'componentWillMount中异步请求callback中setState',
-            'tree': '递归渲染tree组件'
+            'tree': '递归渲染tree组件',
+            'escape': '转义字符和组件',
+            'immutability-helper-operate-array': 'immutability-helper操作数组'
         },
         "react-router": {
             'get-every-type-params':  "获取路由url上的每个参数",

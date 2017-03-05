@@ -61,6 +61,8 @@ import DynamicJSXTags from './pages/React/Dynamic-JSX-tags.react';
 import ImmutableHelper from './pages/React/ImmutableHelper';
 import SetStateInComponentWillMount from './pages/React/SetStateInComponentWillMount';
 import Tree from './pages/React/Tree';
+import Escape from './pages/React/Escape';
+import ImmutableHelperOperateArray from './pages/React/ImmutableHelper/operateArray'
 
 //react-router
 import GetEveryTypeParams from './pages/React-router/GetEveryTypeParams.react';
@@ -170,6 +172,8 @@ const routes = (
             <Route path='immutable-helper' component={ImmutableHelper}></Route>
             <Route path="set-state-in-componentWillMount" component={SetStateInComponentWillMount}></Route>
             <Route path='tree' component={Tree}/>
+            <Route path='escape' component={Escape}/>
+            <Route path='immutability-helper-operate-array' component={ImmutableHelperOperateArray}/>
         </Route>
         <Route path='react-dom' components={{sidebar: Sidebar, main: Main}}>
             <IndexRoute component={ArticleList}/>

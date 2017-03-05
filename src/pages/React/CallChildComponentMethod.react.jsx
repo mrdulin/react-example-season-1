@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class childComponent extends Component{
+class ChildComponent extends Component{
     render() {
         return <div>
             child component
@@ -16,25 +16,21 @@ class childComponent extends Component{
     }
 }
 
-class callChildComponentMethod extends Component{
+class CallChildComponentMethod extends Component{
 
     componentDidMount() {
         //拿到的是子组件的类的实例
-        // console.dir(this._childComponentInstance);
-        //下面这样是调用不到子组件方法的
-        // this._childComponentInstance.method1();
-        // this._childComponentInstance.method2();
-
-        console.dir(this.refs.child);
-        
+        console.log(this._childComponentInstance);
+        this._childComponentInstance.method1();
+        this._childComponentInstance.method2();
     }
     render() {
         return <div>
             parent component
-            {/*<childComponent ref={ref => this._childComponentInstance = ref}></childComponent>*/}
-            <childComponent ref='child'></childComponent>
+            <ChildComponent ref={ref => this._childComponentInstance = ref}></ChildComponent>
+            {/*<childComponent ref='child'></childComponent>*/}
         </div>
     }
 }
 
-export default callChildComponentMethod;
+export default CallChildComponentMethod;
