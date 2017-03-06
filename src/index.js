@@ -40,3 +40,25 @@ ReactDOM.render(
     </Provider>,
     document.getElementById('container')
 );
+
+
+/**
+ * componentDidMount
+ * Invoked when the component has been mounted and has a DOM representation.
+ * However, there is no guarantee that the DOM node is in the document.
+ * 
+ * 下面这种情况就是，组件虽然挂载到了rootElement中，但是由于rootElement还没有被添加到document中，所以componentDidMount执行过后，
+ * 并不能保证组件的DOM元素就已经在document中
+ */
+
+class MyComponent extends React.Component{
+    componentDidMount() {
+        console.log('componentRootElement', this.componentRootElement);
+    }
+    render() {
+        return <div ref={ref => this.componentRootElement = ref}>my component</div>
+    }
+}
+
+const rootElement = document.createElement('div');
+ReactDOM.render(<MyComponent/>, rootElement);
