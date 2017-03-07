@@ -56,10 +56,13 @@ ReactDOM.render(
 
 class MyComponent extends React.Component{
     componentDidMount() {
-        console.log('componentRootElement', this.componentRootElement);
+        console.log('componentRootElement', this.componentRootElement);   //<div data-reactroot="" id="my-component">my component</div>
+
+        const componentRootElement = document.getElementById('my-component');
+        console.log('componentRootElement', componentRootElement);  //null
     }
     render() {
-        return <div ref={ref => this.componentRootElement = ref}>my component</div>
+        return <div id='my-component' ref={ref => this.componentRootElement = ref}>my component</div>
     }
 }
 

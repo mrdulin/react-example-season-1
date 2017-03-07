@@ -62,7 +62,8 @@ import ImmutableHelper from './pages/React/ImmutableHelper';
 import SetStateInComponentWillMount from './pages/React/SetStateInComponentWillMount';
 import Tree from './pages/React/Tree';
 import Escape from './pages/React/Escape';
-import ImmutableHelperOperateArray from './pages/React/ImmutableHelper/operateArray'
+import ImmutableHelperOperateArray from './pages/React/ImmutableHelper/operateArray';
+import ComponentInstantiatedOnce from './pages/React/ComponentInstantiatedOnce';
 
 //react-router
 import GetEveryTypeParams from './pages/React-router/GetEveryTypeParams.react';
@@ -174,6 +175,7 @@ const routes = (
             <Route path='tree' component={Tree}/>
             <Route path='escape' component={Escape}/>
             <Route path='immutability-helper-operate-array' component={ImmutableHelperOperateArray}/>
+            <Route path='component-instantiated-once' component={ComponentInstantiatedOnce}/>
         </Route>
         <Route path='react-dom' components={{sidebar: Sidebar, main: Main}}>
             <IndexRoute component={ArticleList}/>
