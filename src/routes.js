@@ -176,6 +176,7 @@ const routes = (
             <Route path='escape' component={Escape}/>
             <Route path='immutability-helper-operate-array' component={ImmutableHelperOperateArray}/>
             <Route path='component-instantiated-once' component={ComponentInstantiatedOnce}/>
+            <Route path='renderToStaticMarkup' component={require('./pages/React/RenderToStaticMarkup')}/>
         </Route>
         <Route path='react-dom' components={{sidebar: Sidebar, main: Main}}>
             <IndexRoute component={ArticleList}/>
