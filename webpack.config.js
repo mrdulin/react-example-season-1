@@ -5,14 +5,14 @@ const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const pkg = require('./package.json');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const DashboardPlugin = require('webpack-dashboard/plugin');
-
-console.log('========================================================');
-console.log('WEBPACK NODE_ENV :: ', JSON.stringify(process.env.NODE_ENV));
-console.log('========================================================');
 
 const __PROD__ = process.env.NODE_ENV === 'production';
 const __DEV__ = __PROD__ === false;
+const env = __PROD__ ? 'production' : 'development';
+
+console.log('========================================================');
+console.log('WEBPACK NODE_ENV :: ', JSON.stringify(env));
+console.log('========================================================');
 
 const dist = path.resolve(__dirname, __PROD__ ? 'docs' : 'dist');
 const src = path.resolve(__dirname, 'src');
@@ -101,7 +101,7 @@ const config = {
 			__DEV__: __DEV__,
 			__PROD__: __PROD__,
 			'process.env': {
-				'NODE_ENV': JSON.stringify(__PROD__ ? 'production' : 'development')
+				'NODE_ENV': JSON.stringify(env)
 			},
 			__VERSION__: JSON.stringify(pkg.version),
 			__TITLE__: JSON.stringify(pkg.description)
@@ -132,9 +132,7 @@ const config = {
 			root: __dirname,
 			verbose: true,
 			dry: false
-		}),
-
-		new DashboardPlugin()
+		})
 	],
 
 	addNoParse: (noParseMap) => {
@@ -168,7 +166,10 @@ if (__DEV__) {
 		colors: true,
 		port: config.PORT,
 		progress: true,
-		host: '0.0.0.0'
+		host: '0.0.0.0',
+		stats: {
+			chunks: false
+		}
 	};
 }
 
