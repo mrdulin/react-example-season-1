@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+/*import React, {Component} from 'react';
 
 class AComponent extends Component{
     constructor() {
@@ -73,4 +73,72 @@ class ComponentCommunication extends Component{
 
 export default ComponentCommunication;
 
+*/
 
+// 直属父子组件间通信
+
+// 1.
+class A extends React.Component {
+  static defaultProps = {
+    name: 'react',
+    onClick: () => {}
+  };
+  handleClick = (e) => {
+    const {onClick, name} = this.props;
+    onClick(name);
+  };
+  render() {
+    return (
+      <div>
+        <button type='button' onClick={this.handleClick}>A按钮</button>
+      </div>
+    )
+  }
+}
+
+class B extends React.Component {
+  state = {
+    title: 'default title'
+  }
+  static defaultProps = {
+    name: 'angular'
+  };
+  getName() {
+    return this.props.name;
+  }
+  updateTitleView(title) {
+    this.setState({title});
+  }
+  render() {
+    return (
+      <div>
+        <h1>{this.state.title}</h1>
+        <button type='button' onClick={this.handleClick}>B按钮</button>
+      </div>
+    )
+  }
+}
+
+export default class extends React.Component {
+  handleClick = (name) => {
+    //拿到A组件的props上的name属性值
+    console.log(name);
+  };
+
+  componentDidMount() {
+    const name = this._b.getName();
+    this._b.updateTitleView('汉堡王');
+    console.log(name);
+  }
+
+  render() {
+    return (
+      <div>
+        {/*通过props给A组件传递数据*/}
+        <A onClick={this.handleClick} data='fxxk'/>
+
+        <B onClick={this.handleClick} ref={ref => this._b = ref}/>
+      </div>
+    )
+  }
+}
