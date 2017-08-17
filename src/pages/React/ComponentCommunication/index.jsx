@@ -76,7 +76,6 @@ export default ComponentCommunication;
 */
 
 // 直属父子组件间通信
-
 // 1.
 class A extends React.Component {
   static defaultProps = {
