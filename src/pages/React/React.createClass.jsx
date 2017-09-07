@@ -4,9 +4,9 @@
 var React = require('react');
 
 var MyComponent = React.createClass({
-    render: function () {
-        return (<div>Hello React</div>);
-    }
+  render: function () {
+    return (<div>Hello React</div>);
+  }
 });
 
 export default MyComponent;

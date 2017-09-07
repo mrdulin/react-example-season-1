@@ -4,16 +4,16 @@
 var React = require('react');
 
 var MyComponent = React.createClass({
-    displayName: 'MyComponent',
+  displayName: 'MyComponent',
 
-    render: function () {
-        return React.createElement('div', null, this.props.name);
-    }
+  render: function () {
+    return React.createElement('div', null, this.props.name);
+  }
 });
 
 export default React.createClass({
-	render() {
-		
-		return React.createElement(MyComponent, {name: 'novaline'});
-	}
+  render() {
+
+    return React.createElement(MyComponent, { name: 'novaline' });
+  }
 })

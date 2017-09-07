@@ -65,7 +65,7 @@ const callApiMiddleware = store => next => action => {
                 return next(actionWith(action, {type: BUSSINESS_REQUEST_FAIL, res: data}));
             } else if(data.Error == 0) {
                 return next(actionWith(action, {type: BUSSINESS_REQUEST_SUCCESS, res: data}));
-            } 
+            }
 
 
         }).catch(err => next(actionWith(action, {type: REQUEST_FAIL, res: err.message || 'REQUEST_FAIL'})))
