@@ -1,45 +1,45 @@
-#MobileFixedLayout{
-    header, footer, main {
-        display: block;
-    }
+#MobileFixedLayout {
+  header, footer, main {
+    display: block;
+  }
 
-    header {
-        position: fixed;
-        height: 50px;
-        left: 0;
-        right: 0;
-        top: 0;
-        background-color: indianred;
-    }
+  header {
+    position: fixed;
+    height: 50px;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-color: indianred;
+  }
 
-    footer {
-        position: fixed;
-        height: 34px;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #fff;
-        border: 1px solid #ddd;
-    }
+  footer {
+    position: fixed;
+    height: 34px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+  }
 
-    li {
-        height: 50px;
-        border-bottom: 1px solid #ddd;
-        background: #fff;
-    }
+  li {
+    height: 50px;
+    border-bottom: 1px solid #ddd;
+    background: #fff;
+  }
 
-    // main {
-    //     margin-top: 50px;
-    //     margin-bottom: 34px;
-    // }
+  // main {
+  //     margin-top: 50px;
+  //     margin-bottom: 34px;
+  // }
 
-    main {
-        position: absolute;
-        top: 50px;
-        bottom: 34px;
-        width: 100%;
-        /* 使之可以滚动 */
-        overflow-y: scroll;
-        -webkit-overflow-scrolling: touch;
-    }
+  main {
+    position: absolute;
+    top: 50px;
+    bottom: 34px;
+    width: 100%;
+    /* 使之可以滚动 */
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
 }

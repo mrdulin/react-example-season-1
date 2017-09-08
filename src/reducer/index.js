@@ -31,28 +31,28 @@ import * as ReduxSagaBeginning from './ReduxSagaBeginning.reducer';
 
 // console.log(reactRedux01Reducers);
 const rootReducer = combineReducers({
-	TodoList,
-	// todos: undoable(todos, {
-	// 	filter: distinctState()
-	// }),
-	...ChangeStateTreeRefData,
-	...MapStateToProps,
-	...InjectActionCreatorsToComponentProps,
-	...MapDispatchToProps,
-	// ...reduxApiMiddlewareReducers,
-	...scrollTop,
-	...DefineReduxStateDataStructure,
-	...InitReduxStateTreeDataInComponentWillMount,
-    ...AsyncActionInComponentWillReceiveProps,
-	...common,
-	...FileIO,
-	...AutoComplete,
-	...Es6ComponentInheritEs5Component,
-	...CheckDataInStateAndNewCreateStoreStateIsSameWhenDispatchAction,
-	...ConnectMultipleNestedComponents,
-	...InjectStateToEs5ComponentMixins,
-	...TestApiMiddleware,
-	...ReduxSagaBeginning
+  TodoList,
+  // todos: undoable(todos, {
+  // 	filter: distinctState()
+  // }),
+  ...ChangeStateTreeRefData,
+  ...MapStateToProps,
+  ...InjectActionCreatorsToComponentProps,
+  ...MapDispatchToProps,
+  // ...reduxApiMiddlewareReducers,
+  ...scrollTop,
+  ...DefineReduxStateDataStructure,
+  ...InitReduxStateTreeDataInComponentWillMount,
+  ...AsyncActionInComponentWillReceiveProps,
+  ...common,
+  ...FileIO,
+  ...AutoComplete,
+  ...Es6ComponentInheritEs5Component,
+  ...CheckDataInStateAndNewCreateStoreStateIsSameWhenDispatchAction,
+  ...ConnectMultipleNestedComponents,
+  ...InjectStateToEs5ComponentMixins,
+  ...TestApiMiddleware,
+  ...ReduxSagaBeginning
 });
 
 export default rootReducer;

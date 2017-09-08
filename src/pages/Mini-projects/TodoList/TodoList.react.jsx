@@ -11,53 +11,55 @@ import {getVisibleTodos} from './selector';
 
 // console.log(getVisibleTodos);
 
-class TodoList extends Component{
+class TodoList extends Component {
 
-    static propTypes = {
-        visibleTodos: PropTypes.arrayOf(PropTypes.shape({
-            text: PropTypes.string.isRequired,
-            completed: PropTypes.bool.isRequired
-        }).isRequired).isRequired,
+  static propTypes = {
+    visibleTodos: PropTypes.arrayOf(PropTypes.shape({
+      text: PropTypes.string.isRequired,
+      completed: PropTypes.bool.isRequired
+    }).isRequired).isRequired,
 
-        visibilityFilter: PropTypes.oneOf([
-            'SHOW_ALL',
-            'SHOW_ACTIVE',
-            'SHOW_COMPLETE'
-        ]).isRequired
-    }
+    visibilityFilter: PropTypes.oneOf([
+      'SHOW_ALL',
+      'SHOW_ACTIVE',
+      'SHOW_COMPLETE'
+    ]).isRequired
+  }
 
-    state = {
-        test: false
-    }
+  state = {
+    test: false
+  }
 
-    render() {
-        const {dispatch, visibleTodos, visibilityFilter} = this.props;
-        return (
-            <section id='todoapp'>
-                <AddTodo addTodo={(text) => {this.addTodo(text)}}></AddTodo>
-                <Todos todos={visibleTodos} toggleTodo={index => this.toggleTodo(index)} markAll={checked => this.markAll(checked)}></Todos>
-                <Footer filter={visibilityFilter} onFilterChange={filter => this.onFilterChange(filter)} todoCount={visibleTodos.length}></Footer>
-                <button type="button" onClick={() => this.setState({test: !this.state.test})}>通过setState改变组件内部state状态不会重新走了mapStateToProps</button>
-                <button type='button' onClick={() => dispatch(Action.toggleTest())}>改变无关的注入到props上的store上的数据，组件会更新，重新触发mapStateToProps</button>
-            </section>
-        );
-    }
+  render() {
+    const {dispatch, visibleTodos, visibilityFilter} = this.props;
+    return (
+      <section id='todoapp'>
+        <AddTodo addTodo={(text) => {
+          this.addTodo(text)
+        }}></AddTodo>
+        <Todos todos={visibleTodos} toggleTodo={index => this.toggleTodo(index)} markAll={checked => this.markAll(checked)}></Todos>
+        <Footer filter={visibilityFilter} onFilterChange={filter => this.onFilterChange(filter)} todoCount={visibleTodos.length}></Footer>
+        <button type="button" onClick={() => this.setState({test: !this.state.test})}>通过setState改变组件内部state状态不会重新走了mapStateToProps</button>
+        <button type='button' onClick={() => dispatch(Action.toggleTest())}>改变无关的注入到props上的store上的数据，组件会更新，重新触发mapStateToProps</button>
+      </section>
+    );
+  }
 
-    addTodo(text) {
-        this.props.dispatch(Action.addTodo(text));
-    }
+  addTodo(text) {
+    this.props.dispatch(Action.addTodo(text));
+  }
 
-    toggleTodo(index) {
-        this.props.dispatch(Action.toggleTodo(index));
-    }
+  toggleTodo(index) {
+    this.props.dispatch(Action.toggleTodo(index));
+  }
 
-    onFilterChange(filter) {
-        this.props.dispatch(Action.setFilter(filter));
-    }
+  onFilterChange(filter) {
+    this.props.dispatch(Action.setFilter(filter));
+  }
 
-    markAll(checked) {
-        this.props.dispatch(Action.completeAllTodos(checked));
-    }
+  markAll(checked) {
+    this.props.dispatch(Action.completeAllTodos(checked));
+  }
 }
 
 //state中present的todos，需要根据state.visibilityFilter的过滤条件过滤
@@ -79,17 +81,17 @@ class TodoList extends Component{
 //将这个函数(这里是select)传入connect方法，将该函数返回的对象，注入到TodoList组件中
 //常见的方法名是mapStateToProps
 const select = (state) => {
-    const {TodoList} = state;
-    //不使用reselect
-    // const visibleTodos = selectTodos(TodoList.todos, TodoList.visibilityFilter);
-    //使用reselect
-    const visibleTodos = getVisibleTodos(TodoList)
-    console.log('select', visibleTodos)
-    return {
-        visibleTodos,
-        visibilityFilter: TodoList.visibilityFilter,
-        test: TodoList.test
-    }
+  const {TodoList} = state;
+  //不使用reselect
+  // const visibleTodos = selectTodos(TodoList.todos, TodoList.visibilityFilter);
+  //使用reselect
+  const visibleTodos = getVisibleTodos(TodoList)
+  console.log('select', visibleTodos)
+  return {
+    visibleTodos,
+    visibilityFilter: TodoList.visibilityFilter,
+    test: TodoList.test
+  }
 };
 
 export default connect(select)(TodoList);

@@ -14,6 +14,6 @@ var MyComponent = React.createClass({
 export default React.createClass({
   render() {
 
-    return React.createElement(MyComponent, { name: 'novaline' });
+    return React.createElement(MyComponent, {name: 'novaline'});
   }
 })

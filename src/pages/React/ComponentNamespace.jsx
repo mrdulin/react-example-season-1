@@ -34,7 +34,7 @@ FormComponent.Input = React.createClass({
   render: function () {
     console.log(this.props);
     return (
-      <input className="form-control" type={this.props.type} id={this.props.id} />
+      <input className="form-control" type={this.props.type} id={this.props.id}/>
     );
   }
 });

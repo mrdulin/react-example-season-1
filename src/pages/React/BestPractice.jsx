@@ -12,6 +12,7 @@ export default class extends React.Component {
     },
     visiable: true
   }
+
   constructor(props) {
     super(props);
 
@@ -21,11 +22,11 @@ export default class extends React.Component {
     };
 
     this.handleClick = e => {
-      this.setState({ cool: !this.state.cool });
+      this.setState({cool: !this.state.cool});
     };
 
     this.handleCityChange = e => {
-      this.setState({ city: e.target.value });
+      this.setState({city: e.target.value});
     };
 
     this.handleCitySumit = e => {
@@ -33,6 +34,7 @@ export default class extends React.Component {
       alert(this.citySubmitMessage);
     };
   }
+
   get citySubmitMessage() {
     let msg = '';
     if (this.state.city) {
@@ -42,6 +44,7 @@ export default class extends React.Component {
     }
     return msg;
   }
+
   get message() {
     return this.state.cool ? ' is cool' : '';
   }
@@ -49,8 +52,9 @@ export default class extends React.Component {
   get content() {
     return this.props.visiable ? <p>测试getter函数能否访问props</p> : null;
   }
+
   render() {
-    const { cities } = this.props;
+    const {cities} = this.props;
 
     return <div>
       <button onClick={this.handleClick}>cool</button>
@@ -65,7 +69,7 @@ export default class extends React.Component {
             })
           }
         </select>
-        <input type="submit" value='提交' />
+        <input type="submit" value='提交'/>
       </form>
       {this.content}
     </div>

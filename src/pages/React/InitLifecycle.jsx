@@ -4,34 +4,34 @@
 var React = require('react');
 
 var GenericComponent = React.createClass({
-    getDefaultProps: function () {
-        console.log('getDefaultProps');
-        return {};
-    },
+  getDefaultProps: function () {
+    console.log('getDefaultProps');
+    return {};
+  },
 
-    getInitialState: function () {
-        console.log('getInitialState');
-        return {};
-    },
+  getInitialState: function () {
+    console.log('getInitialState');
+    return {};
+  },
 
-    componentWillMount: function () {
-        console.log('componentWillMount');
-    },
+  componentWillMount: function () {
+    console.log('componentWillMount');
+  },
 
-    render: function () {
-        console.log('render');
-        return (
-            <div>Invoke order Testing</div>
-        );
-    },
+  render: function () {
+    console.log('render');
+    return (
+      <div>Invoke order Testing</div>
+    );
+  },
 
-    componentDidMount: function () {
-        console.log('componentDidMount');
-    }
+  componentDidMount: function () {
+    console.log('componentDidMount');
+  }
 });
 
 export default React.createClass({
-	render() {
-		return <GenericComponent></GenericComponent>
-	}
+  render() {
+    return <GenericComponent></GenericComponent>
+  }
 })

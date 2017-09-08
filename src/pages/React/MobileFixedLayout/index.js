@@ -16,7 +16,7 @@ export default class extends React.Component {
         </ul>
       </main>
       <footer>
-        <input type="text" placeholder="Footer..." />
+        <input type="text" placeholder="Footer..."/>
         <button class="submit">提交</button>
       </footer>
     </div>

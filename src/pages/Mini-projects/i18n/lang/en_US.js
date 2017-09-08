@@ -1,3 +1,3 @@
 export default {
-    'app.greeting': 'Hello, {name}!'
+  'app.greeting': 'Hello, {name}!'
 }

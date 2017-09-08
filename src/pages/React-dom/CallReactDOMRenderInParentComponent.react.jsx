@@ -1,49 +1,53 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 
-class ChildComponent extends Component{
-    componentWillMount() {
-        console.log('ChildComponent will mount');
-    }
-    componentDidMount() {
-        console.log('ChildComponent did mount');
-    }
-    render() {
-        console.count('ChildComponent render');
-        return <div>
-            child component
-        </div>
-    }
+class ChildComponent extends Component {
+  componentWillMount() {
+    console.log('ChildComponent will mount');
+  }
 
-    say() {
-       alert('What the hell?'); 
-    }
+  componentDidMount() {
+    console.log('ChildComponent did mount');
+  }
+
+  render() {
+    console.count('ChildComponent render');
+    return <div>
+      child component
+    </div>
+  }
+
+  say() {
+    alert('What the hell?');
+  }
 }
 
-class ParentComponent extends Component{
-    componentWillMount() {
-        console.log('ParentComponent will mount');
-    }
-    componentDidMount() {
-        console.log('ParentComponent did mount')
-        // const el = ReactDOM.findDOMNode(this);
-        // console.log(el);
-        const ChildComponentIns = ReactDOM.render(
-            <ChildComponent />,
-            document.getElementById('content')
-        )
+class ParentComponent extends Component {
+  componentWillMount() {
+    console.log('ParentComponent will mount');
+  }
 
-        ChildComponentIns.say();
-    }
-    render() {
-        console.count('ParentComponent render');
-        return <div id='parent-component'>
-            parent component
-            <div id='content'>
-                {/*<ChildComponent />*/}
-            </div>
-        </div>
-    }
+  componentDidMount() {
+    console.log('ParentComponent did mount')
+    // const el = ReactDOM.findDOMNode(this);
+    // console.log(el);
+    const ChildComponentIns = ReactDOM.render(
+      <ChildComponent />,
+      document.getElementById('content')
+    )
+
+    ChildComponentIns.say();
+  }
+
+  render() {
+    console.count('ParentComponent render');
+    return <div id='parent-component'>
+      parent component
+      <div id='content'>
+        {/*<ChildComponent />*/}
+      </div>
+    </div>
+  }
 }
 
 // console:

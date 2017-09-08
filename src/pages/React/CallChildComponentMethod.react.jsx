@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 class ChildComponent extends Component {
   render() {
     return <div>
       child component
-        </div>
+    </div>
   }
 
   method1() {
@@ -24,10 +24,11 @@ class CallChildComponentMethod extends Component {
     this._childComponentInstance.method1();
     this._childComponentInstance.method2();
   }
+
   render() {
     return <div>
       parent component
-            <ChildComponent ref={ref => this._childComponentInstance = ref}></ChildComponent>
+      <ChildComponent ref={ref => this._childComponentInstance = ref}></ChildComponent>
       {/*<childComponent ref='child'></childComponent>*/}
     </div>
   }

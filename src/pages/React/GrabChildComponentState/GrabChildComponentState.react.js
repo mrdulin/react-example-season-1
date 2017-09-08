@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import GrabStateByParentComponent from './components/GrabStateByParentComponent.react';
 
 class GrabChildComponentState extends Component {
@@ -15,17 +15,18 @@ class GrabChildComponentState extends Component {
     console.log(this.GrabStateByParentComponent.state === childState);    //true
     console.log(this.GrabStateByParentComponent.setState === childFns.setState);    //true
     setTimeout(() => {
-      this.GrabStateByParentComponent.setState({ name: 'WTF' });
+      this.GrabStateByParentComponent.setState({name: 'WTF'});
       //下面报错
       // childFns.setState({name: 'WTF'});
       childFns.setState = this.GrabStateByParentComponent::childFns.setState;
-      childFns.setState({ job: 'fuck off' });
+      childFns.setState({job: 'fuck off'});
     }, 2000);
   }
 
   render() {
     return <div>
-      <GrabStateByParentComponent ref={ins => this.GrabStateByParentComponent = ins} getChildState={fn => this.getChildState = fn} getChildFns={fns => this.getChildFns = fns} />
+      <GrabStateByParentComponent ref={ins => this.GrabStateByParentComponent = ins} getChildState={fn => this.getChildState = fn}
+                                  getChildFns={fns => this.getChildFns = fns}/>
     </div>
   }
 }

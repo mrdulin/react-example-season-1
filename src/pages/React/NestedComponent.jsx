@@ -13,7 +13,7 @@ var GenericComponent = React.createClass({
     return (
       <div>
         <h1>Nested Custom ReactComponent</h1>
-        <GreetingComponent name={this.props.name} />
+        <GreetingComponent name={this.props.name}/>
       </div>
     )
   }
@@ -23,5 +23,5 @@ export default React.createClass({
   render() {
 
     return <GenericComponent name="novaline"></GenericComponent> ,
-	}
+  }
 })

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 class AudioPlayer extends Component {
   static defaultProps = {
@@ -32,19 +32,19 @@ class AudioPlayer extends Component {
   }
 
   render() {
-    const { minVolume, maxVolume, volumeStep, maxProgress } = this.props;
+    const {minVolume, maxVolume, volumeStep, maxProgress} = this.props;
     return <div>
       <ul>
         <li>Gson & Abley,Amasi - Heaven (Radio Edit).mp3</li>
       </ul>
       <audio src="http://7xp9vw.com1.z0.glb.clouddn.com/Gson%20&%20Abley,Amasi%20-%20Heaven%20%28Radio%20Edit%29.mp3"
-        preload="metadata" ref={ref => this._audio = ref} onTimeUpdate={(e) => this.onTimeUpdate(e)}>
+             preload="metadata" ref={ref => this._audio = ref} onTimeUpdate={(e) => this.onTimeUpdate(e)}>
         <p>Your browser does not support the <code>audio</code> element </p>
       </audio>
 
       <div>
         <progress onClick={e => this.handleProgress(e)} value={this.state.progress || 0.1} max={maxProgress}
-          ref={ref => this._progress = ref}></progress>
+                  ref={ref => this._progress = ref}></progress>
       </div>
 
       <div>
@@ -59,8 +59,8 @@ class AudioPlayer extends Component {
       <div>
         <label>
           <input type="range" name="volume" min={minVolume} max={maxVolume} step={volumeStep}
-            onChange={() => this.handleVolume()}
-            ref={ref => this._range = ref} />
+                 onChange={() => this.handleVolume()}
+                 ref={ref => this._range = ref}/>
           volume: <span>{new Number(this.state.volume * 100).toFixed(2) + '%'}</span>
         </label>
       </div>
@@ -95,7 +95,7 @@ class AudioPlayer extends Component {
     const value = this._range.value;
     console.log('volume: %s', value);
     this._audio.volume = value;
-    this.setState({ volume: value });
+    this.setState({volume: value});
   }
 
   fastForward() {
@@ -107,10 +107,10 @@ class AudioPlayer extends Component {
   }
 
   onTimeUpdate(e) {
-    const { currentTime, duration } = this._audio;
+    const {currentTime, duration} = this._audio;
     // console.log('currentTime: %s', currentTime);
     // console.log('duration: %s', duration);
-    this.setState({ progress: currentTime });
+    this.setState({progress: currentTime});
   }
 
 }

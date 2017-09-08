@@ -1,11 +1,11 @@
-export const isLogin = function() {
-    const {InjectStateToEs5ComponentMixins} = this.props;
-    
-    return InjectStateToEs5ComponentMixins.token.length
+export const isLogin = function () {
+  const {InjectStateToEs5ComponentMixins} = this.props;
+
+  return InjectStateToEs5ComponentMixins.token.length
 }
 
 const userHelper = {
-    isLogin
+  isLogin
 }
 
 export default userHelper;

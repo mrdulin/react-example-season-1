@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { requestCity, login } from '../actions/reduxApiMiddleware';
-import { selectCity } from '../actions/MapStateToProps.action';
+import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
+import {requestCity, login} from '../actions/reduxApiMiddleware';
+import {selectCity} from '../actions/MapStateToProps.action';
 
 class ReduxAPIMiddleware extends Component {
 
@@ -20,7 +20,7 @@ class ReduxAPIMiddleware extends Component {
   }
 
   render() {
-    const { cityMap } = this.props;
+    const {cityMap} = this.props;
     const cityKeys = Object.keys(cityMap);
     const options = cityKeys.map((cityKey) => {
       return <option key={cityKey} value={cityKey}>{cityMap[cityKey]}</option>;
@@ -34,7 +34,7 @@ class ReduxAPIMiddleware extends Component {
           <div>
             <label>
               城市选择:
-                            <select onChange={e => this.selectCityChange(e)}>
+              <select onChange={e => this.selectCityChange(e)}>
                 <option>-- 请选择城市 --</option>
                 {options}
               </select>
@@ -46,14 +46,14 @@ class ReduxAPIMiddleware extends Component {
         <form id="myForm" name="myForm" onSubmit={e => this.myFormSubmit(e)}>
           <div>
             <label for="username">Enter name:</label>
-            <input type="text" id="username" name="username" />
+            <input type="text" id="username" name="username"/>
           </div>
           <div>
             <label for="password">Enter account number:</label>
             {/*注意:input标签必须有结束符号/,否则会报错*/}
-            <input type="text" id="password" name="password" />
+            <input type="text" id="password" name="password"/>
           </div>
-          <input type="submit" value="Submit!" />
+          <input type="submit" value="Submit!"/>
         </form>
       </div>
     );

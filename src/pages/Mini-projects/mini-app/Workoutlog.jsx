@@ -5,30 +5,30 @@ var Store = require('./Store.jsx');
 var History = require('./History.jsx');
 
 var WorkoutLog = React.createClass({
-    getInitialState: function () {
-        return {view: 'define'};
-    },
+  getInitialState: function () {
+    return {view: 'define'};
+  },
 
-    render: function () {
-        return (
-            <div>
-                <h1>Workout Log</h1>
-                <Navigation onLogout={this.props.onLogout}
-                            onNav={this._onNav}/>
-                {this.state.view === "define" ?
-                    <DefineWorkout /> : "" }
-                {this.state.view === "store" ?
-                    <Store /> : "" }
-                {this.state.view === "history" ?
-                    <History /> : "" }
-            </div>
-        );
-    },
+  render: function () {
+    return (
+      <div>
+        <h1>Workout Log</h1>
+        <Navigation onLogout={this.props.onLogout}
+                    onNav={this._onNav}/>
+        {this.state.view === "define" ?
+          <DefineWorkout /> : "" }
+        {this.state.view === "store" ?
+          <Store /> : "" }
+        {this.state.view === "history" ?
+          <History /> : "" }
+      </div>
+    );
+  },
 
-    _onNav: function (theView) {
-        console.log('theView', theView);
-        this.setState({view: theView});
-    }
+  _onNav: function (theView) {
+    console.log('theView', theView);
+    this.setState({view: theView});
+  }
 });
 
 module.exports = WorkoutLog;

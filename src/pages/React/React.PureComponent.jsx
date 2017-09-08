@@ -2,6 +2,7 @@ class Item extends React.PureComponent {
   static propTypes = {
     item: React.PropTypes.number.isRequired
   }
+
   render() {
     console.count('item render');
     return <div>
@@ -14,14 +15,16 @@ export default class extends React.PureComponent {
   state = {
     items: []
   }
+
   componentDidMount() {
     this._isMounted = true;
     this.fetchData().then(data => {
       if (this._isMounted) {
-        this.setState((prevState, props) => ({ items: prevState.items.concat(data) }));
+        this.setState((prevState, props) => ({items: prevState.items.concat(data)}));
       }
     });
   }
+
   fetchData() {
     return new Promise((resolve, reject) => {
       this.timeoutId = setTimeout(() => {
@@ -29,6 +32,7 @@ export default class extends React.PureComponent {
       }, 2000);
     });
   }
+
   componentWillUnmount() {
     this._isMounted = false;
     if (this.timeoutId) {
@@ -39,12 +43,13 @@ export default class extends React.PureComponent {
   handleClick() {
     this.fetchData().then(data => {
       if (this._isMounted) {
-        this.setState((prevState, props) => ({ items: prevState.items.concat(data) }));
+        this.setState((prevState, props) => ({items: prevState.items.concat(data)}));
       }
     });
   }
+
   render() {
-    const { items } = this.state;
+    const {items} = this.state;
     const itemNodes = items.map((item, index) => {
       return <Item key={index} item={item}></Item>
     })

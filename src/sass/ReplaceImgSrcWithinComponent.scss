@@ -1,17 +1,17 @@
-#ReplaceImgSrcWithinComponent{
-    .mask{
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        left: 350px;
-        right: 0;
-        z-index: 100;
-        background-color: #222;
-        justify-content: center;
+#ReplaceImgSrcWithinComponent {
+  .mask {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 350px;
+    right: 0;
+    z-index: 100;
+    background-color: #222;
+    justify-content: center;
 
-        img{
-            align-self: center;
-            max-width: 100%;
-        }
+    img {
+      align-self: center;
+      max-width: 100%;
     }
+  }
 }

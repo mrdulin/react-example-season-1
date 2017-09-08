@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 class CountDown extends Component {
 
@@ -117,6 +117,7 @@ class CountDown extends Component {
     );
   }
 
-};
+}
+;
 
 export default CountDown;

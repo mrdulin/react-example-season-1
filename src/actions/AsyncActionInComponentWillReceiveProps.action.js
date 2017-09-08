@@ -1,4 +1,4 @@
-import { request, requestSuccess, requestFail } from './common.action';
+import {request, requestSuccess, requestFail} from './common.action';
 
 export const fetchCitySuccess = data => ({
   type: 'AAICWRP_fetchCitySuccess',
@@ -33,11 +33,11 @@ export const fetchCity = () => (dispatch, getState) => {
       dispatch(fetchCitySuccess(data))
       return Promise.resolve(getState());
     }
-    ).catch(
+  ).catch(
     err => {
       dispatch(requestFail())
       dispatch(fetchCityFail(err))
       return Promise.reject(getState());
     }
-    )
+  )
 }
