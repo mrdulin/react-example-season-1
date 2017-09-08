@@ -1,5 +1,8 @@
 import React from 'react';
 import { Route, IndexRoute, IndexRedirect } from 'react-router';
+import { compose } from 'redux';
+
+import { loadMetaData } from './metadata';
 
 //各个demo页面component
 import App from './pages/App/App';
@@ -8,46 +11,37 @@ import Main from './pages/App/Main';
 import NoMatch from './pages/App/NoMatch';
 import ArticleList from './pages/App/ArticleList/index';
 
-//react-router
-import GetEveryTypeParams from './pages/React-router/GetEveryTypeParams.react';
-import RouterWillLeave from './pages/React-router/RouterWillLeave.react';
-import TransitionToAllWays from './pages/React-router/TransitionToAllWays.react';
-import NamesComponent from './pages/React-router/NamesComponent.react';
-import CreatePath from './pages/React-router/CreatePath.react';
-import ListenEvent from './pages/React-router/ListenEvent.react';
-import Tab from './pages/React-router/Tab/index';
+import Tab, { One, Two, Three } from './pages/React-router-demos/tab';
+import BreadCrumb, { CrumbOne, CrumbTwo, CrumbThree } from './pages/React-router-demos/crumb';
+
+console.log('CrumbOne', CrumbOne);
 
 //redux
-import ReduxBeginning from './pages/Redux/ReduxBeginning.react';
-import CreateStoreInComponentCompareWithConnectState from './pages/Redux/CreateStoreInComponentCompareWithConnectState.react';
-import CheckDataInStateAndNewCreateStoreStateIsSameWhenDispatchAction from './pages/Redux/CheckDataInStateAndNewCreateStoreStateIsSameWhenDispatchAction.react';
+// import ReduxBeginning from './pages/Redux/ReduxBeginning.react';
+// import CreateStoreInComponentCompareWithConnectState from './pages/Redux/CreateStoreInComponentCompareWithConnectState.react';
+// import CheckDataInStateAndNewCreateStoreStateIsSameWhenDispatchAction from './pages/Redux/CheckDataInStateAndNewCreateStoreStateIsSameWhenDispatchAction.react';
 //react-redux
-import InitReduxStateTreeDataInComponentWillMount from './pages/React-redux/InitReduxStateTreeDataInComponentWillMount.react';
-import DefineReduxStateDataStructure from './pages/React-redux/DefineReduxStateDataStructure.react';
-import MapStateToProps from './pages/React-redux/MapStateToProps/MapStateToProps.react';
-import InjectActionCreatorsToComponentProps from './pages/React-redux/InjectActionCreatorsToComponentProps.react';
-import MapDispatchToProps from './pages/React-redux/MapDispatchToProps.react';
-import ChangeStateTreeRefData from './pages/React-redux/ChangeStateTreeRefData.react';
-import AsyncActionInComponentWillReceiveProps from './pages/React-redux/AsyncActionInComponentWillReceiveProps.react';
-import AutoCompletePage from './pages/React-redux/AutoComplete';
-import Es6ComponentInheritEs5Component from './pages/React-redux/Es6ComponentInheritEs5Component.react';
-import ConnectMultipleNestedComponents from './pages/React-redux/ConnectMultipleNestedComponents';
-import InjectStateToEs5ComponentMixins from './pages/React-redux/InjectStateToEs5ComponentMixins.react';
-import TestApiMiddleware from './pages/React-redux/TestApiMiddleware.react';
-
-//react-dom
-import CallReactDOMRenderInParentComponent from './pages/React-dom/CallReactDOMRenderInParentComponent.react';
+// import InitReduxStateTreeDataInComponentWillMount from './pages/React-redux/InitReduxStateTreeDataInComponentWillMount.react';
+// import DefineReduxStateDataStructure from './pages/React-redux/DefineReduxStateDataStructure.react';
+// import MapStateToProps from './pages/React-redux/MapStateToProps/MapStateToProps.react';
+// import InjectActionCreatorsToComponentProps from './pages/React-redux/InjectActionCreatorsToComponentProps.react';
+// import MapDispatchToProps from './pages/React-redux/MapDispatchToProps.react';
+// import ChangeStateTreeRefData from './pages/React-redux/ChangeStateTreeRefData.react';
+// import AsyncActionInComponentWillReceiveProps from './pages/React-redux/AsyncActionInComponentWillReceiveProps.react';
+// import AutoCompletePage from './pages/React-redux/AutoComplete';
+// import Es6ComponentInheritEs5Component from './pages/React-redux/Es6ComponentInheritEs5Component.react';
+// import ConnectMultipleNestedComponents from './pages/React-redux/ConnectMultipleNestedComponents';
+// import InjectStateToEs5ComponentMixins from './pages/React-redux/InjectStateToEs5ComponentMixins.react';
+// import TestApiMiddleware from './pages/React-redux/TestApiMiddleware.react';
 
 
 //mini-projects
-import AdorableAvatars from './pages/Mini-projects/AdorableAvatars/AdorableAvatars.react';
-import FileIO from './pages/Mini-projects/FileIO/FileIO.react';
-import TodoList from './pages/Mini-projects/TodoList/TodoList.react';
-import i18n from './pages/Mini-projects/i18n/i18n.react';
-import MiniApp from './pages/Mini-projects/mini-app/app.jsx';
-import { Hack, HackDetail, HackList, HackUser } from './pages/Mini-projects/hack/';
-
-import { loadMetaData } from './metadata';
+// import AdorableAvatars from './pages/Mini-projects/AdorableAvatars/AdorableAvatars.react';
+// import FileIO from './pages/Mini-projects/FileIO/FileIO.react';
+// import TodoList from './pages/Mini-projects/TodoList/TodoList.react';
+// import i18n from './pages/Mini-projects/i18n/i18n.react';
+// import MiniApp from './pages/Mini-projects/mini-app/app.jsx';
+// import { Hack, HackDetail, HackList, HackUser } from './pages/Mini-projects/hack/';
 
 const loadComponent = (name) => {
   let componentClass;
@@ -58,55 +52,49 @@ const loadComponent = (name) => {
   }
   return componentClass;
 };
+const createRoute = (indexRouteComponent) => (mods) => {
+  const routes = mods.map((mod, idx) => <Route path={mod.routePath} key={idx} component={loadComponent(mod.filepath)} />)
+  routes.unshift(<IndexRoute key='indexRoute' component={indexRouteComponent} />)
+  return routes;
+}
+const loadRoute = compose(createRoute(ArticleList), loadMetaData);
+const layoutNamedComponent = { sidebar: Sidebar, main: Main };
 
 //路由规则
 const routes = (
   //导航首页，导航到各个demo页面
   <Route path='/' component={App}>
     <IndexRedirect to='/react-demos' />
-    <Route path='react-demos' components={{ sidebar: Sidebar, main: Main }}>
-      <IndexRoute component={ArticleList} />
-      {
-        loadMetaData('react-demos').map((name, idx) => {
-          const names = name.split('/');
-          const path = names[names.length - 1];
-          return <Route path={path} key={idx} component={loadComponent(name)} />
-        })
-      }
+    <Route path='react-demos' components={layoutNamedComponent}>
+      {loadRoute('react-demos')}
     </Route>
-    <Route path='react-dom' components={{ sidebar: Sidebar, main: Main }}>
-      <IndexRoute component={ArticleList} />
-      <Route path='call-react-dom-render-in-parent-component' component={CallReactDOMRenderInParentComponent} />
+    <Route path='react-dom-demos' components={layoutNamedComponent}>
+      {loadRoute('react-dom-demos')}
     </Route>
-    <Route path='react-router' components={{ sidebar: Sidebar, main: Main }}>
-      <IndexRoute component={ArticleList} />
-      <Route path='get-every-type-params(/:page)' component={GetEveryTypeParams}></Route>
-      <Route path='router-will-leave' component={RouterWillLeave}></Route>
-      <Route path='transition-to-all-ways' component={TransitionToAllWays}></Route>
-      <Route path='create-path' component={CreatePath} />
-      <Route path='listen-event' component={ListenEvent} />
+    <Route path='react-router-demos' components={layoutNamedComponent}>
+      {loadRoute('react-router-demos', ['tab', 'crumb'])}
       <Route path='tab' component={Tab}>
-        <Route path='page1' component={require('./pages/React-router/Tab/pages/PageOne')}></Route>
-        <Route path='page2' component={require('./pages/React-router/Tab/pages/PageTwo')}></Route>
-        <Route path='page3' component={require('./pages/React-router/Tab/pages/PageThree')}></Route>
+        <Route path='page1' component={One} />
+        <Route path='page2' component={Two} />
+        <Route path='page3' component={Three} />
       </Route>
-      <Route path="crumb" component={require('./pages/React-router/Crumb')}>
-        <Route name='RouteName1' path='level1' component={require('./pages/React-router/Crumb/pages/PageOne')}>
-          <Route name="RouteName2" path="level2" component={require('./pages/React-router/Crumb/pages/PageTwo')}>
-            <Route name="RouteName3" path='level3' component={require('./pages/React-router/Crumb/pages/PageThree')}></Route>
+      <Route path="crumb" component={BreadCrumb}>
+        <Route name='RouteName1' path='level1' component={CrumbOne}>
+          <Route name="RouteName2" path="level2" component={CrumbTwo}>
+            <Route name="RouteName3" path='level3' component={CrumbThree}></Route>
           </Route>
         </Route>
       </Route>
     </Route>
-    <Route path='redux' components={{ sidebar: Sidebar, main: Main }}>
+    {/* <Route path='redux' components={layoutNamedComponent}>
       <IndexRoute component={ArticleList} />
       <Route path='redux-beginning' component={ReduxBeginning} />
       <Route path='create-store-in-component-compare-with-connect-state'
         component={CreateStoreInComponentCompareWithConnectState} />
       <Route path='check-data-in-state-and-new-createStore-state-is-same-when-dispatch-action'
         component={CheckDataInStateAndNewCreateStoreStateIsSameWhenDispatchAction} />
-    </Route>
-    <Route path='react-redux' components={{ sidebar: Sidebar, main: Main }}>
+    </Route> */}
+    {/* <Route path='react-redux' components={layoutNamedComponent}>
       <IndexRoute component={ArticleList} />
       <Route path="init-store-data-in-componentWillMount-when-go-back"
         component={InitReduxStateTreeDataInComponentWillMount}></Route>
@@ -123,8 +111,8 @@ const routes = (
       <Route path='connect-multiple-nested-components' component={ConnectMultipleNestedComponents} />
       <Route path='inject-state-to-es5-component-mixins' component={InjectStateToEs5ComponentMixins} />
       <Route path='test-api-middleware' component={TestApiMiddleware} />
-    </Route>
-    <Route path='mini-projects' components={{ sidebar: Sidebar, main: Main }}>
+    </Route> */}
+    {/* <Route path='mini-projects' components={{ sidebar: Sidebar, main: Main }}>
       <IndexRoute component={ArticleList} />
       <Route path='adorable-avatar' component={AdorableAvatars}></Route>
       <Route path='file-io' component={FileIO}></Route>
@@ -136,7 +124,7 @@ const routes = (
         <Route path="detail/:repo" component={HackDetail} />
         <Route path="user/:username" component={HackUser}></Route>
       </Route>
-    </Route>
+    </Route> */}
 
     <Route path='*' component={NoMatch}></Route>
   </Route>

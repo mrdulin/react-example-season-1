@@ -51,14 +51,14 @@ const META_DATA = {
       "componentDidUpdate-input-focus": "input的onBlur, onFocus事件与删除按钮的onMouseDown，onClick事件的触发的先后顺序。",
       'mobile-fixed-layout': '移动端fixed布局'
     },
-    "react-router": {
-      'get-every-type-params': "获取路由url上的每个参数",
+    "react-router-demos": {
+      'get-each-type-parameters': "获取url上的各种参数",
       "router-will-leave": "路由跳转前确认",
-      "transition-to-all-ways": "路由跳转的N种方法",
-      "create-path": "测试react-router的createPath方法",
-      "listen-event": "监听路由跳转",
-      "tab": "react-router实现tab标签页效果",
-      "crumb": "react-router实现crumb面包屑效果"
+      "navigate": "路由跳转的N种方法",
+      "createPath": "react-router的createPath方法",
+      "event-listen": "路由事件监听",
+      "tab": "react-router实现标签页效果",
+      "crumb": "react-router实现面包屑效果"
     },
     "redux": {
       'redux-beginning': 'redux初探',
@@ -79,7 +79,7 @@ const META_DATA = {
       "inject-state-to-es5-component-mixins": "HOC connect 可以注入store到mixins的方法中",
       "test-api-middleware": "测试自定义api中间件"
     },
-    "react-dom": {
+    "react-dom-demos": {
       "call-react-dom-render-in-parent-component": "在父组件的componentDidMount生命周期内使用ReactDOM.render渲染子组件"
     },
     "mini-projects": {
@@ -89,24 +89,27 @@ const META_DATA = {
       "i18n": "React 国际化",
       "mini-app": '迷你应用',
       "hack": 'github hack'
-    },
-    "Add-Ons": {
-      "pure-render-mixin": ""
     }
   }
 };
 
 const capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
-}
+};
 
-const loadMetaData = (dirname) => {
+const loadMetaData = (dirname, excludes = []) => {
   if (!dirname || !META_DATA.items[dirname]) return [];
   const keyMap = META_DATA.items[dirname];
   dirname = capitalizeFirstLetter(dirname);
   const mods = Object.keys(keyMap).map((key) => {
-    return `${dirname}/${key}`;
-  });
+    const isFound = excludes.indexOf(key) !== -1;
+    if (!isFound) {
+      return {
+        filepath: `${dirname}/${key}`,
+        routePath: key
+      };
+    }
+  }).filter(x => x);
   return mods;
 };
 

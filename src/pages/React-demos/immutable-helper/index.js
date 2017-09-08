@@ -1,10 +1,9 @@
+import { PureComponent, Component } from 'react';
+import { findDOMNode } from 'react-dom';
 import update from 'immutability-helper';
-import 'whatwg-fetch';
 import IScroll from 'iscroll';
 import './style.scss';
 
-const { PureComponent, Component } = React;
-const { findDOMNode } = ReactDOM;
 const API = 'http://it-ebooks-api.info/v1/search';
 
 const _compare = (prop) => (a, b) => {

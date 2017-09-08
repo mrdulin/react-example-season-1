@@ -2,6 +2,7 @@
  * Created by elsa on 2017/3/23.
  */
 import ReactDOMServer from 'react-dom/server';
+import React from 'react';
 import List from './List';
 
 class MyComponent extends React.Component {

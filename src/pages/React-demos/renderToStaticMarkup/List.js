@@ -1,6 +1,5 @@
-/**
- * Created by elsa on 2017/3/23.
- */
+import React from 'react';
+
 class List extends React.Component {
   render() {
     const {items} = this.props;

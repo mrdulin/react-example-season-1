@@ -1,5 +1,5 @@
-import React, {Component, PropTypes} from 'react';
-import {Link, browserHistory, withRouter} from 'react-router';
+import React, { Component, PropTypes } from 'react';
+import { Link, browserHistory, withRouter } from 'react-router';
 
 //react-router 2.4.0以后的版本，提供了withRouter的高阶组件,直接在组件的props上注入了router对象
 //但老的this.context用法依旧可以正常使用
@@ -56,7 +56,7 @@ class TransitionToAllWays extends Component {
         }}>transitionTo7
         </button>
 
-        <Link to={{pathname: '/table', query: {the: 'query'}}}>link2</Link>
+        <Link to={{ pathname: '/table', query: { the: 'query' } }}>link2</Link>
       </div>
     );
   }
@@ -82,7 +82,7 @@ class TransitionToAllWays extends Component {
     // this.props.router.push('table');
     this.props.router.push({
       pathname: 'table',
-      query: {the: 'query'}
+      query: { the: 'query' }
     });
   }
 

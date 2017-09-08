@@ -1,3 +1,5 @@
+import React from 'react';
+
 class Item extends React.PureComponent {
   static propTypes = {
     item: React.PropTypes.number.isRequired

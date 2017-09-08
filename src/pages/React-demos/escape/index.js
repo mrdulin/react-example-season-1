@@ -1,3 +1,5 @@
+import React from 'react';
+
 class Menu1item extends React.Component {
   render() {
     return (
