@@ -2,7 +2,7 @@
  * Created by dulin on 16/8/19.
  */
 import store from '../store';
-import {bindActionCreators} from 'redux';
+import { bindActionCreators } from 'redux';
 
 import * as AsyncActionInComponentWillReceiveProps from './AsyncActionInComponentWillReceiveProps.action';
 import * as InitReduxStateTreeDataInComponentWillMount from './InitReduxStateTreeDataInComponentWillMount.action';
@@ -17,12 +17,12 @@ const conbineActions = (actionMap) => {
   if (pass) {
     const allActions = Object.assign({}, actionMap);
     const allActionKeys = Object.keys(allActions);
-    const {length: len} = allActionKeys;
+    const { length: len } = allActionKeys;
     let actions = {};
     for (let i = 0; i < len; i++) {
       const action = allActions[allActionKeys[i]];
       for (let key in action) {
-        if (typeof(action[key] === 'function')) {
+        if (typeof (action[key] === 'function')) {
           actions[key] = action[key];
         }
       }

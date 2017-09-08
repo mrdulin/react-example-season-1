@@ -1,4 +1,4 @@
-import * as Action from './common.action';
+import * as Action from 'actions/common';
 
 // export const getWeather = () => {
 // 	return {type: 'DefineReduxStateDataStructure_getWeather'}
@@ -29,7 +29,7 @@ export const fetchWeatherData = (q = 'shanghai', units = 'metric') => {
     let url = util.openweatherApiHost + '/weather';
     //TODO 转移下面3行到util中
     url = new URL(url);
-    const params = {q, units, appid: util.openweatherApiKey};
+    const params = { q, units, appid: util.openweatherApiKey };
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
 
     dispatch(Action.request());

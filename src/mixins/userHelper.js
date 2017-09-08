@@ -1,5 +1,5 @@
 export const isLogin = function () {
-  const {InjectStateToEs5ComponentMixins} = this.props;
+  const { InjectStateToEs5ComponentMixins } = this.props;
 
   return InjectStateToEs5ComponentMixins.token.length
 }

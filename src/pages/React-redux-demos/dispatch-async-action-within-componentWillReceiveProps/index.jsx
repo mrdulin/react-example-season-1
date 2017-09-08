@@ -1,7 +1,6 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import * as Action from '../../actions/AsyncActionInComponentWillReceiveProps.action';
-import bindActions from '../../actions/';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as Action from './actions';
 
 class AsyncActionInComponentWillReceiveProps extends Component {
 
@@ -10,14 +9,13 @@ class AsyncActionInComponentWillReceiveProps extends Component {
   }
 
   componentDidMount() {
-    const {dispatch, AsyncActionInCWRP} = this.props;
+    const { dispatch, AsyncActionInCWRP } = this.props;
     dispatch(Action.fetchCity());
-    console.log(bindActions);
   }
 
   componentWillReceiveProps(nextProps) {
-    const {dispatch, AsyncActionInCWRP} = nextProps;
-    const {cityMap} = AsyncActionInCWRP;
+    const { dispatch, AsyncActionInCWRP } = nextProps;
+    const { cityMap } = AsyncActionInCWRP;
     console.count('AsyncActionInComponentWillReceiveProps componentWillReceiveProps');
 
     console.log(this.props.AsyncActionInCWRP === nextProps.AsyncActionInCWRP)
@@ -28,22 +26,22 @@ class AsyncActionInComponentWillReceiveProps extends Component {
     if (this.state.count > 1) {
       dispatch(Action.fetchCity()).then(store => {
         console.assert(store.AsyncActionInCWRP.cityMap === nextProps.AsyncActionInCWRP.cityMap, 'nextProps.AsyncActionInCWRP.cityMap is equal with store which resolve from async action promise')
-        this.setState({count: this.state.count - 1});
+        this.setState({ count: this.state.count - 1 });
       })
     }
   }
 
   render() {
     console.count('AsyncActionInComponentWillReceiveProps render');
-    const {AsyncActionInCWRP} = this.props;
-    const {cityMap} = AsyncActionInCWRP;
+    const { AsyncActionInCWRP } = this.props;
+    const { cityMap } = AsyncActionInCWRP;
     const cityItems = Object.keys(cityMap).map(cityKey => {
       return <li key={cityKey}>{cityMap[cityKey]}</li>
     })
     return <div>
       <p>视图：</p>
       <ul>{cityItems}</ul>
-      <hr/>
+      <hr />
       <p>结论：</p>
       <ol>
         <li>在componentWillReceiveProps中，this.props === nextProps - <i>false</i></li>
@@ -56,5 +54,5 @@ class AsyncActionInComponentWillReceiveProps extends Component {
   }
 }
 
-const mapStateToProps = state => ({AsyncActionInCWRP: state.AsyncActionInCWRP})
+const mapStateToProps = state => ({ AsyncActionInCWRP: state.AsyncActionInCWRP })
 export default connect(mapStateToProps)(AsyncActionInComponentWillReceiveProps);

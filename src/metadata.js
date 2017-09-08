@@ -66,17 +66,18 @@ const META_DATA = {
       "check-data-in-state-and-new-createStore-state-is-same-when-dispatch-action": "当dispatch一个action修改state树上的数据后，检查通过connect注入的现有state树上的数据和通过createStore新创建state的数据是否同步修改"
     },
     "react-redux": {
-      "init-store-data-in-componentWillMount-when-go-back": "在componentWillMount中初始化state树问题",
-      "define-redux-state-data-structure": "定义redux的state树的数据结构，避免组件在render的时候出错(一个天气查询例子)",
-      "map-state-to-props": "mapStateToProps探究",
+      "dispatch-action-to-reset-state-within-componentWillMount": "在componentWillMount中初始化state树问题",
+      "how-to-define-state-structure": "定义redux的state树的数据结构，避免组件在render的时候出错(一个天气查询例子)",
+      "mapStateToProps": "mapStateToProps探究",
+      "mapDispatchToProps": "mapDispatchToProps探究",
       "inject-action-creators-to-component-props": "向组件的props注入action creators",
-      "map-dispatch-to-props": "mapDispatchToProps探究",
-      "change-state-reference-type-data": "直接修改state树上引用类型数据的某个字段的值",
-      "async-action-in-componentWillReceiveProps": "在componentWillReceiveProps中进行dispatch异步action，各项数据引用一致性探究",
-      "auto-complete-page": "一个搜索下拉列表的例子",
-      "es6-component-inherit-es5-component": "es6写法的组件能否继承es5写法的组件",
+      "modify-state-directly": "直接修改state树上引用类型数据的某个字段的值",
+      "dispatch-async-action-within-componentWillReceiveProps": "在componentWillReceiveProps中进行dispatch异步action，各项数据引用一致性探究",
+      "autocomplete": "一个搜索下拉列表的例子",
       "connect-multiple-nested-components": "connect多层嵌套组件, 观察各个组件的render次数",
+      "es6-component-inherit-es5-component": "es6写法的组件能否继承es5写法的组件",
       "inject-state-to-es5-component-mixins": "HOC connect 可以注入store到mixins的方法中",
+
       "test-api-middleware": "测试自定义api中间件"
     },
     "react-dom-demos": {

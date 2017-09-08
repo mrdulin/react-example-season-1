@@ -14,8 +14,6 @@ import ArticleList from './pages/App/ArticleList/index';
 import Tab, { One, Two, Three } from './pages/React-router-demos/tab';
 import BreadCrumb, { CrumbOne, CrumbTwo, CrumbThree } from './pages/React-router-demos/crumb';
 
-console.log('CrumbOne', CrumbOne);
-
 //redux
 // import ReduxBeginning from './pages/Redux/ReduxBeginning.react';
 // import CreateStoreInComponentCompareWithConnectState from './pages/Redux/CreateStoreInComponentCompareWithConnectState.react';
@@ -94,24 +92,9 @@ const routes = (
       <Route path='check-data-in-state-and-new-createStore-state-is-same-when-dispatch-action'
         component={CheckDataInStateAndNewCreateStoreStateIsSameWhenDispatchAction} />
     </Route> */}
-    {/* <Route path='react-redux' components={layoutNamedComponent}>
-      <IndexRoute component={ArticleList} />
-      <Route path="init-store-data-in-componentWillMount-when-go-back"
-        component={InitReduxStateTreeDataInComponentWillMount}></Route>
-      <Route path='define-redux-state-data-structure' component={DefineReduxStateDataStructure}></Route>
-      <Route path='map-state-to-props' component={MapStateToProps}></Route>
-      <Route path='inject-action-creators-to-component-props'
-        component={InjectActionCreatorsToComponentProps}></Route>
-      <Route path='map-dispatch-to-props' component={MapDispatchToProps}></Route>
-      <Route path='change-state-reference-type-data' component={ChangeStateTreeRefData}></Route>
-      <Route path='async-action-in-componentWillReceiveProps'
-        component={AsyncActionInComponentWillReceiveProps}></Route>
-      <Route path='auto-complete-page' component={AutoCompletePage} />
-      <Route path='es6-component-inherit-es5-component' component={Es6ComponentInheritEs5Component}></Route>
-      <Route path='connect-multiple-nested-components' component={ConnectMultipleNestedComponents} />
-      <Route path='inject-state-to-es5-component-mixins' component={InjectStateToEs5ComponentMixins} />
-      <Route path='test-api-middleware' component={TestApiMiddleware} />
-    </Route> */}
+    <Route path='react-redux-demos' components={layoutNamedComponent}>
+      {loadRoute('react-redux-demos')}
+    </Route>
     {/* <Route path='mini-projects' components={{ sidebar: Sidebar, main: Main }}>
       <IndexRoute component={ArticleList} />
       <Route path='adorable-avatar' component={AdorableAvatars}></Route>

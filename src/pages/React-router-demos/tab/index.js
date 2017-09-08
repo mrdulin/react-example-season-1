@@ -1,5 +1,6 @@
 import { Link, withRouter } from 'react-router';
 import React from 'react';
+import './style';
 
 class Tab extends React.Component {
   constructor() {
@@ -40,7 +41,7 @@ class Tab extends React.Component {
       if (tabs.length === 0) {
         prevTab = '';
       }
-      this.props.router.replace(`/react-router/tab/${prevTab}`);
+      this.props.router.replace(`/react-router-demos/tab/${prevTab}`);
     });
 
   }
@@ -75,8 +76,8 @@ class Tab extends React.Component {
   }
 }
 
-export * from './pages/One';
-export * from './pages/Two';
-export * from './pages/Three';
+export { One } from './pages/One';
+export { Two } from './pages/Two';
+export { Three } from './pages/Three';
 
 export default withRouter(Tab);

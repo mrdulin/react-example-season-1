@@ -1,4 +1,4 @@
-import {request, requestSuccess, requestFail} from './common.action';
+import { request, requestSuccess, requestFail } from 'actions/common';
 
 export const getBookSuccess = (data) => ({
   type: 'scrollTop_getBookSuccess',

@@ -1,14 +1,14 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-const mapStateToProps = state => ({...state.Es6ComponentInheritEs5Component});
+const mapStateToProps = state => ({ ...state.Es6ComponentInheritEs5Component });
 const ES5Component = (React.createClass({
   render: function () {
     return null;
   },
 
   setTitle: function (title) {
-    const {dispatch, content} = this.props;
+    const { dispatch, content } = this.props;
     document.title = title || '';
   }
 }));
@@ -26,7 +26,7 @@ class ES6Component extends ES5Component {
     try {
       this.setTitle('es6写法的组件能否继承es5写法的组件');
     } catch (e) {
-      this.setState({isInheritSuccess: false});
+      this.setState({ isInheritSuccess: false });
     }
   }
 

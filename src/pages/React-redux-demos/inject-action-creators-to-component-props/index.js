@@ -1,13 +1,13 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import * as Actions from '../../actions/InjectActionCreatorsToComponentProps.action';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as Actions from './actions';
 
 class InjectActionCreatorsToComponentProps extends Component {
 
   render() {
     //组件的props上有被注入的action creator（getUser和deleteUser），以后直接调用即可
     //此时，props将没有被注入dispatch方法
-    const {user, other, getUser, deleteUser} = this.props;
+    const { user, other, getUser, deleteUser } = this.props;
     return (
       <div>
         <p>React redux 02 for testing inject state and action creators</p>
@@ -22,8 +22,8 @@ class InjectActionCreatorsToComponentProps extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const {user, other} = state.InjectActionCreatorsToComponentProps;
-  return {user, other};
+  const { user, other } = state.InjectActionCreatorsToComponentProps;
+  return { user, other };
 };
 
 //向组件的props注入reduxRedux2的所有action creators

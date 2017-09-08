@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import * as Action from '../../../../actions/ConnectMultipleNestedComponents.action';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as Action from '../actions';
 
 const BB = class BComponent extends Component {
   constructor() {
@@ -9,17 +9,17 @@ const BB = class BComponent extends Component {
   }
 
   render() {
-    const {messageB} = this.props.ConnectMultipleNestedComponents;
+    const { messageB } = this.props.ConnectMultipleNestedComponents;
     console.count('BComponent render')
 
-    return <div style={{border: '1px solid red', margin: '20px'}}>
+    return <div style={{ border: '1px solid red', margin: '20px' }}>
       <p>B component {messageB}</p>
       <button type='button' onClick={this.handleClick}>click me!</button>
     </div>
   }
 
   handleClick() {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch(Action.updateMessage('messageB', 'angular is awesome'));
   }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import userHelper from '../../mixins/userHelper';
-import * as Action from '../../actions/InjectStateToEs5ComponentMixins.action';
+import { connect } from 'react-redux';
+import userHelper from '../../../mixins/userHelper';
+import * as Action from './actions';
 
 var InjectStateToEs5ComponentMixins = React.createClass({
   mixins: [userHelper],
@@ -16,12 +16,12 @@ var InjectStateToEs5ComponentMixins = React.createClass({
     return <form onSubmit={this.handleLogin}>
       <div>
         <label>
-          username：<input name='username' type="text"/>
+          username：<input name='username' type="text" />
         </label>
       </div>
       <div>
         <label>
-          password：<input name='password' type="text"/>
+          password：<input name='password' type="text" />
         </label>
       </div>
       <button type='submit'>login</button>
@@ -30,15 +30,15 @@ var InjectStateToEs5ComponentMixins = React.createClass({
 
   handleLogin(e) {
     e.preventDefault();
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     const form = e.target;
     const username = form.username.value.trim();
     const password = form.password.value.trim();
-    dispatch(Action.login({username, password}));
+    dispatch(Action.login({ username, password }));
   },
 
   renderHome() {
-    const {InjectStateToEs5ComponentMixins} = this.props;
+    const { InjectStateToEs5ComponentMixins } = this.props;
     return <div>
       <h2>Welcome! {InjectStateToEs5ComponentMixins.user.name}</h2>
       <p>react-redux通过connect HOC，注入store，在mixins方法中同样可以拿到this.props，及this.props上得方法和属性。</p>

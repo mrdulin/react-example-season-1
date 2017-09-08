@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getBook } from '../../../actions/scrollTop.action';
+import { getBook } from './actions';
 import './style.scss';
 
 class ScrollTop extends Component {

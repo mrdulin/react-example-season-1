@@ -118,11 +118,8 @@ const config = {
       ignore: ['*.json']
     }),
     new webpack.ProvidePlugin({
-      util: path.resolve(src, 'common/js/util'),
-      React: 'react',
-      ReactRouter: 'react-router',
-      ReactDOM: 'react-dom',
-      ReactRedux: 'react-redux',
+      util: src + '/common/js/util',
+      actions: src + '/actions'
     }),
     // new webpack.optimize.CommonsChunkPlugin("commons", "commons.js", Infinity),
     new CleanWebpackPlugin(['dist', 'docs'])

@@ -1,5 +1,5 @@
-import {REQUEST, REQUEST_SUCCESS, REQUEST_FAIL} from '../actions/common.action';
-import {CALL_API} from '../middlewares/api';
+import { REQUEST, REQUEST_SUCCESS, REQUEST_FAIL } from 'actions/common';
+import { CALL_API } from '../../../middlewares/api';
 
 export const FETCH_BOOK_SUCCESS = Symbol('FETCH_BOOK_SUCCESS');
 export const FETCH_BOOK_FAILED = Symbol('FETCH_BOOK_FAILED');

@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import * as ActionCreators from '../../actions/MapDispatchToProps.action';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as ActionCreators from './actions';
 
 class MapDispatchToProps extends Component {
   render() {
-    const {book, actions} = this.props;
+    const { book, actions } = this.props;
     return (
       <div>
         <p>book name: {book.name}</p>
@@ -18,12 +18,12 @@ class MapDispatchToProps extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const {book} = state.reactRedux03;
-  return {book};
+  const { book } = state.reactRedux03;
+  return { book };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {actions: bindActionCreators(ActionCreators, dispatch)};
+  return { actions: bindActionCreators(ActionCreators, dispatch) };
 };
 
 export default connect(

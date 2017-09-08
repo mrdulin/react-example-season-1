@@ -1,9 +1,9 @@
-import {CALL_API} from 'redux-api-middleware';
-import * as Action from './common.action';
+import { CALL_API } from 'redux-api-middleware';
+import * as Action from './common';
 
 
 export const requestCity = () => {
-  const body = JSON.stringify({userId: '12adfaefsa123123sddfs'});
+  const body = JSON.stringify({ userId: '12adfaefsa123123sddfs' });
   return {
     [CALL_API]: {
       //endpoint 是接口地址，可以是字符串，也可以是一个函数，返回值是字符串

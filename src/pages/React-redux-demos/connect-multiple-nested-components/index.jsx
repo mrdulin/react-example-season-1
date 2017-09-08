@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import AA from './components/AComponent.react';
+import AA from './components/A';
 
 const mapStateToProps = state => ({
   ConnectMultipleNestedComponents: state.ConnectMultipleNestedComponents

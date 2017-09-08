@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import * as Action from '../../actions/TestApiMiddleware.action';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import * as Action from './actions';
+import { connect } from 'react-redux';
 
 class TestApiMiddleware extends Component {
   constructor() {
@@ -9,14 +9,14 @@ class TestApiMiddleware extends Component {
   }
 
   render() {
-    const {TestApiMiddleware} = this.props;
+    const { TestApiMiddleware } = this.props;
     const bookItems = TestApiMiddleware.Books.map(book => {
       return <li key={book.ID}>{book.Title}</li>
     });
     return <div>
       <form onSubmit={this.handleSearch}>
         <label>
-          <input type="search" placeholder='输入书名' name='search'/>
+          <input type="search" placeholder='输入书名' name='search' />
         </label>
       </form>
       <ul>
@@ -27,7 +27,7 @@ class TestApiMiddleware extends Component {
 
   handleSearch(e) {
     e.preventDefault();
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     const form = e.target;
     const value = form.search.value.trim();
     dispatch(Action.fetchBook(value));

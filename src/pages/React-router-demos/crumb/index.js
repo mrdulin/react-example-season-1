@@ -59,9 +59,9 @@ class Crumb extends React.Component {
   }
 }
 
-export * from './pages/One';
-export * from './pages/Two';
-export * from './pages/Three';
+export { CrumbOne } from './pages/One';
+export { CrumbTwo } from './pages/Two';
+export { CrumbThree } from './pages/Three';
 
 export default withRouter(Crumb);
 

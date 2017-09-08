@@ -1,8 +1,8 @@
-import React, {Component, PropTypes} from 'react';
-import {connect} from 'react-redux';
-import {selectCity, fetchCity} from '../../../actions/MapStateToProps.action';
-import Form from './components/ChildComponent.react';
-import {bindActionCreators} from 'redux';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { selectCity, fetchCity } from './actions';
+import Form from './Child';
+import { bindActionCreators } from 'redux';
 
 class MapStateToProps extends Component {
   constructor(props) {
