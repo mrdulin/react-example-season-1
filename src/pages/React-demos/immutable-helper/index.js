@@ -1,9 +1,10 @@
 import update from 'immutability-helper';
 import 'whatwg-fetch';
+import IScroll from 'iscroll';
 import './style.scss';
 
-const {PureComponent, Component} = React;
-const {findDOMNode} = ReactDOM;
+const { PureComponent, Component } = React;
+const { findDOMNode } = ReactDOM;
 const API = 'http://it-ebooks-api.info/v1/search';
 
 const _compare = (prop) => (a, b) => {
@@ -18,29 +19,29 @@ const _compareByKey = (prop, sortKey) => (a, b) => {
   return sortKey === 'desc' ? ~~(a[prop] > b[prop]) : ~~(a[prop] < b[prop]);
 }
 
-const BookList = ({books, toggleIntro}) => {
+const BookList = ({ books, toggleIntro }) => {
   if (!books || books.length === 0) return null;
   return <ul className='book-list'>
     {books.map((book, index) => <BookItem key={index} book={book} toggleIntro={() => toggleIntro(index)}></BookItem>)}
   </ul>
 }
 
-const BookItem = ({book, toggleIntro}) => (
+const BookItem = ({ book, toggleIntro }) => (
   <li className='book-item'>
     <div className='l'>
-      <img className='book-thumbnail' src={book.Image} alt="book thumbnail"/>
+      <img className='book-thumbnail' src={book.Image} alt="book thumbnail" />
     </div>
     <div className='r'>
       <h1 className='book-title'>{book.Title}</h1>
       <a href="javascript: void 0" onClick={toggleIntro}>{book.showIntro ? '隐藏简介' : '显示简介'}</a>
-      <div style={{display: book.showIntro ? 'block' : 'none'}}>
+      <div style={{ display: book.showIntro ? 'block' : 'none' }}>
         <p className='subTitle'>{book.SubTitle}</p>
       </div>
     </div>
   </li>
 )
 
-const LoadMore = ({page, pageSize, total, load}) => {
+const LoadMore = ({ page, pageSize, total, load }) => {
 
   const hasMore = page * pageSize < total;
 
@@ -49,21 +50,21 @@ const LoadMore = ({page, pageSize, total, load}) => {
   return <p type='button' className='LoadMore' onClick={load}>加载更多</p>
 }
 
-const QueryTime = ({time}) => {
+const QueryTime = ({ time }) => {
   if (!time) return null;
   return <p className='query-time'>本次查询耗时{time}秒</p>
 }
 
-const Empty = ({show}) => {
+const Empty = ({ show }) => {
   if (!show) return null;
   return <p className='empty'>查询不到结果~</p>
 }
 
-const Header = ({children}) => <header className='header'>{children}</header>;
+const Header = ({ children }) => <header className='header'>{children}</header>;
 
-const SubHeader = ({children}) => <div className='sub-header'>{children}</div>;
+const SubHeader = ({ children }) => <div className='sub-header'>{children}</div>;
 
-const SearchBar = ({submit}) => {
+const SearchBar = ({ submit }) => {
   let _input = null;
   const handleSubmit = (e) => {
     _input.blur();
@@ -71,23 +72,23 @@ const SearchBar = ({submit}) => {
   };
   return <form className='search-form' onSubmit={handleSubmit}>
     {/*<input type="search" name="search" onChange={e => this._handleSearchChange(e)} placeholder='输入书名进行搜索'/>*/}
-    <input className='search-input' ref={ref => _input = ref} type="search" name="search" placeholder='输入书名进行搜索' autoComplete='off'/>
+    <input className='search-input' ref={ref => _input = ref} type="search" name="search" placeholder='输入书名进行搜索' autoComplete='off' />
     <button type="submit">搜索</button>
   </form>
 }
 
-const Spin = ({show}) => {
+const Spin = ({ show }) => {
   if (!show) return null;
   return <div className='spin'>
     <p className='spin-text'>搜索中...</p>
   </div>
 }
 
-const Scroller = ({children}) => {
+const Scroller = ({ children }) => {
   return <div className='scroller'>{children}</div>
 }
 
-const Filter = ({change, filter}) => {
+const Filter = ({ change, filter }) => {
   const titleMap = {
     'desc': '降序',
     'asc': '升序',
@@ -111,7 +112,7 @@ const Filter = ({change, filter}) => {
   </div>
 }
 
-const Wrapper = ({children}) => <div className='wrapper'>{children}</div>
+const Wrapper = ({ children }) => <div className='wrapper'>{children}</div>
 
 export default class extends Component {
   constructor() {
@@ -183,9 +184,9 @@ export default class extends Component {
   _fetchData(query, page) {
     const url = `${API}/${query}/page/${page}`;
     return fetch(url).then(res => res.json()).then(data => {
-      const {Books: books = [], Total: total, Time: time = 0} = data;
+      const { Books: books = [], Total: total, Time: time = 0 } = data;
       const totalInt = parseInt(total, 10);
-      return {books, total: totalInt, time};
+      return { books, total: totalInt, time };
     }).catch(e => {
       console.error(e)
     });
@@ -195,10 +196,10 @@ export default class extends Component {
    * @desc 加载更多
    */
   _loadMore() {
-    const {page, query, filter: {title}} = this.state;
+    const { page, query, filter: { title } } = this.state;
     const nextPage = page + 1;
     this._fetchData(query, nextPage).then(data => {
-      const {books} = data;
+      const { books } = data;
 
       //使用新建引用的方式
       const oldBooks = this.state.books;
@@ -228,16 +229,16 @@ export default class extends Component {
   }
 
   _handleSearchChange(e) {
-    const newState = update(this.state, {query: {$set: e.target.value}});
+    const newState = update(this.state, { query: { $set: e.target.value } });
     this.setState(newState);
   }
 
   _updateState(query) {
     const newState = update(this.state, {
-      query: {$set: query},
-      page: {$set: 1},
-      total: {$set: 0},
-      searching: {$set: true}
+      query: { $set: query },
+      page: { $set: 1 },
+      total: { $set: 0 },
+      searching: { $set: true }
     });
     this.setState(newState);
   }
@@ -247,23 +248,23 @@ export default class extends Component {
     console.log('submit');
     const form = e.target;
     const query = form.search.value;
-    const {page, filter: {title}} = this.state;
+    const { page, filter: { title } } = this.state;
 
     //虽然在react事件中调用多次setState，react会把这些new state合并后再setState，但是异步callback中的setState除外.
     this._updateState(form.search.value); //render 1次
     this._fetchData(query, page).then(data => { //异步请求 render 1次
-      const {books, total, time} = data;
+      const { books, total, time } = data;
       let newState = update(this.state,
         {
-          books: {$set: books},
-          total: {$set: total},
-          time: {$set: time},
-          searching: {$set: false}
+          books: { $set: books },
+          total: { $set: total },
+          time: { $set: time },
+          searching: { $set: false }
         }
       );
       if (title !== 'none') {
         newState = update(newState, {
-          books: {$apply: books => books.sort(_compareByKey('Title', title))}
+          books: { $apply: books => books.sort(_compareByKey('Title', title)) }
         })
       }
       this.setState(newState, this._refreshScroller);
@@ -279,7 +280,7 @@ export default class extends Component {
 
   _handleFilterChange(titleKey) {
     const newState = update(this.state, {
-      filter: {title: {$set: titleKey}},
+      filter: { title: { $set: titleKey } },
       books: {
         $apply: (books) => {
           return books.sort(_compareByKey('Title', titleKey))
@@ -341,7 +342,7 @@ export default class extends Component {
 
   render() {
     console.count('render count');
-    const {books = [], query, page, total, filter, time, searching} = this.state;
+    const { books = [], query, page, total, filter, time, searching } = this.state;
     // console.log(this.state);
 
     return <div>

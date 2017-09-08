@@ -1,3 +1,5 @@
+import React from 'react';
+
 import './style';
 
 class Slider extends React.Component {
@@ -79,7 +81,7 @@ class Swiper extends React.Component {
   }
 
   handleIndicatorClick(index) {
-    // this.stopplay();        
+    // this.stopplay();
     this.setState({index});
   }
 

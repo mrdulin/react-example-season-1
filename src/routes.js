@@ -2,12 +2,11 @@ import React from 'react';
 import { Route, IndexRoute, IndexRedirect } from 'react-router';
 
 //各个demo页面component
-import App from './pages/App/App.react';
-import Sidebar from './pages/App/Sidebar.react';
-import Main from './pages/App/Main.react';
-import NoMatch from './pages/App/NoMatch.react';
-import ArticleList from './pages/App/ArticleList/index.jsx';
-//react
+import App from './pages/App/App';
+import Sidebar from './pages/App/Sidebar';
+import Main from './pages/App/Main';
+import NoMatch from './pages/App/NoMatch';
+import ArticleList from './pages/App/ArticleList/index';
 
 //react-router
 import GetEveryTypeParams from './pages/React-router/GetEveryTypeParams.react';
@@ -39,8 +38,6 @@ import TestApiMiddleware from './pages/React-redux/TestApiMiddleware.react';
 //react-dom
 import CallReactDOMRenderInParentComponent from './pages/React-dom/CallReactDOMRenderInParentComponent.react';
 
-//redux-saga
-import ReduxSagaBeginnning from './pages/Redux-saga/Beginning';
 
 //mini-projects
 import AdorableAvatars from './pages/Mini-projects/AdorableAvatars/AdorableAvatars.react';
@@ -49,9 +46,6 @@ import TodoList from './pages/Mini-projects/TodoList/TodoList.react';
 import i18n from './pages/Mini-projects/i18n/i18n.react';
 import MiniApp from './pages/Mini-projects/mini-app/app.jsx';
 import { Hack, HackDetail, HackList, HackUser } from './pages/Mini-projects/hack/';
-
-//待整理例子
-import ReduxAPIMiddleware from './pages/ReduxAPIMiddleware.react';
 
 import { loadMetaData } from './metadata';
 
@@ -69,8 +63,8 @@ const loadComponent = (name) => {
 const routes = (
   //导航首页，导航到各个demo页面
   <Route path='/' component={App}>
-    <IndexRedirect to='/react' />
-    <Route path='react' components={{ sidebar: Sidebar, main: Main }}>
+    <IndexRedirect to='/react-demos' />
+    <Route path='react-demos' components={{ sidebar: Sidebar, main: Main }}>
       <IndexRoute component={ArticleList} />
       {
         loadMetaData('react-demos').map((name, idx) => {
@@ -130,10 +124,6 @@ const routes = (
       <Route path='inject-state-to-es5-component-mixins' component={InjectStateToEs5ComponentMixins} />
       <Route path='test-api-middleware' component={TestApiMiddleware} />
     </Route>
-    <Route path='redux-saga' components={{ sidebar: Sidebar, main: Main }}>
-      <IndexRoute component={ArticleList} />
-      <Route path='beginning' component={ReduxSagaBeginnning}></Route>
-    </Route>
     <Route path='mini-projects' components={{ sidebar: Sidebar, main: Main }}>
       <IndexRoute component={ArticleList} />
       <Route path='adorable-avatar' component={AdorableAvatars}></Route>
@@ -147,8 +137,6 @@ const routes = (
         <Route path="user/:username" component={HackUser}></Route>
       </Route>
     </Route>
-
-    <Route path='redux-api-middware' component={ReduxAPIMiddleware}></Route>
 
     <Route path='*' component={NoMatch}></Route>
   </Route>

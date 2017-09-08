@@ -118,20 +118,14 @@ const config = {
       ignore: ['*.json']
     }),
     new webpack.ProvidePlugin({
-      util: path.resolve(src, 'common/js', 'util.js'),
+      util: path.resolve(src, 'common/js/util'),
       React: 'react',
       ReactRouter: 'react-router',
       ReactDOM: 'react-dom',
       ReactRedux: 'react-redux',
-      classNames: 'classNames',
-      IScroll: 'iscroll'
     }),
     // new webpack.optimize.CommonsChunkPlugin("commons", "commons.js", Infinity),
-    new CleanWebpackPlugin(['dist', 'docs'], {
-      root: __dirname,
-      verbose: true,
-      dry: false
-    })
+    new CleanWebpackPlugin(['dist', 'docs'])
   ],
 
   addNoParse: (noParseMap) => {

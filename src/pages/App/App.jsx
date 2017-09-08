@@ -1,5 +1,5 @@
 import React from 'react';
-import {browserHistory, withRouter} from 'react-router';
+import { browserHistory, withRouter } from 'react-router';
 import './app.scss';
 
 class App extends React.Component {
@@ -19,7 +19,7 @@ class App extends React.Component {
     //ES6写法在constructor中初始化state
     this.state = {
       demoKey: routeName,
-      dataPassMainAndSidebar: {filterText: '', hideSideBar: false}
+      dataPassMainAndSidebar: { filterText: '', hideSideBar: false }
     };
     this.handleFilterChange = ::this.handleFilterChange;
     this.handleSideBarHide = ::this.handleSideBarHide;
@@ -30,16 +30,16 @@ class App extends React.Component {
   }
 
   handleFilterChange(filterText) {
-    this.setState({dataPassMainAndSidebar: {filterText}})
+    this.setState({ dataPassMainAndSidebar: { filterText } })
   }
 
   handleSideBarHide(hideSideBar) {
-    this.setState({dataPassMainAndSidebar: {hideSideBar}});
+    this.setState({ dataPassMainAndSidebar: { hideSideBar } });
   }
 
   render() {
     console.count('App render')
-    const {main, sidebar} = this.props;
+    const { main, sidebar } = this.props;
     const data = Object.assign({}, this.state.dataPassMainAndSidebar, {
       handleFilterChangeCallback: this.handleFilterChange,
       handleSideBarHideCallback: this.handleSideBarHide
@@ -62,7 +62,7 @@ class App extends React.Component {
 
   selectChange(e) {
     let value = e.target.value;
-    this.setState({demoKey: value});
+    this.setState({ demoKey: value });
     //如果使用browserHistory.push(`/#/${value}`);不回报错，并且url的路由也会改变，react-router不会匹配到这个路由，所以相应的component不会加载
     //下面的也可以使用browserHistory.push(`/${value}`);
     browserHistory.push(`${value}`);

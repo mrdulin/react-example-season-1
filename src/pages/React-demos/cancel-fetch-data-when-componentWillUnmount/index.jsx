@@ -1,3 +1,4 @@
+import React from 'react';
 /**
  * @desc
  * 操作：进入当前页面，然后导航到其他页面，这时候异步数据返回，this.setState报如下错误。

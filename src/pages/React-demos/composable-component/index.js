@@ -1,4 +1,4 @@
-import React, {Component, fi} from 'react';
+import React, {Component} from 'react';
 import {findDOMNode} from 'react-dom';
 import NumInput from './components/NumInput.react';
 

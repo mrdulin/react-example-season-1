@@ -1,6 +1,5 @@
-/**
- * Created by dulin on 17/1/18.
- */
+import React from 'react';
+
 export default class extends React.Component {
   constructor() {
     super();

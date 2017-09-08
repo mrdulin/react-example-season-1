@@ -1,6 +1,5 @@
-import {applyMiddleware, createStore, compose} from 'redux';
+import { applyMiddleware, createStore, compose } from 'redux';
 import rootReducer from './reducer';
-import sagas from './saga';
 //webpack未开启noParse
 import createLogger from 'redux-logger';
 // const createLogger = require('redux-logger');
@@ -9,17 +8,13 @@ import createLogger from 'redux-logger';
 // import thunk from 'redux-thunk';
 //使用commonjs
 const thunk = require('redux-thunk').default;
-import createSagaMiddleware from 'redux-saga';
 
-import {apiMiddleware} from 'redux-api-middleware';
+import { apiMiddleware } from 'redux-api-middleware';
 // import {testMiddleware} from './middlewares/testMiddleware';
 import api from './middlewares/api';
 
-const sagaMiddleware = createSagaMiddleware();
-
-
 const api_host = 'http://www.google.com';
-let middlewares = [apiMiddleware, api, thunk.withExtraArgument({api_host}), sagaMiddleware];
+let middlewares = [apiMiddleware, api, thunk.withExtraArgument({ api_host })];
 
 if (__DEV__) {
   //如果action常量是Symbol类型，那么会报错： Uncaught (in promise) TypeError: Cannot convert a Symbol value to a string
@@ -44,7 +39,5 @@ const createStoreWithMiddleware = compose(
 )(createStore);
 
 const store = createStoreWithMiddleware(rootReducer);
-
-sagaMiddleware.run(sagas);
 
 export default store;

@@ -41,7 +41,7 @@ const META_DATA = {
       'spread-oprator-with-props': '使用spread操作符给组件props传递属性',
       'tree': 'React实现简单的tree',
       'replace-img-src-within-component': '替换组件内部包含的img标签的src',
-      'component-instantiated-once': '组件只实例化一次',
+      'component-instantiate-once': '组件只实例化一次',
       'ios-scroll-event-block-js-thread': "移动端ios设备滚动事件阻塞JS线程",
       "mobile-input-focus-vistual-keybroad": "移动设备路由切换时设置input聚焦，唤起虚拟键盘",
       "set-modal-window-position-on-input-focus": "移动端模态框中input聚焦虚拟键盘弹出后，重新设置模态框位置",
@@ -79,9 +79,6 @@ const META_DATA = {
       "inject-state-to-es5-component-mixins": "HOC connect 可以注入store到mixins的方法中",
       "test-api-middleware": "测试自定义api中间件"
     },
-    'redux-saga': {
-      'beginning': '官方例子'
-    },
     "react-dom": {
       "call-react-dom-render-in-parent-component": "在父组件的componentDidMount生命周期内使用ReactDOM.render渲染子组件"
     },
@@ -92,9 +89,6 @@ const META_DATA = {
       "i18n": "React 国际化",
       "mini-app": '迷你应用',
       "hack": 'github hack'
-    },
-    "components": {
-      "swiper": "轮播"
     },
     "Add-Ons": {
       "pure-render-mixin": ""

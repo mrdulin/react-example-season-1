@@ -1,3 +1,5 @@
+import React from 'react';
+
 import ChildA from './ChildA';
 import ChildB from './ChildB';
 import Content from './Content';

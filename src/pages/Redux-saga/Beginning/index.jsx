@@ -1,5 +1,6 @@
 import {connect} from 'react-redux';
 import {findDOMNode} from 'react-dom';
+import classnames from 'classnames';
 import style from './style';
 
 const Beginning = class extends React.Component {
@@ -60,7 +61,7 @@ const Beginning = class extends React.Component {
       </li>
     });
 
-    const listLayout = classNames({
+    const listLayout = classnames({
       'layout-list': layout === 'list',
       'layout-grid': layout === 'grid'
     });
