@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import './style.scss';
 //问题，异步数据，组件更新
 
 class FilterBar extends Component {

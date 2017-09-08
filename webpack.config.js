@@ -81,8 +81,7 @@ const config = {
     root: __dirname,
     extensions: ['', '.js', '.jsx', '.scss', '.sass', '.css', '.json'],
     alias: {
-      'articles': path.resolve(src, 'common/js', 'articles.js'),
-      'images': path.resolve(src, 'images'),
+      images: path.resolve(src, 'images'),
       pages: path.resolve(src, 'pages'),
       actions: path.resolve(src, 'actions')
     },

@@ -1,6 +1,6 @@
 import React, {Component, PureComponent} from 'react';
 import {withRouter, Link} from 'react-router';
-import {META_DATA} from 'articles';
+import {META_DATA} from '../../metadata';
 
 class Sidebar extends PureComponent {
   constructor(props) {

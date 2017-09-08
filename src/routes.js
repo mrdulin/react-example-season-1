@@ -1,69 +1,13 @@
 import React from 'react';
-import {Route, IndexRoute, IndexRedirect} from 'react-router';
+import { Route, IndexRoute, IndexRedirect } from 'react-router';
 
 //各个demo页面component
 import App from './pages/App/App.react';
 import Sidebar from './pages/App/Sidebar.react';
 import Main from './pages/App/Main.react';
 import NoMatch from './pages/App/NoMatch.react';
-import ArticleList from './pages/App/ArticleList';
-
+import ArticleList from './pages/App/ArticleList/index.jsx';
 //react
-import FunctionBind from './pages/React/FunctionBind.react';
-import Table from './pages/React/Table/Table.react';
-import DynamicInlineStyle from './pages/React/DynamicInlineStyle.react';
-import Ref from './pages/React/Ref/Ref.react';
-import StateLessFunctionalComponent from './pages/React/StateLessFunctionalComponent.react';
-import ThisPropsChildren from './pages/React/ThisPropsChildren/ThisPropsChildren.react';
-import InheritComponent from './pages/React/InheritComponent/InheritComponent.react';
-import SetChildrenReactElementStyle from './pages/React/SetChildrenReactElementStyle.react';
-import InsertAnElementOnMouseOver from './pages/React/InsertAnElementOnMouseOver.react';
-import JSXArrayDom from './pages/React/JSXArrayDom.react';
-import AudioPlayer from './pages/React/AudioPlayer.react';
-import HorizontalScroll from './pages/React/HorizontalScroll.react';
-import AjaxInConstructor from './pages/React/send-ajax-within-constructor-of-component';
-import CallChildComponentMethod from './pages/React/CallChildComponentMethod.react';
-import PassAsyncDataToChildComponent from './pages/React/PassAsyncDataToChildComponent/PassAsyncDataToChildComponent.react';
-import HOC from './pages/React/HOC/HOC.react';
-import FilterBarExample from './pages/React/Filter.react';
-import ComposableComponent from './pages/React/ComposableComponent/ComposableComponent.react';
-import CountDownPage from './pages/React/CountDownPage.react';
-import IOSScrollEvent from './pages/React/IOSScrollEvent.react';
-import DownloadAllTest from './pages/React/DownloadAllTest.react';
-import LoopScroll from './pages/React/LoopScroll.react';
-import GrabChildComponentState from './pages/React/GrabChildComponentState/GrabChildComponentState.react';
-import CreateIframe from './pages/React/CreateIframe.react';
-import InputTypeText from './pages/React/FormControl/InputTypeText.react';
-import SetModalWindowPositionOnInputFocus from './pages/React/SetModalWindowPositionOnInputFocus.react';
-import InputTypeCheckbox from './pages/React/FormControl/InputTypeCheckbox.react';
-import MobileInputFocusVistualKeyboard from './pages/React/MobileInputFocusVistualKeyboard.react';
-import LogicalOperators from './pages/React/LogicalOperators.react';
-import StaticMethod from './pages/React/StaticMethod.react';
-import ComponentCommunication from './pages/React/ComponentCommunication';
-import ComponentDidUpdateInputFocus from './pages/React/ComponentDidUpdateInputFocus.react';
-import SelectOption from './pages/React/FormControl/SelectOption.react';
-import ScrollTop from './pages/React/ScrollTop.react';
-import ReplaceImgSrcWithinComponent from './pages/React/ReplaceImgSrcWithinComponent.react';
-import ReactCreateClass from './pages/React/React.createClass';
-import ReactChildren from './pages/React/React.children';
-import ReactCreateElement from './pages/React/React.createElement';
-import InitPropsAndState from './pages/React/InitPropsAndState';
-import InitLifecycle from './pages/React/InitLifecycle';
-import StateChangeLifecycle from './pages/React/StateChangeLifecycle';
-import ComponentNamespace from './pages/React/ComponentNamespace';
-import SpreadProps from './pages/React/SpreadProps';
-import CancelFetchData from './pages/React/CancelFetchData';
-import ReactPureComponent from './pages/React/React.PureComponent';
-import SetStateMultipleTimes from './pages/React/SetStateMultipleTimes';
-import BestPractice from './pages/React/BestPractice';
-import MobileFixedLayout from './pages/React/MobileFixedLayout'
-import DynamicJSXTags from './pages/React/Dynamic-JSX-tags.react';
-import ImmutableHelper from './pages/React/ImmutableHelper';
-import SetStateInComponentWillMount from './pages/React/SetStateInComponentWillMount';
-import Tree from './pages/React/Tree';
-import Escape from './pages/React/Escape';
-import ImmutableHelperOperateArray from './pages/React/ImmutableHelper/operateArray';
-import ComponentInstantiatedOnce from './pages/React/ComponentInstantiatedOnce';
 
 //react-router
 import GetEveryTypeParams from './pages/React-router/GetEveryTypeParams.react';
@@ -104,109 +48,49 @@ import FileIO from './pages/Mini-projects/FileIO/FileIO.react';
 import TodoList from './pages/Mini-projects/TodoList/TodoList.react';
 import i18n from './pages/Mini-projects/i18n/i18n.react';
 import MiniApp from './pages/Mini-projects/mini-app/app.jsx';
-import {Hack, HackDetail, HackList, HackUser} from './pages/Mini-projects/hack/';
-
-//components
-import Swiper from './pages/Components/Swiper';
+import { Hack, HackDetail, HackList, HackUser } from './pages/Mini-projects/hack/';
 
 //待整理例子
 import ReduxAPIMiddleware from './pages/ReduxAPIMiddleware.react';
 
-
-import {loadMetaData} from 'common/js/articles';
-
-console.log(loadMetaData('react'));
+import { loadMetaData } from './metadata';
 
 const loadComponent = (name) => {
-  return require(`./pages/${name}/index.js`);
+  let componentClass;
+  try {
+    componentClass = require(`./pages/${name}/index.js`);
+  } catch (e) {
+    componentClass = require(`./pages/${name}/index.jsx`);
+  }
+  return componentClass;
 };
 
-//定义路由规则
+//路由规则
 const routes = (
   //导航首页，导航到各个demo页面
   <Route path='/' component={App}>
-    <IndexRedirect to='/react'/>
-    <Route path='react' components={{sidebar: Sidebar, main: Main}}>
-      <IndexRoute component={ArticleList}/>
-      {/*<Route path='function-bind' component={FunctionBind}/>*/}
-      {/*<Route path='react-component-with-es5-es6-es7-syntax' component={Table}></Route>*/}
-      {/*<Route path='dynamic-inline-style' component={DynamicInlineStyle}></Route>*/}
-      {/*<Route path='refs-to-component' component={Ref}></Route>*/}
-      {/*<Route path='stateless-functional-component' component={StateLessFunctionalComponent}></Route>*/}
-      {/*<Route path='this-props-children' component={ThisPropsChildren}></Route>*/}
-      {/*<Route path='inherit-component' component={InheritComponent}></Route>*/}
-      {/*<Route path='set-children-react-element-style' component={SetChildrenReactElementStyle}></Route>*/}
-      {/*<Route path='insert-an-element-on-mouseover' component={InsertAnElementOnMouseOver}/>*/}
-      {/*<Route path='jsx-array-dom' component={JSXArrayDom}></Route>*/}
-      {/*<Route path='react-audioplayer' component={AudioPlayer}></Route>*/}
-      {/*<Route path='horizontal-scroll' component={HorizontalScroll}></Route>*/}
-
+    <IndexRedirect to='/react' />
+    <Route path='react' components={{ sidebar: Sidebar, main: Main }}>
+      <IndexRoute component={ArticleList} />
       {
-        loadMetaData('react').map((name, idx) => {
+        loadMetaData('react-demos').map((name, idx) => {
           const names = name.split('/');
           const path = names[names.length - 1];
-          return <Route path={path} key={idx} component={loadComponent(name)}/>
+          return <Route path={path} key={idx} component={loadComponent(name)} />
         })
       }
-
-      {/*<Route path="send-ajax-within-constructor-of-component" component={loadComponent('React/send-ajax-within-constructor-of-component')}/>*/}
-
-      {/*<Route path='call-child-component-method' component={CallChildComponentMethod}/>*/}
-      {/*<Route path='pass-async-data-to-child-component' component={PassAsyncDataToChildComponent}></Route>*/}
-      {/*<Route path='high-order-component' component={HOC}></Route>*/}
-      {/*<Route path='react-filter-bar' component={FilterBarExample}></Route>*/}
-      {/*<Route path='composable-component' component={ComposableComponent}></Route>*/}
-      {/*<Route path='count-down' component={CountDownPage}></Route>*/}
-      {/*<Route path='ios-scroll-event-block-js-thread' component={IOSScrollEvent}></Route>*/}
-      {/*<Route path='download-all' component={DownloadAllTest}></Route>*/}
-      {/*<Route path='loop-scroll' component={LoopScroll}></Route>*/}
-      {/*<Route path='grab-child-component-state' component={GrabChildComponentState}></Route>*/}
-      {/*<Route path='create-iframe' component={CreateIframe}></Route>*/}
-      {/*<Route path='set-modal-window-position-on-input-focus'*/}
-      {/*component={SetModalWindowPositionOnInputFocus}></Route>*/}
-      {/*<Route path='input-type-text' component={InputTypeText}/>*/}
-      {/*<Route path='input-type-checkbox' component={InputTypeCheckbox}></Route>*/}
-      {/*<Route path='mobile-input-focus-vistual-keybroad' component={MobileInputFocusVistualKeyboard}/>*/}
-      {/*<Route path='logical-operators' component={LogicalOperators}/>*/}
-      {/*<Route path='static-method' component={StaticMethod}/>*/}
-      {/*<Route path='component-communication' component={ComponentCommunication}/>*/}
-      {/*<Route path='componentDidUpdate-input-focus' component={ComponentDidUpdateInputFocus}/>*/}
-      {/*<Route path='select' component={SelectOption}/>*/}
-      {/*<Route path='scrollTop' component={ScrollTop}></Route>*/}
-      {/*<Route path='replace-img-src-within-component' component={ReplaceImgSrcWithinComponent}></Route>*/}
-      {/*<Route path='react-create-class' component={ReactCreateClass}></Route>*/}
-      {/*<Route path='react-children' component={ReactChildren}></Route>*/}
-      {/*<Route path='react-createElement' component={ReactCreateElement}></Route>*/}
-      {/*<Route path='init-props-and-state' component={InitPropsAndState}></Route>*/}
-      {/*<Route path='init-lifecycle' component={InitLifecycle}></Route>*/}
-      {/*<Route path='state-change-lifecycle' component={StateChangeLifecycle}></Route>*/}
-      {/*<Route path='component-namespace' component={ComponentNamespace}></Route>*/}
-      {/*<Route path='spread-props' component={SpreadProps}></Route>*/}
-      {/*<Route path='cancel-fetch-data' component={CancelFetchData}></Route>*/}
-      {/*<Route path='react-pureComponent' component={ReactPureComponent}></Route>*/}
-      {/*<Route path='setState-multiple-times' component={SetStateMultipleTimes}></Route>*/}
-      {/*<Route path='best-practice' component={BestPractice}></Route>*/}
-      {/*<Route path='mobile-fixed-layout' component={MobileFixedLayout}></Route>*/}
-      {/*<Route path='dynamic-JSX-tags' component={DynamicJSXTags}></Route>*/}
-      {/*<Route path='immutable-helper' component={ImmutableHelper}></Route>*/}
-      {/*<Route path="set-state-in-componentWillMount" component={SetStateInComponentWillMount}></Route>*/}
-      {/*<Route path='tree' component={Tree}/>*/}
-      {/*<Route path='escape' component={Escape}/>*/}
-      {/*<Route path='immutability-helper-operate-array' component={ImmutableHelperOperateArray}/>*/}
-      {/*<Route path='component-instantiated-once' component={ComponentInstantiatedOnce}/>*/}
-      {/*<Route path='renderToStaticMarkup' component={require('./pages/React/RenderToStaticMarkup')}/>*/}
     </Route>
-    <Route path='react-dom' components={{sidebar: Sidebar, main: Main}}>
-      <IndexRoute component={ArticleList}/>
-      <Route path='call-react-dom-render-in-parent-component' component={CallReactDOMRenderInParentComponent}/>
+    <Route path='react-dom' components={{ sidebar: Sidebar, main: Main }}>
+      <IndexRoute component={ArticleList} />
+      <Route path='call-react-dom-render-in-parent-component' component={CallReactDOMRenderInParentComponent} />
     </Route>
-    <Route path='react-router' components={{sidebar: Sidebar, main: Main}}>
-      <IndexRoute component={ArticleList}/>
+    <Route path='react-router' components={{ sidebar: Sidebar, main: Main }}>
+      <IndexRoute component={ArticleList} />
       <Route path='get-every-type-params(/:page)' component={GetEveryTypeParams}></Route>
       <Route path='router-will-leave' component={RouterWillLeave}></Route>
       <Route path='transition-to-all-ways' component={TransitionToAllWays}></Route>
-      <Route path='create-path' component={CreatePath}/>
-      <Route path='listen-event' component={ListenEvent}/>
+      <Route path='create-path' component={CreatePath} />
+      <Route path='listen-event' component={ListenEvent} />
       <Route path='tab' component={Tab}>
         <Route path='page1' component={require('./pages/React-router/Tab/pages/PageOne')}></Route>
         <Route path='page2' component={require('./pages/React-router/Tab/pages/PageTwo')}></Route>
@@ -220,52 +104,48 @@ const routes = (
         </Route>
       </Route>
     </Route>
-    <Route path='redux' components={{sidebar: Sidebar, main: Main}}>
-      <IndexRoute component={ArticleList}/>
-      <Route path='redux-beginning' component={ReduxBeginning}/>
+    <Route path='redux' components={{ sidebar: Sidebar, main: Main }}>
+      <IndexRoute component={ArticleList} />
+      <Route path='redux-beginning' component={ReduxBeginning} />
       <Route path='create-store-in-component-compare-with-connect-state'
-             component={CreateStoreInComponentCompareWithConnectState}/>
+        component={CreateStoreInComponentCompareWithConnectState} />
       <Route path='check-data-in-state-and-new-createStore-state-is-same-when-dispatch-action'
-             component={CheckDataInStateAndNewCreateStoreStateIsSameWhenDispatchAction}/>
+        component={CheckDataInStateAndNewCreateStoreStateIsSameWhenDispatchAction} />
     </Route>
-    <Route path='react-redux' components={{sidebar: Sidebar, main: Main}}>
-      <IndexRoute component={ArticleList}/>
+    <Route path='react-redux' components={{ sidebar: Sidebar, main: Main }}>
+      <IndexRoute component={ArticleList} />
       <Route path="init-store-data-in-componentWillMount-when-go-back"
-             component={InitReduxStateTreeDataInComponentWillMount}></Route>
+        component={InitReduxStateTreeDataInComponentWillMount}></Route>
       <Route path='define-redux-state-data-structure' component={DefineReduxStateDataStructure}></Route>
       <Route path='map-state-to-props' component={MapStateToProps}></Route>
       <Route path='inject-action-creators-to-component-props'
-             component={InjectActionCreatorsToComponentProps}></Route>
+        component={InjectActionCreatorsToComponentProps}></Route>
       <Route path='map-dispatch-to-props' component={MapDispatchToProps}></Route>
       <Route path='change-state-reference-type-data' component={ChangeStateTreeRefData}></Route>
       <Route path='async-action-in-componentWillReceiveProps'
-             component={AsyncActionInComponentWillReceiveProps}></Route>
-      <Route path='auto-complete-page' component={AutoCompletePage}/>
+        component={AsyncActionInComponentWillReceiveProps}></Route>
+      <Route path='auto-complete-page' component={AutoCompletePage} />
       <Route path='es6-component-inherit-es5-component' component={Es6ComponentInheritEs5Component}></Route>
-      <Route path='connect-multiple-nested-components' component={ConnectMultipleNestedComponents}/>
-      <Route path='inject-state-to-es5-component-mixins' component={InjectStateToEs5ComponentMixins}/>
-      <Route path='test-api-middleware' component={TestApiMiddleware}/>
+      <Route path='connect-multiple-nested-components' component={ConnectMultipleNestedComponents} />
+      <Route path='inject-state-to-es5-component-mixins' component={InjectStateToEs5ComponentMixins} />
+      <Route path='test-api-middleware' component={TestApiMiddleware} />
     </Route>
-    <Route path='redux-saga' components={{sidebar: Sidebar, main: Main}}>
-      <IndexRoute component={ArticleList}/>
+    <Route path='redux-saga' components={{ sidebar: Sidebar, main: Main }}>
+      <IndexRoute component={ArticleList} />
       <Route path='beginning' component={ReduxSagaBeginnning}></Route>
     </Route>
-    <Route path='mini-projects' components={{sidebar: Sidebar, main: Main}}>
-      <IndexRoute component={ArticleList}/>
+    <Route path='mini-projects' components={{ sidebar: Sidebar, main: Main }}>
+      <IndexRoute component={ArticleList} />
       <Route path='adorable-avatar' component={AdorableAvatars}></Route>
       <Route path='file-io' component={FileIO}></Route>
       <Route path='todoList' component={TodoList}></Route>
-      <Route path='i18n' component={i18n}/>
+      <Route path='i18n' component={i18n} />
       <Route path='mini-app' component={MiniApp}></Route>
       <Route path="hack" component={Hack}>
-        <IndexRoute component={HackList}/>
-        <Route path="detail/:repo" component={HackDetail}/>
+        <IndexRoute component={HackList} />
+        <Route path="detail/:repo" component={HackDetail} />
         <Route path="user/:username" component={HackUser}></Route>
       </Route>
-    </Route>
-    <Route path='components' components={{sidebar: Sidebar, main: Main}}>
-      <IndexRoute component={ArticleList}/>
-      <Route path='swiper' component={Swiper}></Route>
     </Route>
 
     <Route path='redux-api-middware' component={ReduxAPIMiddleware}></Route>

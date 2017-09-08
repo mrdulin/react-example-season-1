@@ -1,5 +1,6 @@
 import React from 'react';
 import {browserHistory, withRouter} from 'react-router';
+import './app.scss';
 
 class App extends React.Component {
 
