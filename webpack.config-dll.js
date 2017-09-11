@@ -5,16 +5,22 @@ const AssetsPlugin = require('assets-webpack-plugin');
 
 module.exports = {
   entry: {
-    react_libs: [
+    vendor: [
       'react',
       'react-dom',
       'react-router',
       'react-redux',
       'redux',
-      'redux-logger',
       'redux-thunk',
-      'redux-saga',
-      'react-intl'
+      'react-intl',
+      'redux-api-middleware',
+      'reselect',
+      'whatwg-fetch',
+      'iscroll',
+      'immutability-helper',
+      'normalizr',
+      'classnames',
+      'intl'
     ]
   },
   resolve: {
@@ -27,11 +33,7 @@ module.exports = {
     library: '[name]',
   },
   plugins: [
-    new cleanWebpackPlugin('dll', {
-      root: __dirname,
-      verbose: true,
-      dry: false
-    }),
+    new cleanWebpackPlugin('dll'),
     new webpack.DllPlugin({
       path: path.join(__dirname, 'dll', '[name].manifest.json'),
       name: '[name]',

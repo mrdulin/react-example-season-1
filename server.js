@@ -1,7 +1,6 @@
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
-// const multiparty = require('multiparty');
 const util = require('util');
 const webpackConfig = require('./webpack.config');
 

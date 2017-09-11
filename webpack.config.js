@@ -113,10 +113,10 @@ const config = {
     // 	manifest: require('./dll/react_libs.manifest.json')
     // }),
     new CopyWebpackPlugin([
-      {from: 'dll', to: 'dll'}
+      { from: 'dll', to: 'dll' }
     ], {
-      ignore: ['*.json']
-    }),
+        ignore: ['*.json']
+      }),
     new webpack.ProvidePlugin({
       util: src + '/common/js/util',
       actions: src + '/actions'

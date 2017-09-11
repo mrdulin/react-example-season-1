@@ -10,7 +10,10 @@
   },
   "env": {
     "browser": true,
-    "es6": true
+    "es6": true,
+    "amd": true,
+    "commonjs": true,
+    "node": true
   },
   "plugins": [
     "react"
