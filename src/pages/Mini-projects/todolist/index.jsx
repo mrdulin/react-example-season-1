@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import AddTodo from './components/AddTodo.react';
 import Todos from './components/Todos.react';
 import Footer from './components/Footer.react';
-import * as Action from '../../../actions/TodoList.action';
+import * as Action from './actions';
 
 //使用reselect
 import {getVisibleTodos} from './selector';
@@ -72,7 +72,7 @@ class TodoList extends Component {
 //             return todos.filter((todo) => !todo.completed);
 //         case 'SHOW_COMPLETE':
 //             return todos.filter((todo) => todo.completed);
-//         default: 
+//         default:
 //             return todos;
 //     }
 // };

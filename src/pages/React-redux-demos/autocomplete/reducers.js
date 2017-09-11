@@ -10,8 +10,8 @@ const initState = {
 export const AutoComplete = (state = initState, action) => {
   switch (action.type) {
     case 'autoComplete_fetchAutoCompleteDataSuccess':
-      const {data, query} = action.payload;
-      return Object.assign({}, state, {...data, query});
+      const { data, query } = action.payload;
+      return Object.assign({}, state, { ...data, query });
     case 'autoComplete_fetchAutoCompleteDataFail':
       return state;
     default:

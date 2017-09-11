@@ -1,4 +1,5 @@
 import {IndexLink, Link} from 'react-router';
+import React from 'react';
 
 class List extends React.Component {
   render() {

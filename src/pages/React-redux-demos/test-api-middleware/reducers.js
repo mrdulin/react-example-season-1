@@ -1,4 +1,4 @@
-import { FETCH_BOOK_SUCCESS, FETCH_BOOK_FAILED } from '../actions/TestApiMiddleware.action';
+import { FETCH_BOOK_SUCCESS, FETCH_BOOK_FAILED } from './actions';
 
 const initState = {
   Books: []

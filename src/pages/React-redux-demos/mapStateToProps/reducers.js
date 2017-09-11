@@ -1,5 +1,4 @@
-import {SELECT_CITY, REQUEST_CITY, RECEIVE_CITY} from '../actions/MapStateToProps.action';
-
+import { SELECT_CITY, REQUEST_CITY, RECEIVE_CITY } from './actions';
 
 export const city = (state = '', action) => {
   switch (action.type) {

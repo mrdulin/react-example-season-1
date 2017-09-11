@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import './style';
 
 class AdorableAvatars extends Component {
   static defaultProps = {
@@ -12,12 +13,12 @@ class AdorableAvatars extends Component {
   }
 
   render() {
-    const {name, size, radius, pngValue} = this.state;
-    const {api} = this.props;
+    const { name, size, radius, pngValue } = this.state;
+    const { api } = this.props;
 
     return <div id='adorable-avatars'>
       <h2>Adorable Avatars</h2>
-      <hr/>
+      <hr />
       <section className='adorable-avatars-container'>
         <div className='row'>
           <div></div>
@@ -27,7 +28,7 @@ class AdorableAvatars extends Component {
             <div className='form-card'>
               <div id='name' className="input-container">
                 <label>Identifier</label>
-                <input type="text" id='name' placeholder='enter text' value={name} onChange={this.handleNameChange}/>
+                <input type="text" id='name' placeholder='enter text' value={name} onChange={this.handleNameChange} />
               </div>
               <div id='size' className="input-container">
                 <label>
@@ -35,7 +36,7 @@ class AdorableAvatars extends Component {
                   <span className='size-value'>{size}</span>
                   <span>px</span>
                 </label>
-                <input type="range" min='40' max='285' value={size} onChange={this.handleSizeChange}/>
+                <input type="range" min='40' max='285' value={size} onChange={this.handleSizeChange} />
               </div>
               <div id='radius' className="input-container">
                 <label>
@@ -43,14 +44,14 @@ class AdorableAvatars extends Component {
                   <span className='radius-value'>{radius}</span>
                   <span>%</span>
                 </label>
-                <input type="range" min='0' max='50' value={radius} onChange={this.handleRadiusChange}/>
+                <input type="range" min='0' max='50' value={radius} onChange={this.handleRadiusChange} />
               </div>
             </div>
           </div>
           <div className="columns m-6 text-center">
             <div className="container">
-              <img id='demo-image' style={{width: `${size}px`, height: `${size}px`, borderRadius: `${radius}%`}} src={`${api}${size}${name}`}
-                   alt="demo-image"/>
+              <img id='demo-image' style={{ width: `${size}px`, height: `${size}px`, borderRadius: `${radius}%` }} src={`${api}${size}${name}`}
+                alt="demo-image" />
             </div>
           </div>
         </div>
@@ -71,8 +72,8 @@ class AdorableAvatars extends Component {
   }
 
   handleCopy = e => {
-    const {api} = this.props;
-    const {name} = this.state;
+    const { api } = this.props;
+    const { name } = this.state;
     var input = document.createElement('input');
     input.value = `${api}${name}.png`;
     input.style.opacity = '0';
@@ -83,15 +84,15 @@ class AdorableAvatars extends Component {
   }
 
   handleSizeChange = e => {
-    this.setState({size: e.target.value});
+    this.setState({ size: e.target.value });
   }
 
   handleRadiusChange = e => {
-    this.setState({radius: e.target.value});
+    this.setState({ radius: e.target.value });
   }
 
   handleNameChange = e => {
-    this.setState({name: e.target.value});
+    this.setState({ name: e.target.value });
   }
 }
 

@@ -61,11 +61,10 @@ const META_DATA = {
       "crumb": "react-router实现面包屑效果"
     },
     "redux": {
-      'redux-beginning': 'redux初探',
       'create-store-in-component-compare-with-connect-state': '在component中createStore，并与connect注入的store比较',
-      "check-data-in-state-and-new-createStore-state-is-same-when-dispatch-action": "当dispatch一个action修改state树上的数据后，检查通过connect注入的现有state树上的数据和通过createStore新创建state的数据是否同步修改"
+      "multiple-store": "当dispatch一个action修改state树上的数据后，检查通过connect注入的现有state树上的数据和通过createStore新创建state的数据是否同步修改"
     },
-    "react-redux": {
+    "react-redux-demos": {
       "dispatch-action-to-reset-state-within-componentWillMount": "在componentWillMount中初始化state树问题",
       "how-to-define-state-structure": "定义redux的state树的数据结构，避免组件在render的时候出错(一个天气查询例子)",
       "mapStateToProps": "mapStateToProps探究",
@@ -77,7 +76,7 @@ const META_DATA = {
       "connect-multiple-nested-components": "connect多层嵌套组件, 观察各个组件的render次数",
       "es6-component-inherit-es5-component": "es6写法的组件能否继承es5写法的组件",
       "inject-state-to-es5-component-mixins": "HOC connect 可以注入store到mixins的方法中",
-
+      "redux-api-middware-example": "redux-api-middware用法例子",
       "test-api-middleware": "测试自定义api中间件"
     },
     "react-dom-demos": {
@@ -85,8 +84,7 @@ const META_DATA = {
     },
     "mini-projects": {
       "adorable-avatar": "Adorable Avatars —— Generate random cartoon avatars",
-      "file-io": "file.io —— Ephemeral file sharing Convenient, anonymous and secure",
-      "todoList": "TodoList",
+      "todolist": "TodoList",
       "i18n": "React 国际化",
       "mini-app": '迷你应用',
       "hack": 'github hack'

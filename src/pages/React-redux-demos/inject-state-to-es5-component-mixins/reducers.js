@@ -1,4 +1,4 @@
-import {LOGIN} from '../actions/InjectStateToEs5ComponentMixins.action';
+import { LOGIN } from './actions';
 
 const initState = {
   token: '',
@@ -8,7 +8,7 @@ const initState = {
 export const InjectStateToEs5ComponentMixins = (state = initState, action) => {
   switch (action.type) {
     case LOGIN:
-      return Object.assign({}, state, {token: '7b47d1e4f7a0a9ef569e', user: {name: action.payload.user.username}});
+      return Object.assign({}, state, { token: '7b47d1e4f7a0a9ef569e', user: { name: action.payload.user.username } });
     default:
       return state;
   }

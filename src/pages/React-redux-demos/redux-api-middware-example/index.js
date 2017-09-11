@@ -1,7 +1,7 @@
-import React, {Component, PropTypes} from 'react';
-import {connect} from 'react-redux';
-import {requestCity, login} from '../actions/reduxApiMiddleware';
-import {selectCity} from '../actions/MapStateToProps.action';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { requestCity, login } from './actions';
+import { selectCity } from '../mapStateToProps/actions';
 
 class ReduxAPIMiddleware extends Component {
 
@@ -20,7 +20,7 @@ class ReduxAPIMiddleware extends Component {
   }
 
   render() {
-    const {cityMap} = this.props;
+    const { cityMap } = this.props;
     const cityKeys = Object.keys(cityMap);
     const options = cityKeys.map((cityKey) => {
       return <option key={cityKey} value={cityKey}>{cityMap[cityKey]}</option>;
@@ -45,15 +45,15 @@ class ReduxAPIMiddleware extends Component {
         <h3>例2:通过使用FormData给服务器端发送数据</h3>
         <form id="myForm" name="myForm" onSubmit={e => this.myFormSubmit(e)}>
           <div>
-            <label for="username">Enter name:</label>
-            <input type="text" id="username" name="username"/>
+            <label htmlFor="username">Enter name:</label>
+            <input type="text" id="username" name="username" />
           </div>
           <div>
-            <label for="password">Enter account number:</label>
+            <label htmlFor="password">Enter account number:</label>
             {/*注意:input标签必须有结束符号/,否则会报错*/}
-            <input type="text" id="password" name="password"/>
+            <input type="text" id="password" name="password" />
           </div>
-          <input type="submit" value="Submit!"/>
+          <input type="submit" value="Submit!" />
         </form>
       </div>
     );

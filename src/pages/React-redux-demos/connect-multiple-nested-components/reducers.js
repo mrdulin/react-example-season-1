@@ -1,4 +1,4 @@
-import {UPDATE_MESSAGE} from '../actions/ConnectMultipleNestedComponents.action';
+import { UPDATE_MESSAGE } from './actions';
 
 const initState = {
   messageA: '',
@@ -9,7 +9,7 @@ const initState = {
 export const ConnectMultipleNestedComponents = (state = initState, action) => {
   switch (action.type) {
     case UPDATE_MESSAGE:
-      return Object.assign({}, state, {[action.payload.key]: action.payload.message});
+      return Object.assign({}, state, { [action.payload.key]: action.payload.message });
     default:
       return state;
   }

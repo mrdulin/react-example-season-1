@@ -1,5 +1,5 @@
 import { CALL_API } from 'redux-api-middleware';
-import * as Action from './common';
+import * as Action from 'actions/common';
 
 
 export const requestCity = () => {

@@ -8,30 +8,27 @@ import 'whatwg-fetch';
 
 import './sass/index.scss';
 
-import routes from './routes';
+import AppRoute from './routes';
 import store from './store';
-
-const createElement = (Component, props) => {
-  // console.log(Component, props);
-  return <Component {...props} />
-};
 
 util.setTitle(__TITLE__);
 
-var pathHistory = [];
-
 browserHistory.listen(function (ev) {
   console.log('listen', ev);
-
 });
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={__DEV__ ? browserHistory : hashHistory} routes={routes} createElement={createElement} render={props => {
-      return <RouterContext {...props} />
-    }}>
-      {/**或者将routes当作chilren插入也可以 */}
-      {/*routes*/}
+    <Router history={__DEV__ ? browserHistory : hashHistory}
+      createElement={(Component, props) => {
+        // console.log(Component, props);
+        return <Component {...props} />
+      }}
+      render={props => {
+        return <RouterContext {...props} />
+      }}>
+
+      {AppRoute}
     </Router>
   </Provider>,
   document.getElementById('container'),
@@ -39,7 +36,6 @@ ReactDOM.render(
     console.log('ReactDOM.render callback', ...args);
   }
 );
-
 
 /**
  * componentDidMount

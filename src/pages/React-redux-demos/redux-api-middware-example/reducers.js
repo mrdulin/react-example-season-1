@@ -2,7 +2,7 @@ import {
   REQUEST,
   REQUEST_SUCCESS,
   REQUEST_FAIL
-} from '../actions/reduxApiMiddleware';
+} from './actions';
 
 export const cityMap = (state = {}, action) => {
   switch (action.type) {
@@ -23,7 +23,7 @@ export const err = (state = {}, action) => {
   }
 };
 
-export const usr = (state = {usr: {}}, action) => {
+export const usr = (state = { usr: {} }, action) => {
   switch (action.type) {
     case 'LOGIN_SUCCESS':
       return Object.assign({}, state, {

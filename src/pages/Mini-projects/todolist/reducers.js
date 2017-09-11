@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 
 const initState = {
   visibilityFilter: 'SHOW_ALL',
@@ -29,20 +29,20 @@ function toggleTest(state) {
   }
 }
 
-function completeAllTodos(state, {checked}) {
+function completeAllTodos(state, { checked }) {
   return {
     ...state,
-    todos: state.todos.map(todo => Object.assign({}, todo, {completed: checked}))
+    todos: state.todos.map(todo => Object.assign({}, todo, { completed: checked }))
   }
 }
 
-function toggleTodo(state, {index}) {
+function toggleTodo(state, { index }) {
   const target = state.todos[index];
   return {
     ...state,
     todos: [
       ...state.todos.slice(0, index),
-      Object.assign({}, target, {text: target.text, completed: !target.completed}),
+      Object.assign({}, target, { text: target.text, completed: !target.completed }),
       ...state.todos.slice(index + 1)
     ]
   }
@@ -68,4 +68,4 @@ function setFilter(state, action) {
 }
 
 
-export {TodoList};
+export { TodoList };

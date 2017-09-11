@@ -4,7 +4,6 @@ import { compose } from 'redux';
 
 import { loadMetaData } from './metadata';
 
-//各个demo页面component
 import App from './pages/App/App';
 import Sidebar from './pages/App/Sidebar';
 import Main from './pages/App/Main';
@@ -13,36 +12,10 @@ import ArticleList from './pages/App/ArticleList/index';
 
 import Tab, { One, Two, Three } from './pages/React-router-demos/tab';
 import BreadCrumb, { CrumbOne, CrumbTwo, CrumbThree } from './pages/React-router-demos/crumb';
-
-//redux
-// import ReduxBeginning from './pages/Redux/ReduxBeginning.react';
-// import CreateStoreInComponentCompareWithConnectState from './pages/Redux/CreateStoreInComponentCompareWithConnectState.react';
-// import CheckDataInStateAndNewCreateStoreStateIsSameWhenDispatchAction from './pages/Redux/CheckDataInStateAndNewCreateStoreStateIsSameWhenDispatchAction.react';
-//react-redux
-// import InitReduxStateTreeDataInComponentWillMount from './pages/React-redux/InitReduxStateTreeDataInComponentWillMount.react';
-// import DefineReduxStateDataStructure from './pages/React-redux/DefineReduxStateDataStructure.react';
-// import MapStateToProps from './pages/React-redux/MapStateToProps/MapStateToProps.react';
-// import InjectActionCreatorsToComponentProps from './pages/React-redux/InjectActionCreatorsToComponentProps.react';
-// import MapDispatchToProps from './pages/React-redux/MapDispatchToProps.react';
-// import ChangeStateTreeRefData from './pages/React-redux/ChangeStateTreeRefData.react';
-// import AsyncActionInComponentWillReceiveProps from './pages/React-redux/AsyncActionInComponentWillReceiveProps.react';
-// import AutoCompletePage from './pages/React-redux/AutoComplete';
-// import Es6ComponentInheritEs5Component from './pages/React-redux/Es6ComponentInheritEs5Component.react';
-// import ConnectMultipleNestedComponents from './pages/React-redux/ConnectMultipleNestedComponents';
-// import InjectStateToEs5ComponentMixins from './pages/React-redux/InjectStateToEs5ComponentMixins.react';
-// import TestApiMiddleware from './pages/React-redux/TestApiMiddleware.react';
-
-
-//mini-projects
-// import AdorableAvatars from './pages/Mini-projects/AdorableAvatars/AdorableAvatars.react';
-// import FileIO from './pages/Mini-projects/FileIO/FileIO.react';
-// import TodoList from './pages/Mini-projects/TodoList/TodoList.react';
-// import i18n from './pages/Mini-projects/i18n/i18n.react';
-// import MiniApp from './pages/Mini-projects/mini-app/app.jsx';
-// import { Hack, HackDetail, HackList, HackUser } from './pages/Mini-projects/hack/';
+import { Hack, HackDetail, HackList, HackUser } from './pages/Mini-projects/hack';
 
 const loadComponent = (name) => {
-  let componentClass;
+  let componentClass = null;
   try {
     componentClass = require(`./pages/${name}/index.js`);
   } catch (e) {
@@ -58,17 +31,18 @@ const createRoute = (indexRouteComponent) => (mods) => {
 const loadRoute = compose(createRoute(ArticleList), loadMetaData);
 const layoutNamedComponent = { sidebar: Sidebar, main: Main };
 
-//路由规则
-const routes = (
-  //导航首页，导航到各个demo页面
+const AppRoute = (
   <Route path='/' component={App}>
     <IndexRedirect to='/react-demos' />
+
     <Route path='react-demos' components={layoutNamedComponent}>
       {loadRoute('react-demos')}
     </Route>
+
     <Route path='react-dom-demos' components={layoutNamedComponent}>
       {loadRoute('react-dom-demos')}
     </Route>
+
     <Route path='react-router-demos' components={layoutNamedComponent}>
       {loadRoute('react-router-demos', ['tab', 'crumb'])}
       <Route path='tab' component={Tab}>
@@ -84,35 +58,27 @@ const routes = (
         </Route>
       </Route>
     </Route>
-    {/* <Route path='redux' components={layoutNamedComponent}>
-      <IndexRoute component={ArticleList} />
-      <Route path='redux-beginning' component={ReduxBeginning} />
-      <Route path='create-store-in-component-compare-with-connect-state'
-        component={CreateStoreInComponentCompareWithConnectState} />
-      <Route path='check-data-in-state-and-new-createStore-state-is-same-when-dispatch-action'
-        component={CheckDataInStateAndNewCreateStoreStateIsSameWhenDispatchAction} />
-    </Route> */}
+
+    <Route path='redux' components={layoutNamedComponent}>
+      {loadRoute('redux')}
+    </Route>
+
     <Route path='react-redux-demos' components={layoutNamedComponent}>
       {loadRoute('react-redux-demos')}
     </Route>
-    {/* <Route path='mini-projects' components={{ sidebar: Sidebar, main: Main }}>
-      <IndexRoute component={ArticleList} />
-      <Route path='adorable-avatar' component={AdorableAvatars}></Route>
-      <Route path='file-io' component={FileIO}></Route>
-      <Route path='todoList' component={TodoList}></Route>
-      <Route path='i18n' component={i18n} />
-      <Route path='mini-app' component={MiniApp}></Route>
+
+    <Route path='mini-projects' components={layoutNamedComponent}>
+      {loadRoute('mini-projects', ['hack'])}
       <Route path="hack" component={Hack}>
         <IndexRoute component={HackList} />
         <Route path="detail/:repo" component={HackDetail} />
         <Route path="user/:username" component={HackUser}></Route>
       </Route>
-    </Route> */}
+    </Route>
 
     <Route path='*' component={NoMatch}></Route>
   </Route>
-);
-
+)
 //路由改造: 一，JS原始对象的形式,同步加载方式
 // const routes = {
 //     path: '/',
@@ -165,4 +131,4 @@ const routes = (
 // }
 
 
-export default routes;
+export default AppRoute;

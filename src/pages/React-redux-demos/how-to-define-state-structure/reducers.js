@@ -20,7 +20,7 @@ export const DefineReduxStateDataStructure = (state = initState, action) => {
 
       //state数据结构扁平化
       const weather = action.payload.weather;
-      const {main, sys, coord, name, wind, clouds} = weather;
+      const { main, sys, coord, name, wind, clouds } = weather;
 
       sys.sunrise = new Date(sys.sunrise).toLocaleTimeString();
       sys.sunset = new Date(sys.sunset).toLocaleTimeString();
@@ -31,12 +31,12 @@ export const DefineReduxStateDataStructure = (state = initState, action) => {
       clouds.all = clouds.all + ' %';
 
       return Object.assign({}, state, {
-        weather: {...main, ...sys, ...coord, ...wind, ...clouds, name},
+        weather: { ...main, ...sys, ...coord, ...wind, ...clouds, name },
         error: {},
         date: dateFormat
       });
     case 'DefineReduxStateDataStructure_getWeatherFail':
-      return Object.assign({}, state, {error: action.payload.err})
+      return Object.assign({}, state, { error: action.payload.err })
     default:
       return state;
   }

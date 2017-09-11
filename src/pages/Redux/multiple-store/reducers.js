@@ -5,7 +5,7 @@ const initState = {
 export const CDSANCSSSWDA = (state = initState, action) => {
   switch (action.type) {
     case 'CDSANCSSSWDA_updateFoodName':
-      return Object.assign({}, state, {name: action.payload.name})
+      return Object.assign({}, state, { name: action.payload.name })
     default:
       return state;
   }

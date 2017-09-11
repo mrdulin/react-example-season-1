@@ -16,6 +16,8 @@ import en_US from './lang/en_US';
 import zh_CN from './lang/zh_CN';
 addLocaleData([...en, ...zh]);
 
+import './style.scss';
+
 class I18n extends Component {
   state = {
     locale: 'zh'

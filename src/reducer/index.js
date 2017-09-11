@@ -1,25 +1,24 @@
-import {combineReducers} from 'redux';
-import {TodoList} from './TodoList.reducer';
-import undoable, {distinctState} from 'redux-undo';
+import { combineReducers } from 'redux';
+import undoable, { distinctState } from 'redux-undo';
 
-import * as MapStateToProps from './MapStateToProps.reducer';
-import * as reduxApiMiddlewareReducers from './reduxApiMiddleware';
-import * as InjectActionCreatorsToComponentProps from './InjectActionCreatorsToComponentProps.reducer';
-import * as MapDispatchToProps from './MapDispatchToProps.reducer';
-import * as ChangeStateTreeRefData from './ChangeStateTreeRefData.reducer';
-import * as scrollTop from './scrollTop.reducer';
-import * as DefineReduxStateDataStructure from './DefineReduxStateDataStructure';
-import * as InitReduxStateTreeDataInComponentWillMount from './InitReduxStateTreeDataInComponentWillMount.reducer';
-import * as AsyncActionInComponentWillReceiveProps from './AsyncActionInComponentWillReceiveProps.reducer';
+import { TodoList } from '../pages/Mini-projects/TodoList/reducers';
+import * as MapStateToProps from '../pages/React-redux-demos/mapStateToProps/reducers';
+import * as ConnectMultipleNestedComponents from '../pages/React-redux-demos/connect-multiple-nested-components/reducers';
+import * as InjectStateToEs5ComponentMixins from '../pages/React-redux-demos/inject-state-to-es5-component-mixins/reducers';
+import * as TestApiMiddleware from '../pages/React-redux-demos/test-api-middleware/reducers';
+import * as InjectActionCreatorsToComponentProps from '../pages/React-redux-demos/inject-action-creators-to-component-props/reducers';
+import * as AsyncActionInComponentWillReceiveProps from '../pages/React-redux-demos/dispatch-async-action-within-componentWillReceiveProps/reducers';
+import * as MapDispatchToProps from '../pages/React-redux-demos/mapDispatchToProps/reducers';
+import * as DefineReduxStateDataStructure from '../pages/React-redux-demos/how-to-define-state-structure/reducers';
+import * as AutoComplete from '../pages/React-redux-demos/autocomplete/reducers';
+import * as InitReduxStateTreeDataInComponentWillMount from '../pages/React-redux-demos/dispatch-action-to-reset-state-within-componentWillMount/reducers';
+import * as ChangeStateTreeRefData from '../pages/React-redux-demos/modify-state-directly/reducers';
+import * as Es6ComponentInheritEs5Component from '../pages/React-redux-demos/es6-component-inherit-es5-component/reducers';
+import * as scrollTop from '../pages/React-demos/scroll-top/reducers';
+import * as reduxApiMiddlewareReducers from '../pages/React-redux-demos/redux-api-middware-example/reducers';
+import * as MultipleStore from '../pages/Redux/multiple-store/reducers';
+
 import * as common from './common.reducer';
-import * as FileIO from './FileIO.reducer';
-import * as AutoComplete from './AutoComplete.reducer';
-import * as Es6ComponentInheritEs5Component from './Es6ComponentInheritEs5Component.reducer';
-import * as CheckDataInStateAndNewCreateStoreStateIsSameWhenDispatchAction from './CheckDataInStateAndNewCreateStoreStateIsSameWhenDispatchAction.reducer';
-import * as ConnectMultipleNestedComponents from './ConnectMultipleNestedComponents.reducer';
-import * as InjectStateToEs5ComponentMixins from './InjectStateToEs5ComponentMixins.reducer';
-import * as TestApiMiddleware from './TestApiMiddleware.reducer';
-import * as ReduxSagaBeginning from './ReduxSagaBeginning.reducer';
 
 //通过combineReducers合成reducer后，state的数据结构就为{todos: [], visibilityFilter: ''}
 //传入combineReducers的对象的key名就是state对象的key名，combineReducers的对象的key对应的reducer函数名，可以与key名相同，也可以不同，
@@ -29,7 +28,6 @@ import * as ReduxSagaBeginning from './ReduxSagaBeginning.reducer';
 //使用该模块后，它将数据结构转换为{todos: {future: [], history: {...}, present: [], past: []}}
 //这时候'todos'reducer操作的应该是present字段对应的数据
 
-// console.log(reactRedux01Reducers);
 const rootReducer = combineReducers({
   TodoList,
   // todos: undoable(todos, {
@@ -39,20 +37,18 @@ const rootReducer = combineReducers({
   ...MapStateToProps,
   ...InjectActionCreatorsToComponentProps,
   ...MapDispatchToProps,
-  // ...reduxApiMiddlewareReducers,
+  ...reduxApiMiddlewareReducers,
   ...scrollTop,
   ...DefineReduxStateDataStructure,
   ...InitReduxStateTreeDataInComponentWillMount,
   ...AsyncActionInComponentWillReceiveProps,
   ...common,
-  ...FileIO,
   ...AutoComplete,
   ...Es6ComponentInheritEs5Component,
-  ...CheckDataInStateAndNewCreateStoreStateIsSameWhenDispatchAction,
+  ...MultipleStore,
   ...ConnectMultipleNestedComponents,
   ...InjectStateToEs5ComponentMixins,
-  ...TestApiMiddleware,
-  ...ReduxSagaBeginning
+  ...TestApiMiddleware
 });
 
 export default rootReducer;
