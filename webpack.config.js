@@ -5,6 +5,7 @@ const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const pkg = require('./package.json');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CompressionPlugin = require("compression-webpack-plugin");
 
 const __PROD__ = process.env.NODE_ENV === 'production';
 const __DEV__ = __PROD__ === false;
@@ -14,7 +15,7 @@ console.log('========================================================');
 console.log('WEBPACK NODE_ENV :: ', JSON.stringify(env));
 console.log('========================================================');
 
-const dist = path.resolve(__dirname, __PROD__ ? 'docs' : 'dist');
+const dist = path.resolve(__dirname, 'docs');
 const src = path.resolve(__dirname, 'src');
 
 const getNodeModulePath = (nodeModulePath, symbol = '.') => {
@@ -31,7 +32,7 @@ const getNodeModulePath = (nodeModulePath, symbol = '.') => {
 //例如：开发中：background-image: url(../../../images/adorable-avatar-bg.jpg);
 //打包编译后：在dist目录下得images目录下
 //部署后：http://novaline.space/react-examples/images/adorable-avatar-bg.jpg
-const publicPath = __PROD__ ? `http://novaline.space/${pkg.name}/` : '/';
+const publicPath = (__PROD__ && process.env.HOST !== 'local') ? `http://novaline.space/${pkg.name}/` : '/';
 
 const config = {
   PORT: 3000,
@@ -93,8 +94,8 @@ const config = {
   plugins: [
     new HtmlWebpackPlugin({
       template: src + '/index.html',
-      filename: 'index.html'
-      // dll: require('./dll/dll.json').react_libs.js
+      filename: 'index.html',
+      vendor: require('./dll/dll.json').vendor.js
     }),
     new webpack.DefinePlugin({
       __DEV__: __DEV__,
@@ -108,10 +109,10 @@ const config = {
     new ExtractTextPlugin('[name].[contenthash:8].css', {
       allChunks: true
     }),
-    // new webpack.DllReferencePlugin({
-    // 	context: __dirname,
-    // 	manifest: require('./dll/react_libs.manifest.json')
-    // }),
+    new webpack.DllReferencePlugin({
+      context: __dirname,
+      manifest: require('./dll/vendor.manifest.json')
+    }),
     new CopyWebpackPlugin([
       { from: 'dll', to: 'dll' }
     ], {
@@ -121,7 +122,6 @@ const config = {
       util: src + '/common/js/util',
       actions: src + '/actions'
     }),
-    // new webpack.optimize.CommonsChunkPlugin("commons", "commons.js", Infinity),
     new CleanWebpackPlugin(['dist', 'docs'])
   ],
 
@@ -133,7 +133,6 @@ const config = {
       config.module.noParse.push(filepath);
     }
   }
-
 };
 
 // config.addNoParse(new Map([
@@ -153,9 +152,7 @@ if (__DEV__) {
   config.devServer = {
     contentBase: './',
     historyApiFallback: true,
-    colors: true,
     port: config.PORT,
-    progress: true,
     host: '0.0.0.0',
     stats: {
       chunks: false
@@ -177,7 +174,14 @@ if (__PROD__) {
       mangle: true
     }),
     new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurrenceOrderPlugin()
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new CompressionPlugin({
+      asset: "[path].gz[query]",
+      algorithm: "gzip",
+      test: /\.(js|html)$/,
+      threshold: 10240,
+      minRatio: 0.8
+    })
   );
 }
 module.exports = config;
